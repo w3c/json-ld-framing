@@ -1,0 +1,11 @@
+Example 013: Inverted library frame
+---
+"@context":
+  "@vocab": http://example.org/
+  within:
+    "@reverse": contains
+"@type": Chapter
+within:
+  "@type": Book
+  within:
+    "@type": Library

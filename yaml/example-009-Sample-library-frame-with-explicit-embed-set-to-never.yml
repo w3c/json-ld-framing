@@ -1,0 +1,8 @@
+Example 009: Sample library frame with explicit @embed set to @never
+---
+"@context":
+  "@vocab": http://example.org/
+"@type": Library
+contains:
+  "@type": Book
+  "@embed": "@never"
