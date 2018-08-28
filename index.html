@@ -374,7 +374,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
     </pre>
 
     <p>If <a>processing mode</a> is <code>json-ld-1.1</code>, or the <a>omit graph flag</a> is <code>true</code>,
-      the top-level <code>@graph</code> member may be omitted.</p>
+      the top-level <code>@graph</code> <a>member</a> may be omitted.</p>
     <pre class="example" data-transform="updateExample"
          data-frame="Sample library frame"
          data-result-for="Flattened library objects"
@@ -643,7 +643,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
         The initial value for the <a>omit graph flag</a> is set using the
         <a data-link-for="JsonLdOptions">omitGraph</a> option, or based on
         the <a>processing mode</a>; if <a>processing mode</a> is <code>json-ld-1.0</code>, the output
-        always includes a <code>@graph</code> member, otherwise, the <code>@graph</code> member is used only
+        always includes a <code>@graph</code> <a>member</a>, otherwise, the <code>@graph</code> <a>member</a> is used only
         to describe multiple <a>node objects</a>, consistent with compaction.
         See <a href="#framing-algorithm" class="sectionRef"></a> for a further discussion.</p>
     </section>
@@ -931,19 +931,19 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
   The <a data-cite="JSON-LD11#json-ld-grammar">Grammar</a> defined in the JSON-LD 1.1 Syntax specification [[JSON-LD11]]
   is extended as follows:</p>
   <ul>
-    <li>Framing adds <a>framing keywords</a> which may be used as keys of a <a>node object</a>, which MUST be preserved when expanding.
-    <li>Values of keys in a <a>frame object</a> that are not <a>keyword</a> MAY also include a <a>default object</a>.
+    <li>Framing adds <a>framing keywords</a> which may be used as <a>members</a> of a <a>node object</a>, which MUST be preserved when expanding.
+    <li>Values of <a>members</a> in a <a>frame object</a> that are not <a>keyword</a> MAY also include a <a>default object</a>.
       Values of <code>@default</code> MAY include the value <code>@null</code>,
       or an <a>array</a> containing only <code>@null</code>, in addition to other values
-      allowed in the grammar for values of keys expanding to <a>absolute IRIs</a>.
-      <a>Processors</a> MUST preserve this value when expanding. All other key/value pairs of
+      allowed in the grammar for values of <a>member</a> keys expanding to <a>absolute IRIs</a>.
+      <a>Processors</a> MUST preserve this value when expanding. All other <a>members</a> of
       a <a>default object</a> MUST be ignored.</li>
     <li>The values of <code>@id</code> and <code>@type</code> may also be an empty <a>dictionary</a>, or an <a>array</a>
       containing only an empty <a>dictionary</a>.
       <a>Processors</a> MUST preserve this value when expanding.</li>
     <li>Framing either operates on the merged node definitions contained in
       the input document, or on the <a>default graph</a> depending on if the
-      input frame contains the <code>@graph</code> key at the top level.
+      input frame contains the <code>@graph</code> <a>member</a> at the top level.
       Nodes with a <a>subject</a> that is also a <a>named graph</a>, where
       the <a>frame object</a> contains <code>@graph</code>, extend framing
       to <a>node objects</a> from the associated <a>named graph</a>.</li>
@@ -1008,7 +1008,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
   portion of the framing algorithm:</p>
 
 <ol>
-  <li>If <var>frame</var> is an <a>array</a>, set <var>frame</var> to the first member of the <a>array</a>, which MUST be a valid <a>frame</a>.</li>
+  <li>If <var>frame</var> is an <a>array</a>, set <var>frame</var> to the first item in the <a>array</a>, which MUST be a valid <a>frame</a>.</li>
   <li>Initialize flags <var>embed</var>, <var>explicit</var>, and <var>requireAll</var> from
     <a>object embed flag</a>, <a>explicit inclusion flag</a>, and
     <a>require all flag</a> in <var>state</var> overriding from any property values
@@ -1036,7 +1036,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
         <ol>
           <li class="changed">If <var>graph map</var> in <var>state</var> has an entry for <var>id</var>:
             <ol>
-              <li>If <var>frame</var> does not have the key <code>@graph</code>,
+              <li>If <var>frame</var> does not have a <code>@graph</code> <a>member</a>,
                 set <var>recurse</var> to <code>true</code>, unless <var>graph name</var> in <var>state</var> is <code>@merged</code>
                 and set <var>subframe</var> to a new empty <a>dictionary</a>.</li>
               <li>Otherwise, set <var>subframe</var> to the first entry for <code>@graph</code> in <var>frame</var>,
@@ -1074,7 +1074,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
                       <li>If <var>listitem</var> is a <a>node reference</a>,
                         invoke the recursive algorithm using <var>state</var>,
                         the value of <code>@id</code> from <var>listitem</var>
-                        as the sole member of a new <var>subjects</var> <a>array</a>,
+                        as the sole item in a new <var>subjects</var> <a>array</a>,
                         the first value from <code>@list</code> in <var>frame</var> as <var>frame</var>,
                         <var>list</var> as <var>parent</var>, and <code>@list</code> as <var>active property</var>.
                         If <var>frame</var> does not exist, create a new <var>frame</var> using a new <a>dictionary</a>
@@ -1087,7 +1087,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
                   <li>If <var>item</var> is a <a>node reference</a>,
                     invoke the recursive algorithm using <var>state</var>,
                     the value of <code>@id</code> from <var>item</var>
-                    as the sole member of a new <var>subjects</var> <a>array</a>,
+                    as the sole item in a new <var>subjects</var> <a>array</a>,
                     the first value from <var>property</var> in <var>frame</var> as <var>frame</var>,
                     <var>output</var> as <var>parent</var>, and <var>property</var> as <var>active property</var>.
                     If <var>frame</var> does not exist, create a new <var>frame</var> using a new <a>dictionary</a>
@@ -1127,7 +1127,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
                   <li>Add <var>reverse property</var> to <var>reverse dict</var> with a new empty <a>array</a> as its value.</li>
                   <li>Invoke the recursive algorithm using <var>state</var>,
                     the <var>reverse id</var>
-                    as the sole member of a new <var>subjects</var> <a>array</a>,
+                    as the sole item in a new <var>subjects</var> <a>array</a>,
                     <var>sub frame</var> as <var>frame</var>,
                     <code>null</code> as <var>active property</var>,
                     and the <a>array</a> value of <var>reverse property</var> in <var>reverse dict</var> as <var>parent</var>.</li>
@@ -1145,22 +1145,22 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
 </ol>
 
 <p class="changed">If the <a>processing mode</a> is <code>json-ld-1.1</code>,
-  remove the <code>@id</code> member of each <a>node object</a> where the
-  member value is a <a>blank node identifier</a> which appears only once
+  remove the <code>@id</code> <a>member</a> of each <a>node object</a> where the
+  <a>member</a> value is a <a>blank node identifier</a> which appears only once
   in any property value within <var>result</var>.</p>
 <p>Using <var>result</var> from the recursive algorithm, set <var>compacted results</var> to the result of using the
   <code class="idlMemberName"><a data-cite="JSON-LD11-API#dom-jsonldprocessor-compact">compact</a></code>
   method using <var>results</var>, <a>context</a>, and
   <a data-lt="JsonLdProcessor-frame-options">options</a>.</p>
 <p>If <span class="changed">the <a>omit graph flag</a> is <code>false</code> and</span>
-  <var>compacted results</var> does not have a top-level <code>@graph</code> member, or its value is
+  <var>compacted results</var> does not have a top-level <code>@graph</code> <a>member</a>, or its value is
   not an <a>array</a>, modify <var>compacted results</var> to place the non <code>@context</code> <a>properties</a>
   of <var>compacted results</var> into a <a>dictionary</a> contained within the array value of
   <code>@graph</code>. If the <a>omit graph flag</a> is <code>true</code>, a
-  top-level <code>@graph</code> member is used only to contain multiple <a>node objects</a>.</p>
-<p>Recursively, replace all key-value pairs in <var>compacted results</var>
-  where the key is <code>@preserve</code> with the value from the key-pair.
-  If the value from the key-pair is <code>@null</code>, replace the value with <code>null</code>.
+  top-level <code>@graph</code> <a>member</a> is used only to contain multiple <a>node objects</a>.</p>
+<p>Recursively, replace all <a>members</a> in <var>compacted results</var>
+  where the key is <code>@preserve</code> with the value of the <a>member</a>.
+  If the value of the <a>member</a> is <code>@null</code>, replace the value with <code>null</code>.
   <span class="changed">If, after replacement, an array contains a single array value, replace the array with that value.</span>
   If, after replacement, an array contains only the value <a>null</a> remove the value, leaving
   an empty <a>array</a>.</p>
@@ -1238,7 +1238,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
         containing a valid <a>frame</a>.</li>
       <li><var>property</var> matches if <var>values</var> is empty, or non existent,
         the value of <var>property</var> in <var>frame</var>
-        is a <a>dictionary</a> containing only the key <code>@default</code> with any value,
+        is a <a>dictionary</a> containing only the <code>@default</code> <a>member</a> with any value,
         and any other property in <var>node</var> has a non-default match.</li>
       <li><var>node</var> does not match if <var>values</var> is not empty and the value of <var>property</var> in <var>frame</var> is <code><a>match none</a></code>, and further matching is aborted.</li>
       <li>Otherwise, <var>property</var> matches if <var>values</var> is not empty and the value of <var>property</var> in <var>frame</var> is <code><a>wildcard</a></code>.</li>
@@ -1588,7 +1588,7 @@ becomes a W3C Recommendation.</p>
     <li>Frames can use one or more values for <code>@id</code> to allow for matching
       specific objects in a frame.</li>
     <li>If <a>processing mode</a> is <code>json-ld-1.1</code>,
-      <code>@id</code> members whose value is a <a>blank node identifier</a>
+      <code>@id</code> <a>members</a> with <a>blank node identifiers</a>
       used only for that <code>@id</code> are removed.</li>
     <li>The JSON syntax has been abstracted into an <a>internal representation</a>
       to allow for other serialization formats that are functionally equivalent
@@ -1652,19 +1652,7 @@ becomes a W3C Recommendation.</p>
     Rego Gmür,
     Rob Trainer,
     Ted Thibodeau Jr.,
-    and Victor Charpenay.
-    .</p>
-
-  <p>For the 1.0 version of the specification, the editors would like to thank Mark Birbeck, who provided a great deal of
-    the initial push behind the JSON-LD work via his work on RDFj.
-    The work of Dave Lehn and Mike Johnson are appreciated for reviewing,
-    and performing several implementations of the specification. Ian Davis is
-    thanked for his work on RDF/JSON. Thanks also to Nathan Rixham,
-    Bradley P. Allen, Kingsley Idehen, Glenn McDonald, Alexandre Passant,
-    Danny Ayers, Ted Thibodeau Jr., Olivier Grisel, Josh Mandel, Eric Prud'hommeaux,
-    David Wood, Guus Schreiber, Pat Hayes, Sandro Hawke, Richard Cyganiak,
-    François Daoust, Lin Clark, and Zdenko 'Denny' Vrandečić
-    for their input on the specification.</p>
+    and Victor Charpenay.</p>
 </section>
 
 </body>
