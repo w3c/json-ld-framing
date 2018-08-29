@@ -1,0 +1,10 @@
+{
+  "@context": "context.jsonld",
+  "@id": "",
+  "@type": "mf:Manifest",
+  "name": "JSON-LD Test Suite",
+  "description": "This manifest loads additional manifests for specific behavior tests",
+  "sequence": [
+    "frame-manifest.jsonld"
+  ]
+}
