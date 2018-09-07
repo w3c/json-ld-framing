@@ -411,7 +411,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
       which are <code>contains</code> values of the <code>Library</code> object, and so forth.</p>
   </section>
 
-  <section>
+  <section class="informative">
     <h3>Default content</h3>
     <p>A frame may specify properties that don't exist in an input file. If the
       <a>explicit inclusion flag</a> is <code>false</code>, the framing algorithm
@@ -476,7 +476,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
 
   </section>
 
-  <section>
+  <section class="informative">
     <h3>Framing Flags</h3>
     <p>Framing can be controlled using <a data-lt="JsonLdOptions">API options</a>,
       or by adding framing <a>keywords</a> within the <a>frame</a> as
@@ -485,7 +485,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
     <p class="note">Framing flags set using keywords have effect only for the
       frame in which they appear, and for implicit frames which are created
       for objects where no frame object exists.</p>
-    <section>
+    <section class="informative">
       <h4>Object Embed Flag</h4>
 
       <p>The <a>object embed flag</a> determines if a referenced
@@ -552,7 +552,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
       </pre>
     </section>
 
-    <section>
+    <section class="informative">
       <h4>Explicit inclusion flag</h4>
       <p>The <a>explicit inclusion flag</a> used to determine
         properties which will be included in the output document.
@@ -625,7 +625,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
       not exist in the output, because it is not explicit.</p>
     </section>
 
-    <section>
+    <section class="informative">
       <h4>Omit default flag</h4>
       <p>The <a>omit default flag</a> changes the way framing generates output when a property
         described in the frame is not present in the input document.
@@ -634,7 +634,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
         See <a href="#default-content" class="sectionRef"></a> for a further discussion.</p>
     </section>
 
-    <section class="changed">
+    <section class="informative changed">
       <h4>Omit graph flag</h4>
       <p>The <a>omit graph flag</a> determines if framed output containing a single
         <a>node object</a> is contained within <code>@graph</code>, or not.
@@ -646,7 +646,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
         See <a href="#framing-algorithm" class="sectionRef"></a> for a further discussion.</p>
     </section>
 
-    <section>
+    <section class="informative">
       <h4>Require all flag</h4>
       <p>The <a>require all flag</a> is used in frame matching to determine when a
         <a>node object</a> from an input document matches a frame. When
@@ -660,9 +660,9 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
     </section>
   </section>
 
-  <section>
+  <section class="informative">
     <h3>Reverse Framing</h3>
-    <p>A frame may include @reverse, or a value of a term defined using @reverse
+    <p>A frame may include <code>@reverse</code>, or a value of a term defined using <code>@reverse</code>
       to invert the relationships in the output object. For example, the
       Library example can be inverted using the following frame:</p>
 
@@ -722,7 +722,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
     </pre>
   </section>
 
-  <section class="changed">
+  <section class="informative changed">
     <h3>Framing Named Graphs</h3>
     <p>Frames can include <code>@graph</code>, which allows information from <a>named graphs</a>
       contained within a <a>JSON-LD document</a> to be exposed within it's proper
@@ -988,7 +988,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
   MUST be overridden by values set in <a data-lt="JsonLdProcessor-frame-options">options</a>.
   Also initialize <var>results</var> as an empty <a>array</a>.</p>
 
-<p class="note"><a>Processors</a> MAY use other runtime options to set different <a>framing state</a> defaults
+<p><a>Processors</a> MAY use other runtime options to set different <a>framing state</a> defaults
   for values of <var>state</var>.</p>
 
 <p>Invoke the recursive algorithm using <a>framing state</a> (<var>state</var>),
