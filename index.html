@@ -1015,10 +1015,8 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
     using the <a href="#frame-matching">Frame Matching algorithm</a>
     with <var>state</var>, <var>subjects</var>, <var>frame</var>, and <var>requireAll</var>.</li>
   <li>For each <var>id</var> and associated <a>node object</a> <var>node</var>
-    from the set of matched subjects, ordered by <var>id</var>:
-    <p class="ednote">Can we remove sorting, or make it subject to a processing
-      flag? In general, sorting is a performance problem for JSON-LD, and
-      inhibits stream processing.</p>
+    from the set of matched subjects, ordered lexographically by <var>id</var>
+    <span class="changed">if the optional <a data-link-for="JsonLdOptions">ordered</a> flag is <code>true</code></span>:
     <ol>
       <li>Initialize <var>output</var> to a new <a>dictionary</a> with <code>@id</code> and <var>id</var>.</li>
       <li>Otherwise, if <var>embed</var> is <code>@never</code> or if a
@@ -1056,7 +1054,8 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
               </li>
             </ol>
           </li>
-          <li>For each <var>property</var> and <var>objects</var> in <var>node</var>, ordered by <var>property</var>:
+          <li>For each <var>property</var> and <var>objects</var> in <var>node</var>, ordered lexographically by <var>property</var>
+            <span class="changed">if the optional <a data-link-for="JsonLdOptions">ordered</a> flag is <code>true</code></span>:
             <ol>
               <li>If <var>property</var> is a <a>keyword</a>, add <var>property</var> and <var>objects</var>
                 to <var>output</var>.</li>
@@ -1298,7 +1297,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
   <section class="algorithm">
     <h3>JsonLdProcessor</h3>
 
-    <p>The <a data-cite="JSON-LD11-API#dfn-json-ld-processor">JSON-LD Processor</a> interface is the high-level programming structure that developers
+    <p>The <a data-cite="JSON-LD11-API#dfn-json-ld-processors">JSON-LD Processor</a> interface is the high-level programming structure that developers
       use to access the JSON-LD transformation methods. The definition below is an experimental
       extension of the interface defined in the JSON-LD 1.1 API [[!JSON-LD11-API]].</p>
 
@@ -1322,14 +1321,16 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
         following steps are then executed asynchronously.</li>
       <li>Set <var>expanded input</var> to the result of using the
         <a data-cite="JSON-LD11-API#dom-jsonldprocessor-expand">expand</a>
-        method using <a data-lt="JsonLdProcessor-frame-input">input</a> and <a data-lt="JsonLdProcessor-frame-options">options</a>.
+        method using <a data-lt="JsonLdProcessor-frame-input">input</a> and <a data-lt="JsonLdProcessor-frame-options">options</a>
+        <span class="changed">with <a data-link-for="JsonldOptions">ordered</a> set to <code>false</code></span>.
       <li>Set <var>expanded frame</var> to the result of using the
         <code class="idlMemberName"><a data-cite="JSON-LD11-API#dom-jsonldprocessor-expand">expand</a></code>
         method using
         <a data-lt="JsonLdProcessor-frame-frame">frame</a> and
         <a data-lt="JsonLdProcessor-frame-options">options</a> with
-        <code class="idlMemberName"><a data-cite="JSON-LD11-API#dom-jsonldoptions-expandcontext">expandContext</a></code> set to <code>null</code>
-        and the <a data-cite="JSON-LD11-API#dom-jsonldoptions-frameexpansion">frameExpansion</a> option set to <code>true</code>.
+        <code class="idlMemberName"><a data-cite="JSON-LD11-API#dom-jsonldoptions-expandcontext">expandContext</a></code> set to <code>null</code>,
+        the <a data-cite="JSON-LD11-API#dom-jsonldoptions-frameexpansion">frameExpansion</a> option set to <code>true</code>,
+        <span class="changed">and the <a data-link-for="JsonldOptions">ordered</a> option set to <code>false</code></span>.
       <li>Set <var>context</var> to the value of <code>@context</code>
         from <a data-lt="JsonLdProcessor-frame-frame">frame</a>, if it exists, or to
         a new empty <a>context</a>, otherwise.</li>
@@ -1426,11 +1427,12 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
     <pre class="idl" data-transform="unComment"><!--
       dictionary JsonLdOptions {
         (JsonLdEmbed or boolean)  embed = "@last";
-        boolean explicit    = false;
-        boolean omitDefault = false;
-        boolean omitGraph;
-        boolean requireAll  = false;
-        boolean frameDefault  = false;
+        boolean                   explicit    = false;
+        boolean                   omitDefault = false;
+        boolean                   omitGraph;
+        boolean                   requireAll  = false;
+        boolean                   frameDefault  = false;
+        boolean                   ordered = false;
       };
 
       enum JsonLdEmbed {
@@ -1467,6 +1469,11 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
         <a href="#framing-algorithm">Framing Algorithm</a>.</dd>
       <dt><dfn data-dfn-for="JsonLdOptions">frameDefault</dfn></dt>
       <dd>Instead of framing a <var>merged graph</var>, frame only the <a>default graph</a>.</dd>
+      <dt class="changed"><dfn data-dfn-for="JsonLdOptions">ordered</dfn></dt>
+      <dd class="changed">If set to <code>true</code>, certain algorithm
+        processing steps where indicated are ordered lexicographically.
+        If <code>false</code>, order
+        is not considered in processing.</dd>
     </dl>
 
     <p><dfn>JsonLdEmbed</dfn> enumerates the values of the <a data-link-for="JsonLdOptions">embed</a> option:</p>
@@ -1603,12 +1610,23 @@ becomes a W3C Recommendation.</p>
     <li>Added the <a>omit default flag</a>, controled via the
       <a data-link-for="JsonLdOptions">omitDefault</a> API option and/or
       the current <a>processing mode</a>.</li>
+    <li>The API now adds an <a data-link-for="JsonLdOptions">ordered</a>
+       option, defaulting to <code>false</code> This is used in algorithms to
+       control interation of <a>dictionary member</a> keys. Previously, the
+       algorithms always required such an order. The instructions for
+       evaluating test results have been updated accordingly.</li>
   </ul>
 </section>
 
 <section class="appendix informative" id="changes-from-cg">
   <h2>Changes since JSON-LD Community Group Final Report</h2>
-  <p>None.</p>
+  <ul>
+    <li>The API now adds an <a data-link-for="JsonLdOptions">ordered</a>
+       option, defaulting to <code>false</code> This is used in algorithms to
+       control interation of <a>dictionary member</a> keys. Previously, the
+       algorithms always required such an order. The instructions for
+       evaluating test results have been updated accordingly.</li>
+  </ul>
 </section>
 
 <section class="appendix informative">

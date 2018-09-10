@@ -1260,7 +1260,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
       <a href="https://www.w3.org/2018/json-ld-wg/">JSON-LD Working Group</a>:</p>
 
     <ul>
-      <li><a href="http://www.w3.org/TR/2018/WD-json-ld11-syntax-20180911/">JSON-LD 1.1</a></li>
+      <li><a href="http://www.w3.org/TR/2018/WD-json-ld11-20180911/">JSON-LD 1.1</a></li>
       <li><a href="http://www.w3.org/TR/2018/WD-json-ld11-api-20180911/">JSON-LD 1.1 Processing Algorithms and API</a></li>
       <li><a href="http://www.w3.org/TR/2018/WD-json-ld11-framing-20180911/">JSON-LD 1.1 Framing</a></li>
     </ul>
@@ -1376,7 +1376,7 @@ The content <span class="hljs-keyword">of</span> the example is <span class="hlj
     the collection is <em>unordered</em> by default. While order is
     preserved in regular JSON arrays, it is not in regular JSON-LD arrays
     unless specifically defined (see
-    <a class="externalDFN" href="http://www.w3.org/TR/2018/WD-json-ld11-syntax-20180911/#sets-and-lists">Sets and Lists</a> in
+    <a class="externalDFN" href="http://www.w3.org/TR/2018/WD-json-ld11-20180911/#sets-and-lists">Sets and Lists</a> in
     the JSON-LD Syntax specification [<cite><a class="bibref" href="#bib-json-ld11">JSON-LD11</a></cite>]).</dd>
   <dt><dfn data-lt="json objects|json object" id="dfn-json-objects" data-dfn-type="dfn">JSON object</dfn></dt><dd>
     In the JSON serialization, an <a class="externalDFN" href="https://tools.ietf.org/html/rfc8259#section-4">object</a> structure is represented as a pair of curly brackets surrounding zero or
@@ -1464,7 +1464,7 @@ The content <span class="hljs-keyword">of</span> the example is <span class="hlj
     begin with <code>_:</code>.</dd>
   <dt><dfn data-lt="contexts|context" id="dfn-contexts" data-dfn-type="dfn">context</dfn></dt><dd>
     A set of rules for interpreting a <a href="#dfn-json-ld-documents" class="internalDFN" data-link-type="dfn">JSON-LD document</a> as specified in
-    <a href="http://www.w3.org/TR/2018/WD-json-ld11-syntax-20180911/#the-context">The Context</a> of the JSON-LD Syntax specification [<cite><a class="bibref" href="#bib-json-ld11">JSON-LD11</a></cite>].</dd>
+    <a href="http://www.w3.org/TR/2018/WD-json-ld11-20180911/#the-context">The Context</a> of the JSON-LD Syntax specification [<cite><a class="bibref" href="#bib-json-ld11">JSON-LD11</a></cite>].</dd>
   <dt><dfn id="dfn-default-graph" data-dfn-type="dfn">default graph</dfn></dt><dd>
     The <a class="externalDFN" href="https://www.w3.org/TR/rdf11-concepts/#dfn-default-graph">default graph</a> is the only graph in a JSON-LD document which has no <a href="#dfn-graph-names" class="internalDFN" data-link-type="dfn">graph name</a>.
     When executing an algorithm, the graph where data should be placed
@@ -1501,7 +1501,7 @@ The content <span class="hljs-keyword">of</span> the example is <span class="hlj
     <a href="#dfn-language-tagged-strings" class="internalDFN" data-link-type="dfn">language-tagged string</a>.</dd>
   <dt><dfn data-lt="keywords|keyword" id="dfn-keywords" data-dfn-type="dfn">keyword</dfn></dt><dd>
     A <a href="#dfn-strings" class="internalDFN" data-link-type="dfn">string</a> that is specific to JSON-LD, specified in the JSON-LD Syntax specification [<cite><a class="bibref" href="#bib-json-ld11">JSON-LD11</a></cite>]
-    in the section titled <a href="http://www.w3.org/TR/2018/WD-json-ld11-syntax-20180911/#syntax-tokens-and-keywords">Syntax Tokens and Keywords</a>.</dd>
+    in the section titled <a href="http://www.w3.org/TR/2018/WD-json-ld11-20180911/#syntax-tokens-and-keywords">Syntax Tokens and Keywords</a>.</dd>
   <dt><dfn data-lt="language-tagged strings|language-tagged string" id="dfn-language-tagged-strings" data-dfn-type="dfn">language-tagged string</dfn></dt><dd>
     A <a class="externalDFN" href="https://www.w3.org/TR/rdf11-concepts/#dfn-language-tagged-string">language-tagged string</a> consists of a string and a non-empty language
     tag as defined by [<cite><a class="bibref" href="#bib-bcp47">BCP47</a></cite>]. The  <em class="rfc2119" title="MUST">MUST</em> be well-formed according to
@@ -1512,7 +1512,7 @@ The content <span class="hljs-keyword">of</span> the example is <span class="hlj
   <dt><dfn data-lt="graph|graphs|linked data graph" id="dfn-graph" data-dfn-type="dfn">linked data graph</dfn></dt><dd>
     A labeled directed <a class="externalDFN" href="https://www.w3.org/TR/rdf11-concepts/#dfn-rdf-graph">graph</a>, i.e., a set of <a href="#dfn-nodes" class="internalDFN" data-link-type="dfn">nodes</a>
     connected by <a href="#dfn-edges" class="internalDFN" data-link-type="dfn">edges</a>,
-    as specified in the <a href="http://www.w3.org/TR/2018/WD-json-ld11-syntax-20180911/#data-model">Data Model</a>
+    as specified in the <a href="http://www.w3.org/TR/2018/WD-json-ld11-20180911/#data-model">Data Model</a>
     section of the JSON-LD specification [<cite><a class="bibref" href="#bib-json-ld11">JSON-LD11</a></cite>].
     A <a href="#dfn-graph" class="internalDFN" data-link-type="dfn">linked data graph</a> is a generalized representation of an
     <a href="https://www.w3.org/TR/rdf11-concepts/#dfn-rdf-graph">RDF graph</a>
@@ -2234,7 +2234,7 @@ The content <span class="hljs-keyword">of</span> the example is <span class="hlj
 <h4 id="x4-2-1-framing-requirements"><span class="secno">4.2.1 </span>Framing Requirements&nbsp;<span class="permalink"><a href="#framing-requirements" aria-label="Permalink for 4.2.1 Framing Requirements" title="Permalink for 4.2.1 Framing Requirements"><span>§</span></a></span></h4>
 <p>A valid <a href="#dfn-json-ld-frame" class="internalDFN" data-link-type="dfn">JSON-LD Frame</a> is a superset of a valid <a href="#dfn-json-ld-documents" class="internalDFN" data-link-type="dfn">JSON-LD document</a>,
   allowing additional content, which is preserved through expansion.
-  The <a href="http://www.w3.org/TR/2018/WD-json-ld11-syntax-20180911/#json-ld-grammar">Grammar</a> defined in the JSON-LD 1.1 Syntax specification [<cite><a class="bibref" href="#bib-json-ld11">JSON-LD11</a></cite>]
+  The <a href="http://www.w3.org/TR/2018/WD-json-ld11-20180911/#json-ld-grammar">Grammar</a> defined in the JSON-LD 1.1 Syntax specification [<cite><a class="bibref" href="#bib-json-ld11">JSON-LD11</a></cite>]
   is extended as follows:</p>
   <ul>
     <li>Framing adds <a href="#dfn-framing-keywords" class="internalDFN" data-link-type="dfn">framing keywords</a> which may be used as <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-dictionary-member">members</a> of a <a href="#dfn-node-objects" class="internalDFN" data-link-type="dfn">node object</a>, which <em class="rfc2119" title="MUST">MUST</em> be preserved when expanding.
@@ -2296,8 +2296,8 @@ The content <span class="hljs-keyword">of</span> the example is <span class="hlj
   <em class="rfc2119" title="MUST">MUST</em> be overridden by values set in <a data-lt="JsonLdProcessor-frame-options" href="#dfn-jsonldprocessor-frame-options" class="internalDFN" data-link-type="dfn">options</a>.
   Also initialize <var>results</var> as an empty <a href="#dfn-arrays" class="internalDFN" data-link-type="dfn">array</a>.</p>
 
-<div class="note" id="issue-container-generatedID-4"><div role="heading" class="note-title marker" id="h-note-3" aria-level="5"><span>Note</span></div><p class=""><a href="#dfn-json-ld-processors" class="internalDFN" data-link-type="dfn">Processors</a> <em class="rfc2119" title="MAY">MAY</em> use other runtime options to set different <a href="#dfn-framing-state" class="internalDFN" data-link-type="dfn">framing state</a> defaults
-  for values of <var>state</var>.</p></div>
+<p><a href="#dfn-json-ld-processors" class="internalDFN" data-link-type="dfn">Processors</a> <em class="rfc2119" title="MAY">MAY</em> use other runtime options to set different <a href="#dfn-framing-state" class="internalDFN" data-link-type="dfn">framing state</a> defaults
+  for values of <var>state</var>.</p>
 
 <p>Invoke the recursive algorithm using <a href="#dfn-framing-state" class="internalDFN" data-link-type="dfn">framing state</a> (<var>state</var>),
   the keys from the <a href="#dfn-map-of-flattened-subjects" class="internalDFN" data-link-type="dfn">map of flattened subjects</a> as <var>subjects</var>,
@@ -2323,10 +2323,8 @@ The content <span class="hljs-keyword">of</span> the example is <span class="hlj
     using the <a href="#frame-matching">Frame Matching algorithm</a>
     with <var>state</var>, <var>subjects</var>, <var>frame</var>, and <var>requireAll</var>.</li>
   <li>For each <var>id</var> and associated <a href="#dfn-node-objects" class="internalDFN" data-link-type="dfn">node object</a> <var>node</var>
-    from the set of matched subjects, ordered by <var>id</var>:
-    <div class="ednote" id="issue-container-generatedID-5"><div role="heading" class="ednote-title marker" id="h-ednote" aria-level="5"><span>Editor's note</span></div><p class="">Can we remove sorting, or make it subject to a processing
-      flag? In general, sorting is a performance problem for JSON-LD, and
-      inhibits stream processing.</p></div>
+    from the set of matched subjects, ordered lexographically by <var>id</var>
+    <span class="changed">if the optional <a data-link-for="JsonLdOptions" href="#dom-jsonldoptions-ordered" class="internalDFN" data-link-type="dfn"><code>ordered</code></a> flag is <code>true</code></span>:
     <ol>
       <li>Initialize <var>output</var> to a new <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-dictionary">dictionary</a> with <code>@id</code> and <var>id</var>.</li>
       <li>Otherwise, if <var>embed</var> is <code>@never</code> or if a
@@ -2364,7 +2362,8 @@ The content <span class="hljs-keyword">of</span> the example is <span class="hlj
               </li>
             </ol>
           </li>
-          <li>For each <var>property</var> and <var>objects</var> in <var>node</var>, ordered by <var>property</var>:
+          <li>For each <var>property</var> and <var>objects</var> in <var>node</var>, ordered lexographically by <var>property</var>
+            <span class="changed">if the optional <a data-link-for="JsonLdOptions" href="#dom-jsonldoptions-ordered" class="internalDFN" data-link-type="dfn"><code>ordered</code></a> flag is <code>true</code></span>:
             <ol>
               <li>If <var>property</var> is a <a href="#dfn-keywords" class="internalDFN" data-link-type="dfn">keyword</a>, add <var>property</var> and <var>objects</var>
                 to <var>output</var>.</li>
@@ -2484,7 +2483,7 @@ The content <span class="hljs-keyword">of</span> the example is <span class="hlj
     or if it matches given one of several different properties (or all properties, if the
     <a href="#dfn-require-all-flag" class="internalDFN" data-link-type="dfn">require all flag</a> is present.).</p>
 
-  <div class="note" id="issue-container-generatedID-6"><div role="heading" class="note-title marker" id="h-note-4" aria-level="5"><span>Note</span></div><p class="">As matching is performed on expanded node objects, all values will be in the form of an array.</p></div>
+  <div class="note" id="issue-container-generatedID-4"><div role="heading" class="note-title marker" id="h-note-3" aria-level="5"><span>Note</span></div><p class="">As matching is performed on expanded node objects, all values will be in the form of an array.</p></div>
 
   <p>Node matching uses a combination of JSON constructs to match <em>any</em>, <em>zero</em>, or <em>some</em> specific values:</p>
   <dl data-sort=""><dt><code>[]</code> (<code><dfn data-dfn-type="dfn" id="dfn-match-none">match none</dfn></code>)</dt>
@@ -2518,7 +2517,7 @@ The content <span class="hljs-keyword">of</span> the example is <span class="hlj
     Otherwise, <var>node</var> does not match if <var>frame</var> has a non-empty
     <code>@id</code> property, other than an empty <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-dictionary">dictionary</a>.
     Otherwise, frame must not have a <code>@id</code> property; continue to the next step.
-    <div class="note" id="issue-container-generatedID-7"><div role="heading" class="note-title marker" id="h-note-5" aria-level="5"><span>Note</span></div><div class="">Framing works on <a href="#dfn-map-of-flattened-subjects" class="internalDFN" data-link-type="dfn">map of flattened subjects</a>,
+    <div class="note" id="issue-container-generatedID-5"><div role="heading" class="note-title marker" id="h-note-4" aria-level="5"><span>Note</span></div><div class="">Framing works on <a href="#dfn-map-of-flattened-subjects" class="internalDFN" data-link-type="dfn">map of flattened subjects</a>,
       and the act of flattening ensures that all subjects have an
       <code>@id</code> property; thus the <code>"@id": []</code> pattern would
       never match any <a href="#dfn-node-objects" class="internalDFN" data-link-type="dfn">node object</a>. the <code>"@id": [{}]</code> pattern would
@@ -2604,7 +2603,7 @@ The content <span class="hljs-keyword">of</span> the example is <span class="hlj
   <section class="algorithm" id="jsonldprocessor">
     <h3 id="x5-1-jsonldprocessor"><span class="secno">5.1 </span>JsonLdProcessor&nbsp;<span class="permalink"><a href="#jsonldprocessor" aria-label="Permalink for 5.1 JsonLdProcessor" title="Permalink for 5.1 JsonLdProcessor"><span>§</span></a></span></h3>
 
-    <p>The <a href="http://www.w3.org/TR/2018/WD-json-ld11-api-20180911/#dfn-json-ld-processor">JSON-LD Processor</a> interface is the high-level programming structure that developers
+    <p>The <a href="http://www.w3.org/TR/2018/WD-json-ld11-api-20180911/#dfn-json-ld-processors">JSON-LD Processor</a> interface is the high-level programming structure that developers
       use to access the JSON-LD transformation methods. The definition below is an experimental
       extension of the interface defined in the JSON-LD 1.1 API [<cite><a class="bibref" href="#bib-json-ld11-api">JSON-LD11-API</a></cite>].</p>
 
@@ -2626,14 +2625,16 @@ interface <span class="idlInterfaceID"><a data-no-default="" data-link-for="" da
         following steps are then executed asynchronously.</li>
       <li>Set <var>expanded input</var> to the result of using the
         <a href="http://www.w3.org/TR/2018/WD-json-ld11-api-20180911/#dom-jsonldprocessor-expand">expand</a>
-        method using <a data-lt="JsonLdProcessor-frame-input" href="#dfn-jsonldprocessor-frame-input" class="internalDFN" data-link-type="dfn">input</a> and <a data-lt="JsonLdProcessor-frame-options" href="#dfn-jsonldprocessor-frame-options" class="internalDFN" data-link-type="dfn">options</a>.
+        method using <a data-lt="JsonLdProcessor-frame-input" href="#dfn-jsonldprocessor-frame-input" class="internalDFN" data-link-type="dfn">input</a> and <a data-lt="JsonLdProcessor-frame-options" href="#dfn-jsonldprocessor-frame-options" class="internalDFN" data-link-type="dfn">options</a>
+        <span class="changed">with <a data-link-for="JsonldOptions" href="#dom-jsonldoptions-ordered" class="internalDFN" data-link-type="dfn"><code>ordered</code></a> set to <code>false</code></span>.
       </li><li>Set <var>expanded frame</var> to the result of using the
         <code class="idlMemberName"><a href="http://www.w3.org/TR/2018/WD-json-ld11-api-20180911/#dom-jsonldprocessor-expand">expand</a></code>
         method using
         <a data-lt="JsonLdProcessor-frame-frame" href="#dfn-jsonldprocessor-frame-frame" class="internalDFN" data-link-type="dfn">frame</a> and
         <a data-lt="JsonLdProcessor-frame-options" href="#dfn-jsonldprocessor-frame-options" class="internalDFN" data-link-type="dfn">options</a> with
-        <code class="idlMemberName"><a href="http://www.w3.org/TR/2018/WD-json-ld11-api-20180911/#dom-jsonldoptions-expandcontext">expandContext</a></code> set to <code>null</code>
-        and the <a href="http://www.w3.org/TR/2018/WD-json-ld11-api-20180911/#dom-jsonldoptions-frameexpansion">frameExpansion</a> option set to <code>true</code>.
+        <code class="idlMemberName"><a href="http://www.w3.org/TR/2018/WD-json-ld11-api-20180911/#dom-jsonldoptions-expandcontext">expandContext</a></code> set to <code>null</code>,
+        the <a href="http://www.w3.org/TR/2018/WD-json-ld11-api-20180911/#dom-jsonldoptions-frameexpansion">frameExpansion</a> option set to <code>true</code>,
+        <span class="changed">and the <a data-link-for="JsonldOptions" href="#dom-jsonldoptions-ordered" class="internalDFN" data-link-type="dfn"><code>ordered</code></a> option set to <code>false</code></span>.
       </li><li>Set <var>context</var> to the value of <code>@context</code>
         from <a data-lt="JsonLdProcessor-frame-frame" href="#dfn-jsonldprocessor-frame-frame" class="internalDFN" data-link-type="dfn">frame</a>, if it exists, or to
         a new empty <a href="#dfn-contexts" class="internalDFN" data-link-type="dfn">context</a>, otherwise.</li>
@@ -2729,7 +2730,8 @@ enum <span class="idlEnumID"><a data-no-default="" data-link-for="" data-lt="" h
   <a href="https://heycam.github.io/webidl/#idl-boolean">boolean</a></span> <span class="idlMemberName"><a data-no-default="" data-link-for="jsonldoptions" data-lt="" href="#dom-jsonldoptions-omitdefault" class="internalDFN" data-link-type="dfn"><code>omitDefault</code></a></span> = <span class="idlMemberValue">false</span>;</span><span class="idlMember" id="idl-def-jsonldoptions-omitgraph" data-idl="" data-title="omitGraph" data-dfn-for="jsonldoptions"><span class="idlMemberType">
   <a href="https://heycam.github.io/webidl/#idl-boolean">boolean</a></span> <span class="idlMemberName"><a data-no-default="" data-link-for="jsonldoptions" data-lt="" href="#dom-jsonldoptions-omitgraph" class="internalDFN" data-link-type="dfn"><code>omitGraph</code></a></span>;</span><span class="idlMember" id="idl-def-jsonldoptions-requireall" data-idl="" data-title="requireAll" data-dfn-for="jsonldoptions"><span class="idlMemberType">
   <a href="https://heycam.github.io/webidl/#idl-boolean">boolean</a></span> <span class="idlMemberName"><a data-no-default="" data-link-for="jsonldoptions" data-lt="" href="#dom-jsonldoptions-requireall" class="internalDFN" data-link-type="dfn"><code>requireAll</code></a></span> = <span class="idlMemberValue">false</span>;</span><span class="idlMember" id="idl-def-jsonldoptions-framedefault" data-idl="" data-title="frameDefault" data-dfn-for="jsonldoptions"><span class="idlMemberType">
-  <a href="https://heycam.github.io/webidl/#idl-boolean">boolean</a></span> <span class="idlMemberName"><a data-no-default="" data-link-for="jsonldoptions" data-lt="" href="#dom-jsonldoptions-framedefault" class="internalDFN" data-link-type="dfn"><code>frameDefault</code></a></span> = <span class="idlMemberValue">false</span>;</span>
+  <a href="https://heycam.github.io/webidl/#idl-boolean">boolean</a></span> <span class="idlMemberName"><a data-no-default="" data-link-for="jsonldoptions" data-lt="" href="#dom-jsonldoptions-framedefault" class="internalDFN" data-link-type="dfn"><code>frameDefault</code></a></span> = <span class="idlMemberValue">false</span>;</span><span class="idlMember" id="idl-def-jsonldoptions-ordered" data-idl="" data-title="ordered" data-dfn-for="jsonldoptions"><span class="idlMemberType">
+  <a href="https://heycam.github.io/webidl/#idl-boolean">boolean</a></span> <span class="idlMemberName"><a data-no-default="" data-link-for="jsonldoptions" data-lt="" href="#dom-jsonldoptions-ordered" class="internalDFN" data-link-type="dfn"><code>ordered</code></a></span> = <span class="idlMemberValue">false</span>;</span>
 };</span><span class="idlEnum" id="idl-def-jsonldembed" data-idl="" data-title="JsonLdEmbed">
 
 enum <span class="idlEnumID"><a data-no-default="" data-link-for="" data-lt="" href="#dom-jsonldembed" class="internalDFN" data-link-type="dfn"><code>JsonLdEmbed</code></a></span> {
@@ -2752,14 +2754,19 @@ enum <span class="idlEnumID"><a data-no-default="" data-link-for="" data-lt="" h
         <a href="#framing-algorithm">Framing Algorithm</a>.
       </dd>
       <dt><dfn data-dfn-for="jsonldoptions" data-dfn-type="dfn" id="dom-jsonldoptions-framedefault" data-idl="" data-title="frameDefault"><code>frameDefault</code></dfn></dt>
-      <dd>Instead of framing a <var>merged graph</var>, frame only the <a href="#dfn-default-graph" class="internalDFN" data-link-type="dfn">default graph</a>.</dd><dt><dfn data-dfn-for="jsonldoptions" data-dfn-type="dfn" id="dom-jsonldoptions-omitdefault" data-idl="" data-title="omitDefault"><code>omitDefault</code></dfn></dt>
+      <dd>Instead of framing a <var>merged graph</var>, frame only the <a href="#dfn-default-graph" class="internalDFN" data-link-type="dfn">default graph</a>.</dd>
+      <dt><dfn data-dfn-for="jsonldoptions" data-dfn-type="dfn" id="dom-jsonldoptions-omitdefault" data-idl="" data-title="omitDefault"><code>omitDefault</code></dfn></dt>
       <dd>Sets the value <a href="#dfn-omit-default-flag" class="internalDFN" data-link-type="dfn">omit default flag</a> used in the
         <a href="#framing-algorithm">Framing Algorithm</a></dd>
       <dt class="changed"><dfn data-dfn-for="jsonldoptions" data-dfn-type="dfn" id="dom-jsonldoptions-omitgraph" data-idl="" data-title="omitGraph"><code>omitGraph</code></dfn></dt>
       <dd class="changed">Sets the value <a href="#dfn-omit-graph-flag" class="internalDFN" data-link-type="dfn">omit graph flag</a> used in the
         <a href="#framing-algorithm">Framing Algorithm</a>. If not set explicitly,
         it is set to <code>false</code> if <a href="#dfn-processing-mode" class="internalDFN" data-link-type="dfn">processing mode</a> if <code>json-ld-1.0</code>, <code>true</code> otherwise.</dd>
-      <dt><dfn data-dfn-for="jsonldoptions" data-dfn-type="dfn" id="dom-jsonldoptions-requireall" data-idl="" data-title="requireAll"><code>requireAll</code></dfn></dt>
+      <dt class="changed"><dfn data-dfn-for="jsonldoptions" data-dfn-type="dfn" id="dom-jsonldoptions-ordered" data-idl="" data-title="ordered"><code>ordered</code></dfn></dt>
+      <dd class="changed">If set to <code>true</code>, certain algorithm
+        processing steps where indicated are ordered lexicographically.
+        If <code>false</code>, order
+        is not considered in processing.</dd><dt><dfn data-dfn-for="jsonldoptions" data-dfn-type="dfn" id="dom-jsonldoptions-requireall" data-idl="" data-title="requireAll"><code>requireAll</code></dfn></dt>
       <dd>Sets the value <a href="#dfn-require-all-flag" class="internalDFN" data-link-type="dfn">require all flag</a> used in the
         <a href="#framing-algorithm">Framing Algorithm</a>.</dd>
       </dl>
@@ -2847,7 +2854,7 @@ becomes a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation.</p>
 
 <section id="security" class="appendix">
   <!--OddPage--><h2 id="b-security-considerations"><span class="secno">B. </span>Security Considerations&nbsp;<span class="permalink"><a href="#security" aria-label="Permalink for B. Security Considerations" title="Permalink for B. Security Considerations"><span>§</span></a></span></h2>
-  <div class="ednote" id="issue-container-generatedID-8"><div role="heading" class="ednote-title marker" id="h-ednote-0" aria-level="3"><span>Editor's note</span></div><p class="">Consider requirements from <a href="https://w3ctag.github.io/security-questionnaire/">Self-Review Questionnaire: Security and Privacy</a>.</p></div>
+  <div class="ednote" id="issue-container-generatedID-6"><div role="heading" class="ednote-title marker" id="h-ednote" aria-level="3"><span>Editor's note</span></div><p class="">Consider requirements from <a href="https://w3ctag.github.io/security-questionnaire/">Self-Review Questionnaire: Security and Privacy</a>.</p></div>
   <p>See, <a href="#iana-considerations" class="sectionRef sec-ref">section <span class="secno">A.</span> <span class="sec-title">IANA Considerations</span></a></p>
 </section>
 
@@ -2875,7 +2882,8 @@ enum <span class="idlEnumID"><a data-no-default="" data-link-for="" data-lt="" h
   <a href="https://heycam.github.io/webidl/#idl-boolean">boolean</a></span> <span class="idlMemberName"><a data-no-default="" data-link-for="jsonldoptions" data-lt="" href="#dom-jsonldoptions-omitdefault" class="internalDFN" data-link-type="dfn"><code>omitDefault</code></a></span> = <span class="idlMemberValue">false</span>;</span><span class="idlMember" data-idl="" data-title="omitGraph" data-dfn-for="jsonldoptions"><span class="idlMemberType">
   <a href="https://heycam.github.io/webidl/#idl-boolean">boolean</a></span> <span class="idlMemberName"><a data-no-default="" data-link-for="jsonldoptions" data-lt="" href="#dom-jsonldoptions-omitgraph" class="internalDFN" data-link-type="dfn"><code>omitGraph</code></a></span>;</span><span class="idlMember" data-idl="" data-title="requireAll" data-dfn-for="jsonldoptions"><span class="idlMemberType">
   <a href="https://heycam.github.io/webidl/#idl-boolean">boolean</a></span> <span class="idlMemberName"><a data-no-default="" data-link-for="jsonldoptions" data-lt="" href="#dom-jsonldoptions-requireall" class="internalDFN" data-link-type="dfn"><code>requireAll</code></a></span> = <span class="idlMemberValue">false</span>;</span><span class="idlMember" data-idl="" data-title="frameDefault" data-dfn-for="jsonldoptions"><span class="idlMemberType">
-  <a href="https://heycam.github.io/webidl/#idl-boolean">boolean</a></span> <span class="idlMemberName"><a data-no-default="" data-link-for="jsonldoptions" data-lt="" href="#dom-jsonldoptions-framedefault" class="internalDFN" data-link-type="dfn"><code>frameDefault</code></a></span> = <span class="idlMemberValue">false</span>;</span>
+  <a href="https://heycam.github.io/webidl/#idl-boolean">boolean</a></span> <span class="idlMemberName"><a data-no-default="" data-link-for="jsonldoptions" data-lt="" href="#dom-jsonldoptions-framedefault" class="internalDFN" data-link-type="dfn"><code>frameDefault</code></a></span> = <span class="idlMemberValue">false</span>;</span><span class="idlMember" data-idl="" data-title="ordered" data-dfn-for="jsonldoptions"><span class="idlMemberType">
+  <a href="https://heycam.github.io/webidl/#idl-boolean">boolean</a></span> <span class="idlMemberName"><a data-no-default="" data-link-for="jsonldoptions" data-lt="" href="#dom-jsonldoptions-ordered" class="internalDFN" data-link-type="dfn"><code>ordered</code></a></span> = <span class="idlMemberValue">false</span>;</span>
 };</span><span class="idlEnum" data-idl="" data-title="JsonLdEmbed">
 
 enum <span class="idlEnumID"><a data-no-default="" data-link-for="" data-lt="" href="#dom-jsonldembed" class="internalDFN" data-link-type="dfn"><code>JsonLdEmbed</code></a></span> {
@@ -2887,8 +2895,8 @@ enum <span class="idlEnumID"><a data-no-default="" data-link-for="" data-lt="" h
 <section class="appendix informative preserve" id="open-issues">
   <!--OddPage--><h2 id="d-open-issues"><span class="secno">D. </span>Open Issues&nbsp;<span class="permalink"><a href="#open-issues" aria-label="Permalink for D. Open Issues" title="Permalink for D. Open Issues"><span>§</span></a></span></h2><p><em>This section is non-normative.</em></p>
   <p>The following is a list of issues open at the time of publication.</p>
-  <div class="issue" id="issue-container-number-5"><div role="heading" class="issue-title marker" id="h-issue-0" aria-level="3"><a href="https://github.com/w3c/json-ld-framing/issues/5"><span class="issue-number">Issue 5</span></a><span style="text-transform: none">: infinite recursion in @reverse properties<a class="respec-gh-label respec-label-dark" href="https://github.com/w3c/json-ld-framing/issues/?q=is%3Aissue+is%3Aopen+label%3A%22spec%3Aenhancement%22" style="background-color: rgb(193, 21, 55);">spec:enhancement</a><a class="respec-gh-label respec-label-light" href="https://github.com/w3c/json-ld-framing/issues/?q=is%3Aissue+is%3Aopen+label%3A%22spec%3Asubstantive%22" style="background-color: rgb(207, 249, 164);">spec:substantive</a></span></div><p class="">It would be nice to have the same possiblity of infinite recursion in the @reverse properties as there are in non-reverse ones, currently recursion only works as many times as the frame defines it.</p></div>
-  <div class="issue" id="issue-container-number-9"><div role="heading" class="issue-title marker" id="h-issue-1" aria-level="3"><a href="https://github.com/w3c/json-ld-framing/issues/9"><span class="issue-number">Issue 9</span></a><span style="text-transform: none">: Frame Matching &amp; Blank Nodes<a class="respec-gh-label respec-label-dark" href="https://github.com/w3c/json-ld-framing/issues/?q=is%3Aissue+is%3Aopen+label%3A%22spec%3Aeditorial%22" style="background-color: rgb(88, 130, 10);">spec:editorial</a></span></div><p class="">Clarification required on the use of blank node identifiers in frames.</p></div>
+  <div class="issue" id="issue-container-number-5"><div role="heading" class="issue-title marker" id="h-issue-0" aria-level="3"><a href="https://github.com/w3c/json-ld-framing/issues/5"><span class="issue-number">Issue 5</span></a></div><p class="">It would be nice to have the same possiblity of infinite recursion in the @reverse properties as there are in non-reverse ones, currently recursion only works as many times as the frame defines it.</p></div>
+  <div class="issue" id="issue-container-number-9"><div role="heading" class="issue-title marker" id="h-issue-1" aria-level="3"><a href="https://github.com/w3c/json-ld-framing/issues/9"><span class="issue-number">Issue 9</span></a></div><p class="">Clarification required on the use of blank node identifiers in frames.</p></div>
 </section>
 
 <section class="appendix informative" id="changes-since-1-0-draft-of-30-august-2012">
@@ -2926,12 +2934,23 @@ enum <span class="idlEnumID"><a data-no-default="" data-link-for="" data-lt="" h
     <li>Added the <a href="#dfn-omit-default-flag" class="internalDFN" data-link-type="dfn">omit default flag</a>, controled via the
       <a data-link-for="JsonLdOptions" href="#dom-jsonldoptions-omitdefault" class="internalDFN" data-link-type="dfn"><code>omitDefault</code></a> API option and/or
       the current <a href="#dfn-processing-mode" class="internalDFN" data-link-type="dfn">processing mode</a>.</li>
+    <li>The API now adds an <a data-link-for="JsonLdOptions" href="#dom-jsonldoptions-ordered" class="internalDFN" data-link-type="dfn"><code>ordered</code></a>
+       option, defaulting to <code>false</code> This is used in algorithms to
+       control interation of <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-dictionary-member">dictionary member</a> keys. Previously, the
+       algorithms always required such an order. The instructions for
+       evaluating test results have been updated accordingly.</li>
   </ul>
 </section>
 
 <section class="appendix informative" id="changes-from-cg">
   <!--OddPage--><h2 id="f-changes-since-json-ld-community-group-final-report"><span class="secno">F. </span>Changes since JSON-LD Community Group Final Report&nbsp;<span class="permalink"><a href="#changes-from-cg" aria-label="Permalink for F. Changes since JSON-LD Community Group Final Report" title="Permalink for F. Changes since JSON-LD Community Group Final Report"><span>§</span></a></span></h2><p><em>This section is non-normative.</em></p>
-  <p>None.</p>
+  <ul>
+    <li>The API now adds an <a data-link-for="JsonLdOptions" href="#dom-jsonldoptions-ordered" class="internalDFN" data-link-type="dfn"><code>ordered</code></a>
+       option, defaulting to <code>false</code> This is used in algorithms to
+       control interation of <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-dictionary-member">dictionary member</a> keys. Previously, the
+       algorithms always required such an order. The instructions for
+       evaluating test results have been updated accordingly.</li>
+  </ul>
 </section>
 
 <section class="appendix informative" id="acknowledgements">
@@ -2990,7 +3009,7 @@ enum <span class="idlEnumID"><a data-no-default="" data-link-for="" data-lt="" h
     <section id="normative-references">
         <h3 id="h-1-normative-references"><span class="secno">H.1 </span>Normative references&nbsp;<span class="permalink"><a href="#normative-references" aria-label="Permalink for H.1 Normative references" title="Permalink for H.1 Normative references"><span>§</span></a></span></h3>
       <dl class="bibliography">
-        <dt id="bib-bcp47">[BCP47]</dt><dd><a href="https://tools.ietf.org/html/bcp47"><cite>Tags for Identifying Languages</cite></a>. A. Phillips; M. Davis. IETF. September 2009. IETF Best Current Practice. URL: <a href="https://tools.ietf.org/html/bcp47">https://tools.ietf.org/html/bcp47</a></dd><dt id="bib-json-ld">[JSON-LD]</dt><dd><a href="https://www.w3.org/TR/json-ld/"><cite>JSON-LD 1.0</cite></a>. Manu Sporny; Gregg Kellogg; Markus Lanthaler. W3C. 16 January 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/json-ld/">https://www.w3.org/TR/json-ld/</a></dd><dt id="bib-json-ld11">[JSON-LD11]</dt><dd><a href="http://www.w3.org/TR/2018/WD-json-ld11-syntax-20180911/"><cite>JSON-LD 1.1</cite></a>. Gregg Kellogg. W3C. 11 September 2018. W3C First Public Working Draft. URL: <a href="http://www.w3.org/TR/2018/WD-json-ld11-syntax-20180911/">http://www.w3.org/TR/2018/WD-json-ld11-syntax-20180911/</a></dd><dt id="bib-json-ld11-api">[JSON-LD11-API]</dt><dd><a href="http://www.w3.org/TR/2018/WD-json-ld11-api-20180911/"><cite>JSON-LD 1.1 Processing Algorithms and API</cite></a>. Gregg Kellogg. W3C. 11 September 2018. W3C First Public Working Draft. URL: <a href="http://www.w3.org/TR/2018/WD-json-ld11-api-20180911/">http://www.w3.org/TR/2018/WD-json-ld11-api-20180911/</a></dd><dt id="bib-rdf-schema">[RDF-SCHEMA]</dt><dd><a href="https://www.w3.org/TR/rdf-schema/"><cite>RDF Schema 1.1</cite></a>. Dan Brickley; Ramanathan Guha. W3C. 25 February 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/rdf-schema/">https://www.w3.org/TR/rdf-schema/</a></dd><dt id="bib-rdf11-concepts">[RDF11-CONCEPTS]</dt><dd><a href="https://www.w3.org/TR/rdf11-concepts/"><cite>RDF 1.1 Concepts and Abstract Syntax</cite></a>. Richard Cyganiak; David Wood; Markus Lanthaler. W3C. 25 February 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/rdf11-concepts/">https://www.w3.org/TR/rdf11-concepts/</a></dd><dt id="bib-rfc2119">[RFC2119]</dt><dd><a href="https://tools.ietf.org/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner. IETF. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a></dd><dt id="bib-rfc3987">[RFC3987]</dt><dd><a href="https://tools.ietf.org/html/rfc3987"><cite>Internationalized Resource Identifiers (IRIs)</cite></a>. M. Duerst; M. Suignard. IETF. January 2005. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc3987">https://tools.ietf.org/html/rfc3987</a></dd><dt id="bib-rfc8259">[RFC8259]</dt><dd><a href="https://tools.ietf.org/html/rfc8259"><cite>The JavaScript Object Notation (JSON) Data Interchange Format</cite></a>. T. Bray, Ed.. IETF. December 2017. Internet Standard. URL: <a href="https://tools.ietf.org/html/rfc8259">https://tools.ietf.org/html/rfc8259</a></dd><dt id="bib-webidl">[WEBIDL]</dt><dd><a href="https://heycam.github.io/webidl/"><cite>Web IDL</cite></a>. Cameron McCormack; Boris Zbarsky; Tobie Langel. W3C. 15 December 2016. W3C Editor's Draft. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a></dd>
+        <dt id="bib-bcp47">[BCP47]</dt><dd><a href="https://tools.ietf.org/html/bcp47"><cite>Tags for Identifying Languages</cite></a>. A. Phillips; M. Davis. IETF. September 2009. IETF Best Current Practice. URL: <a href="https://tools.ietf.org/html/bcp47">https://tools.ietf.org/html/bcp47</a></dd><dt id="bib-json-ld">[JSON-LD]</dt><dd><a href="https://www.w3.org/TR/json-ld/"><cite>JSON-LD 1.0</cite></a>. Manu Sporny; Gregg Kellogg; Markus Lanthaler. W3C. 16 January 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/json-ld/">https://www.w3.org/TR/json-ld/</a></dd><dt id="bib-json-ld11">[JSON-LD11]</dt><dd><a href="http://www.w3.org/TR/2018/WD-json-ld11-20180911/"><cite>JSON-LD 1.1</cite></a>. Gregg Kellogg. W3C. 11 September 2018. W3C First Public Working Draft. URL: <a href="http://www.w3.org/TR/2018/WD-json-ld11-20180911/">http://www.w3.org/TR/2018/WD-json-ld11-20180911/</a></dd><dt id="bib-json-ld11-api">[JSON-LD11-API]</dt><dd><a href="http://www.w3.org/TR/2018/WD-json-ld11-api-20180911/"><cite>JSON-LD 1.1 Processing Algorithms and API</cite></a>. Gregg Kellogg. W3C. 11 September 2018. W3C First Public Working Draft. URL: <a href="http://www.w3.org/TR/2018/WD-json-ld11-api-20180911/">http://www.w3.org/TR/2018/WD-json-ld11-api-20180911/</a></dd><dt id="bib-rdf-schema">[RDF-SCHEMA]</dt><dd><a href="https://www.w3.org/TR/rdf-schema/"><cite>RDF Schema 1.1</cite></a>. Dan Brickley; Ramanathan Guha. W3C. 25 February 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/rdf-schema/">https://www.w3.org/TR/rdf-schema/</a></dd><dt id="bib-rdf11-concepts">[RDF11-CONCEPTS]</dt><dd><a href="https://www.w3.org/TR/rdf11-concepts/"><cite>RDF 1.1 Concepts and Abstract Syntax</cite></a>. Richard Cyganiak; David Wood; Markus Lanthaler. W3C. 25 February 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/rdf11-concepts/">https://www.w3.org/TR/rdf11-concepts/</a></dd><dt id="bib-rfc2119">[RFC2119]</dt><dd><a href="https://tools.ietf.org/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner. IETF. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a></dd><dt id="bib-rfc3987">[RFC3987]</dt><dd><a href="https://tools.ietf.org/html/rfc3987"><cite>Internationalized Resource Identifiers (IRIs)</cite></a>. M. Duerst; M. Suignard. IETF. January 2005. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc3987">https://tools.ietf.org/html/rfc3987</a></dd><dt id="bib-rfc8259">[RFC8259]</dt><dd><a href="https://tools.ietf.org/html/rfc8259"><cite>The JavaScript Object Notation (JSON) Data Interchange Format</cite></a>. T. Bray, Ed.. IETF. December 2017. Internet Standard. URL: <a href="https://tools.ietf.org/html/rfc8259">https://tools.ietf.org/html/rfc8259</a></dd><dt id="bib-webidl">[WEBIDL]</dt><dd><a href="https://heycam.github.io/webidl/"><cite>Web IDL</cite></a>. Cameron McCormack; Boris Zbarsky; Tobie Langel. W3C. 15 December 2016. W3C Editor's Draft. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a></dd>
       </dl></section><section id="informative-references">
         <h3 id="h-2-informative-references"><span class="secno">H.2 </span>Informative references&nbsp;<span class="permalink"><a href="#informative-references" aria-label="Permalink for H.2 Informative references" title="Permalink for H.2 Informative references"><span>§</span></a></span></h3>
       <dl class="bibliography">
