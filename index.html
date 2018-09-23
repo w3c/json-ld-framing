@@ -194,6 +194,26 @@
   A <a>Frame</a> can be used by a developer on a JSON-LD document to
   specify a deterministic layout for a graph.</p>
 
+<p>Using delimiters around a chunk of data is known as "framing".
+  JSON-LD uses JSON delimiters such as <code>{</code> and <code>}</code> to
+  separate statements about a particular subject. JSON-LD also allows subjects
+  to reference other subjects through the use of their identifiers, expressed
+  as strings.</p>
+
+<p>However, given that JSON-LD represents a <a>graph</a> of information,
+  there is more than one way to frame the statements about several related
+  subjects into a whole document. In fact, a graph of information can be
+  thought of as a long list of independent statements (aka <a>triples</a> or
+  <a>quads</a>) that are not bundled together in any way.</p>
+
+<p>The
+  <a href="#the-application-programming-interface" class="sectionRef">JSON-LD Framing API</a>
+  enables a developer to specify exactly how they would like data to be framed,
+  such that statements about a particular subject are bundled together,
+  delimited via <code>{</code> and <code>}</code>, and such that the subjects
+  they relate to "nest" into a particular tree structure that matches what
+  their application expects.</p>
+
 <section>
 <h2>How to Read this Document</h2>
 
