@@ -154,6 +154,62 @@
     color:  green;
     background-color: inherit;
   }
+  aside.example {
+    overflow-y: hidden;
+  }
+  /* example tab selection */
+  .ds-selector-tabs {
+    padding-bottom: 2em;
+  }
+  .ds-selector-tabs .selectors {
+    padding: 0;
+    border-bottom: 1px solid #ccc;
+    height: 28px;
+  }
+  .ds-selector-tabs .selectors button {
+    display: inline-block;
+    min-width: 54px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: bold;
+    height: 27px;
+    padding: 0 8px;
+    line-height: 27px;
+    transition: all,0.218s;
+    border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+    color: #666;
+    border: 1px solid transparent;
+  }
+  .ds-selector-tabs .selectors button:first-child {
+    margin-left: 2px;
+  }
+  .ds-selector-tabs .selectors button.selected {
+    color: #202020 !important;
+    border: 1px solid #ccc;
+    border-bottom: 1px solid #fff !important;
+  }
+  .ds-selector-tabs .selectors button:hover {
+    background-color: transparent;
+    color: #202020;
+    cursor: pointer;
+  }
+  .ds-selector-tabs pre, .ds-selector-tabs table {
+    display: none;
+  }
+  .ds-selector-tabs pre.selected, .ds-selector-tabs table.selected {
+    display: block;
+  }
+  a.playground {
+    border-bottom: none;
+    text-decoration: none;
+    font-size: 13px;
+  }
+  a[href].playground {
+    border-bottom: none;
+    text-decoration: none;
+    color: #666;
+  }
 </style>
 </head>
 
@@ -308,7 +364,8 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
       framed output.</p>
 
     <p>For example, assume the following JSON-LD frame:</p>
-    <pre class="example" data-transform="updateExample"
+    <pre id="sample-library-frame"
+         class="example" data-transform="updateExample"
          data-content-type="application/ld-frame+json"
          data-frame-for="Flattened library objects"
          title="Sample library frame">
@@ -334,7 +391,8 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
       as embedded values of the <em>Book</em> object.</p>
 
     <p>When using a flattened set of objects that match the frame components:</p>
-    <pre class="example" data-transform="updateExample"
+    <pre id="flattened-library-objects"
+         class="example" data-transform="updateExample"
          title="Flattened library objects">
     <!--
     {
@@ -364,35 +422,45 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
 
     <p>The Frame Algorithm can create a new document which follows the structure
       of the frame:</p>
-    <pre class="example" data-transform="updateExample"
-         data-frame="Sample library frame"
-         data-result-for="Flattened library objects"
-         title="Framed library objects">
-    <!--
-    {
-      "@context": {"@vocab": "http://example.org/"},
-      "@graph": [{
-        "@id": "http://example.org/library",
-        "@type": "Library",
-        "contains": {
-          "@id": "http://example.org/library/the-republic",
-          "@type": "Book",
+
+    <aside class="example ds-selector-tabs"
+           title="Framed library objects">
+      <div class="selectors">
+        <a class="playground"
+           data-result-for="#flattened-library-objects"
+           data-frame="#sample-library-frame"
+           target="_blank"></a>
+      </div>
+      <pre class="selected original" data-transform="updateExample"
+           data-frame="Sample library frame"
+           data-result-for="Flattened library objects">
+      <!--
+      {
+        "@context": {"@vocab": "http://example.org/"},
+        "@graph": [{
+          "@id": "http://example.org/library",
+          "@type": "Library",
           "contains": {
-            "@id": "http://example.org/library/the-republic#introduction",
-            "@type": "Chapter",
-            "description": "An introductory chapter on The Republic.",
-            "title": "The Introduction"
-          },
-          "creator": "Plato",
-          "title": "The Republic"
-        }
-      }]
-    }
-    -->
-    </pre>
+            "@id": "http://example.org/library/the-republic",
+            "@type": "Book",
+            "contains": {
+              "@id": "http://example.org/library/the-republic#introduction",
+              "@type": "Chapter",
+              "description": "An introductory chapter on The Republic.",
+              "title": "The Introduction"
+            },
+            "creator": "Plato",
+            "title": "The Republic"
+          }
+        }]
+      }
+      -->
+      </pre>
+    </aside>
 
     <p>If <a>processing mode</a> is <code>json-ld-1.1</code>, or the <a>omit graph flag</a> is <code>true</code>,
       the top-level <code>@graph</code> <a>member</a> may be omitted.</p>
+
     <pre class="example" data-transform="updateExample"
          data-frame="Sample library frame"
          data-result-for="Flattened library objects"
@@ -444,7 +512,8 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
     <p class="note">The value of the property in the frame is not otherwise
       used in the output document. It's purpose is for frame matching and
       finding default values. Note the <em>description</em> value for <em>Library</em> in the following example.</p>
-    <pre class="example nohighlight" data-transform="updateExample"
+    <pre id="sample-library-frame-with-default-value"
+         class="example nohighlight" data-transform="updateExample"
          data-content-type="application/ld-frame+json"
          data-frame-for="Flattened library objects"
          title="Sample library frame with @default value">
@@ -464,35 +533,42 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
     -->
     </pre>
 
-
-    <pre class="example nohighlight" data-transform="updateExample"
-         data-frame="Sample library frame with @default value"
-         data-result-for="Flattened library objects"
-         title="Sample library output with @default value">
-    <!--
-    {
-      "@context": {"@vocab": "http://example.org/"},
-      "@graph": [{
-        "@id": "http://example.org/library",
-        "@type": "Library",
-        "contains": {
-          "@id": "http://example.org/library/the-republic",
-          "@type": "Book",
+    <aside class="example ds-selector-tabs"
+           title="Sample library output with @default value">
+      <div class="selectors">
+        <a class="playground"
+           data-result-for="#flattened-library-objects"
+           data-frame="#sample-library-frame-with-default-value"
+           target="_blank"></a>
+      </div>
+      <pre class="selected original nohighlight" data-transform="updateExample"
+           data-frame="Sample library frame with @default value"
+           data-result-for="Flattened library objects">
+      <!--
+      {
+        "@context": {"@vocab": "http://example.org/"},
+        "@graph": [{
+          "@id": "http://example.org/library",
+          "@type": "Library",
           "contains": {
-            "@id": "http://example.org/library/the-republic#introduction",
-            "@type": "Chapter",
-            "description": "An introductory chapter on The Republic.",
-            "title": "The Introduction"
+            "@id": "http://example.org/library/the-republic",
+            "@type": "Book",
+            "contains": {
+              "@id": "http://example.org/library/the-republic#introduction",
+              "@type": "Chapter",
+              "description": "An introductory chapter on The Republic.",
+              "title": "The Introduction"
+            },
+            "creator": "Plato",
+            ****"description": "A great book.",****
+            "title": "The Republic"
           },
-          "creator": "Plato",
-          ****"description": "A great book.",****
-          "title": "The Republic"
-        },
-      ****"description": null****
-      }]
-    }
-    -->
-    </pre>
+        ****"description": null****
+        }]
+      }
+      -->
+      </pre>
+    </aside>
 
   </section>
 
@@ -534,10 +610,11 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
          using a default empty frame. As a result, the same output used in the
          <a href="#lib-example-output">Framed library objects</a> above is generated.</p>
 
-       <p>However, if the <code>@embed</code> property is added explicitly with a
+      <p>However, if the <code>@embed</code> property is added explicitly with a
          value of <code>@never</code>, the values for <em>Book</em> and <em>Chapter</em> will be excluded.</p>
 
-      <pre class="example nohighlight" data-transform="updateExample"
+      <pre id="sample-library-frame-with-explicit-embed-set-to-never"
+           class="example nohighlight" data-transform="updateExample"
            data-content-type="application/ld-frame+json"
            data-frame-for="Flattened library objects"
            title="Sample library frame with explicit @embed set to @never">
@@ -553,23 +630,31 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
       -->
       </pre>
 
-      <pre class="example nohighlight" data-transform="updateExample"
-           data-frame="Sample library frame with explicit @embed set to @never"
-           data-result-for="Flattened library objects"
-           title="Framed library objects with @embed set to @never">
-      <!--
-      {
-        "@context": {"@vocab": "http://example.org/"},
-        "@graph": [{
-          "@id": "http://example.org/library",
-          "@type": "Library",
-          "contains": {
-            ****"@id": "http://example.org/library/the-republic"****
-          }
-        }]
-      }
-      -->
-      </pre>
+      <aside class="example ds-selector-tabs"
+             title="Framed library objects with @embed set to @never">
+        <div class="selectors">
+          <a class="playground"
+             data-result-for="#flattened-library-objects"
+             data-frame="#sample-library-frame-with-explicit-embed-set-to-never"
+             target="_blank"></a>
+        </div>
+        <pre class="selected original nohighlight" data-transform="updateExample"
+             data-frame="Sample library frame with explicit @embed set to @never"
+             data-result-for="Flattened library objects">
+        <!--
+        {
+          "@context": {"@vocab": "http://example.org/"},
+          "@graph": [{
+            "@id": "http://example.org/library",
+            "@type": "Library",
+            "contains": {
+              ****"@id": "http://example.org/library/the-republic"****
+            }
+          }]
+        }
+        -->
+        </pre>
+      </aside>
     </section>
 
     <section class="informative">
@@ -587,7 +672,8 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
       <p>For example, take an expanded version of the library frame which include
         some properties from the input, but omit others.</p>
 
-      <pre class="example nohighlight" data-transform="updateExample"
+      <pre id="sample-library-frame-with-explicit-set-to-true"
+           class="example nohighlight" data-transform="updateExample"
            data-content-type="application/ld-frame+json"
            data-frame-for="Flattened library objects"
            title="Sample library frame with @explicit set to true">
@@ -611,33 +697,42 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
       <p>The resulting output will exclude properties for Book which are not explicitly
         listed in the <a>frame object</a>:</p>
 
-    <pre id="lib-example-output" class="example nohighlight" data-transform="updateExample"
-         data-frame="Sample library frame with @explicit set to true"
-         data-result-for="Flattened library objects"
-         title="Framed library objects with @explicit set to true">
-    <!--
-    {
-      "@context": {"@vocab": "http://example.org/"},
-      "@graph": [{
-        "@id": "http://example.org/library",
-        "@type": "Library",
-        "contains": {
-          "@id": "http://example.org/library/the-republic",
-          "@type": "Book",
+    <aside class="example ds-selector-tabs"
+           title="Framed library objects with @explicit set to true">
+      <div class="selectors">
+        <a class="playground"
+           data-result-for="#flattened-library-objects"
+           data-frame="#sample-library-frame-with-explicit-set-to-true"
+           target="_blank"></a>
+      </div>
+      <pre id="lib-example-output"
+           class="selected original nohighlight" data-transform="updateExample"
+           data-frame="Sample library frame with @explicit set to true"
+           data-result-for="Flattened library objects">
+      <!--
+      {
+        "@context": {"@vocab": "http://example.org/"},
+        "@graph": [{
+          "@id": "http://example.org/library",
+          "@type": "Library",
           "contains": {
-            "@id": "http://example.org/library/the-republic#introduction",
-            "@type": "Chapter",
-            "description": "An introductory chapter on The Republic.",
-            "title": "The Introduction"
+            "@id": "http://example.org/library/the-republic",
+            "@type": "Book",
+            "contains": {
+              "@id": "http://example.org/library/the-republic#introduction",
+              "@type": "Chapter",
+              "description": "An introductory chapter on The Republic.",
+              "title": "The Introduction"
+            },
+            ####"creator": "Plato", ← This property is omitted####
+            "title": "The Republic"
           },
-          ####"creator": "Plato", ← This property is omitted####
-          "title": "The Republic"
-        },
-        ****"description": null**** ####← This property is explicit####
-      }]
-    }
-    -->
-    </pre>
+          ****"description": null**** ####← This property is explicit####
+        }]
+      }
+      -->
+      </pre>
+    </aside>
 
     <p>Note that the <em>Library</em> object contains a <code>null</code>
       <em>description</em> property, as it is explicitly called for in the fram
@@ -686,7 +781,8 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
       to invert the relationships in the output object. For example, the
       Library example can be inverted using the following frame:</p>
 
-    <pre class="example nohighlight" data-transform="updateExample"
+    <pre id="inverted-library-frame"
+         class="example nohighlight" data-transform="updateExample"
          data-content-type="application/ld-frame+json"
          data-frame-for="Flattened library objects"
          title="Inverted library frame">
@@ -709,37 +805,46 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
 
     <p>Using the flattened library example above, results in the following:</p>
 
-    <pre class="example" data-transform="updateExample"
-         data-frame="Inverted library frame"
-         data-result-for="Flattened library objects"
-         title="Inverted library output">
-    <!--
-    {
-      "@context": {
-        "@vocab": "http://example.org/",
-        "within": {"@reverse": "contains"}
-      },
-      "@graph": [{
-        "@id": "http://example.org/library/the-republic#introduction",
-        "@type": "Chapter",
-        "description": "An introductory chapter on The Republic.",
-        "title": "The Introduction",
-        "within": {
-          "@id": "http://example.org/library/the-republic",
-          "@type": "Book",
-          "contains": {"@id": "http://example.org/library/the-republic#introduction"},
-          "creator": "Plato",
-          "title": "The Republic",
+    <aside class="example ds-selector-tabs"
+           title="Inverted library output">
+      <div class="selectors">
+        <a class="playground"
+           data-result-for="#flattened-library-objects"
+           data-frame="#inverted-library-frame"
+           target="_blank"></a>
+      </div>
+      <pre class="selected original" data-transform="updateExample"
+           data-frame="Inverted library frame"
+           data-result-for="Flattened library objects"
+           title="Inverted library output">
+      <!--
+      {
+        "@context": {
+          "@vocab": "http://example.org/",
+          "within": {"@reverse": "contains"}
+        },
+        "@graph": [{
+          "@id": "http://example.org/library/the-republic#introduction",
+          "@type": "Chapter",
+          "description": "An introductory chapter on The Republic.",
+          "title": "The Introduction",
           "within": {
-            "@id": "http://example.org/library",
-            "@type": "Library",
-            "contains": {"@id": "http://example.org/library/the-republic"}
+            "@id": "http://example.org/library/the-republic",
+            "@type": "Book",
+            "contains": {"@id": "http://example.org/library/the-republic#introduction"},
+            "creator": "Plato",
+            "title": "The Republic",
+            "within": {
+              "@id": "http://example.org/library",
+              "@type": "Library",
+              "contains": {"@id": "http://example.org/library/the-republic"}
+            }
           }
-        }
-      }]
-    }
-    -->
-    </pre>
+        }]
+      }
+      -->
+      </pre>
+    </aside>
   </section>
 
   <section class="informative changed">
@@ -754,7 +859,8 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
     <p>The following example uses a variation on our library theme where information
       is split between the <a>default graph</a>, and a graph named <code>http://example.org/graphs/books</code>:</p>
 
-    <pre class="example nohighlight" data-transform="updateExample"
+    <pre id="frame-with-named-graphs"
+         class="example nohighlight" data-transform="updateExample"
          data-content-type="application/ld-frame+json"
          data-frame-for="Flattened Input with named graphs"
          title="Frame with named graphs">
@@ -772,7 +878,8 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
     -->
     </pre>
 
-    <pre class="example" data-transform="updateExample"
+    <pre id="flattened-input-with-named-graphs"
+         class="example" data-transform="updateExample"
          title="Flattened Input with named graphs">
     <!--
     [{
@@ -802,36 +909,44 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
     -->
     </pre>
 
-    <pre class="example nohighlight" data-transform="updateExample"
-         data-frame="Frame with named graphs"
-         data-result-for="Flattened Input with named graphs"
-         title="Framed output with named graphs">
-    <!--
-    {
-      "@context": {"@vocab": "http://example.org/"},
-      "@graph": [{
-        "@id": "http://example.org/library",
-        "@type": "Library",
-        "name": "Library",
-        "contains": {
-          ****"@id": "http://example.org/graphs/books",
-          "@graph": {****
-            "@id": "http://example.org/library/the-republic",
-            "@type": "Book",
-            "creator": "Plato",
-            "title": "The Republic",
-            "contains": {
-              "@id": "http://example.org/library/the-republic#introduction",
-              "@type": "Chapter",
-              "description": "An introductory chapter on The Republic.",
-              "title": "The Introduction"
-            }
-          ****}****
-        }
-      }]
-    }
-    -->
-    </pre>
+    <aside class="example ds-selector-tabs"
+           title="Framed output with named graphs">
+      <div class="selectors">
+        <a class="playground"
+           data-result-for="#flattened-input-with-named-graphs"
+           data-frame="#frame-with-named-graphs"
+           target="_blank"></a>
+      </div>
+      <pre class="selected original nohighlight" data-transform="updateExample"
+           data-frame="Frame with named graphs"
+           data-result-for="Flattened Input with named graphs">
+      <!--
+      {
+        "@context": {"@vocab": "http://example.org/"},
+        "@graph": [{
+          "@id": "http://example.org/library",
+          "@type": "Library",
+          "name": "Library",
+          "contains": {
+            ****"@id": "http://example.org/graphs/books",
+            "@graph": {****
+              "@id": "http://example.org/library/the-republic",
+              "@type": "Book",
+              "creator": "Plato",
+              "title": "The Republic",
+              "contains": {
+                "@id": "http://example.org/library/the-republic#introduction",
+                "@type": "Chapter",
+                "description": "An introductory chapter on The Republic.",
+                "title": "The Introduction"
+              }
+            ****}****
+          }
+        }]
+      }
+      -->
+      </pre>
+    </aside>
 
   </section>
 </section>
