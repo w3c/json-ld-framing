@@ -446,6 +446,24 @@
       "frame": "frame/0051-frame.jsonld",
       "expect": "frame/0051-out.jsonld"
     }, {
+      "@id": "#t0052",
+      "@type": ["jld:NegativeEvaluationTest", "jld:FrameTest"],
+      "name": "@id must not include a blank node identifier",
+      "purpose": "Node matching does not consider blank nodes.",
+      "option": {"specVersion": "json-ld-1.1"},
+      "input": "frame/0052-in.jsonld",
+      "frame": "frame/0052-frame.jsonld",
+      "expect": "invalid frame"
+    }, {
+      "@id": "#t0053",
+      "@type": ["jld:NegativeEvaluationTest", "jld:FrameTest"],
+      "name": "@type must not include a blank node identifier",
+      "purpose": "Node matching does not consider blank nodes.",
+      "option": {"specVersion": "json-ld-1.1"},
+      "input": "frame/0053-in.jsonld",
+      "frame": "frame/0053-frame.jsonld",
+      "expect": "invalid frame"
+    }, {
       "@id": "#tg001",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "Library framing example with @graph and omitGraph is true.",
