@@ -145,23 +145,29 @@ require(["core/pubsubhub"], (respecEvents) => {
 require(["core/pubsubhub"], (respecEvents) => {
   "use strict";
   respecEvents.sub('beforesave', (documentElement) => {
-    $("a[href]", documentElement).each((index) => {
-      // Don't rewrite these.
-      if ($(this, documentElement).closest('dd').prev().text().match(/Latest editor|Test suite|Implementation report/)) return;
-      if ($(this, documentElement).closest('section.preserve').length > 0) return;
+    for (const anchor of document.querySelectorAll("a[href]")) {
+      const dd = anchor.closest('dd');
 
-      const href = $(this, documentElement).attr("href");
+      // Don't replace specific anchors
+      if (dd) {
+        const dt = dd.previousElementSibling;
+        if (dt.textContent.match(/Latest editor|Test suite|Implementation report/)) return;
+      }
+      if (anchor.closest('section.preserve')) return;
+
+      if (anchor.href === undefined) return;
+
       for (const toReplace in jsonld.conversions) {
-        if (href.indexOf(toReplace) !== -1) {
+        if (anchor.href.indexOf(toReplace) !== -1) {
           const replacement = jsonld.conversions[toReplace];
-          const newHref = href.replace(toReplace, replacement);
-          $(this, documentElement).attr("href", newHref);
-          if( $(this, documentElement).text().indexOf(toReplace) !== -1 ) {
-            $(this, documentElement).text($(this, documentElement).text().replace(toReplace, replacement));
+          const newHref = anchor.href.replace(toReplace, replacement);
+          anchor.setAttribute('href', newHref);
+          if (anchor.textContent().indexOf(toReplace) !== -1) {
+            anchor.innerText = anchor.textContent().replace(toReplace, replacement);
           }
         }
       }
-    });
+    }
   });
 });
 
@@ -171,6 +177,7 @@ require(["core/pubsubhub"], (respecEvents) => {
 require(["core/pubsubhub"], (respecEvents) => {
   "use strict";
   respecEvents.sub('end-all', (documentElement) => {
+    // Add example button selection logic
     for (const button of document.querySelectorAll(".ds-selector-tabs .selectors button")) {
       button.onclick = () => {
         const ex = button.closest(".ds-selector-tabs");
@@ -179,6 +186,33 @@ require(["core/pubsubhub"], (respecEvents) => {
         button.classList.add('selected');
         ex.querySelector("." + button.dataset.selects).classList.add("selected");
       }
+    }
+
+    // Add playground links
+    for (const link of document.querySelectorAll("a.playground")) {
+      // First pre element of aside
+      const pre = link.closest("aside").querySelector("pre");
+      const content = unComment(document, pre.textContent)
+        .replace(/\*\*\*\*/g, '')
+        .replace(/####([^#]*)####/g, '');
+      link.setAttribute('aria-label', 'playground link');
+      link.innerText = "Open in playground";
+      link.setAttribute('href',
+        'https://json-ld.org/playground-dev/#startTab=tab-expanded&json-ld=' +
+        encodeURI(content));
+      // Wrap in a button
+      const button = document.createElement('button');
+      link.parentNode.insertBefore(button, link);
+      button.appendChild(link);
+    }
+
+    // Add highlighting and remove comment from pre elements
+    for (const pre of document.querySelectorAll("pre")) {
+      // First pre element of aside
+      const content = pre.innerHTML
+        .replace(/\*\*\*\*([^*]*)\*\*\*\*/g, '<span class="hl-bold">$1</span>')
+        .replace(/####([^#]*)####/g, '<span class="comment">$1</span>');
+      pre.innerHTML = content;
     }
   });
 });
@@ -203,9 +237,7 @@ function reindent(text) {
 
 function updateExample(doc, content) {
   // perform transformations to make it render and prettier
-  return _esc(reindent(unComment(doc, content)))
-    .replace(/\*\*\*\*([^*]*)\*\*\*\*/g, '<span class="hl-bold">$1</span>')
-    .replace(/####([^#]*)####/g, '<span class="comment">$1</span>');
+  return _esc(reindent(unComment(doc, content)));
 }
 
 
