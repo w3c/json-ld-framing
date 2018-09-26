@@ -956,8 +956,10 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
       allowed in the grammar for values of <a>member</a> keys expanding to <a>absolute IRIs</a>.
       <a>Processors</a> MUST preserve this value when expanding. All other <a>members</a> of
       a <a>default object</a> MUST be ignored.</li>
-    <li>The values of <code>@id</code> and <code>@type</code> may also be an empty <a>dictionary</a>, or an <a>array</a>
-      containing only an empty <a>dictionary</a>.
+    <li>The values of <code>@id</code> and <code>@type</code> may also be an empty <a>dictionary</a>,
+      <span class="changed">an <a>absolute IRI</a></span>,
+      <a>array</a> containing only an empty <a>dictionary</a>,
+      <span class="changed">or an array of <a>absolute IRIs</a></span>.
       <a>Processors</a> MUST preserve this value when expanding.</li>
     <li>Framing either operates on the merged node definitions contained in
       the input document, or on the <a>default graph</a> depending on if the
