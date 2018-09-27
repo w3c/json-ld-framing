@@ -1,4 +1,4 @@
-Example 010: Framed library objects with @embed set to @never
+Example 010: Framed library objects with @embed set to @never-original
 ---
 "@context":
   "@vocab": http://example.org/

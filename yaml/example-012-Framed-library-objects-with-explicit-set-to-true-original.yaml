@@ -1,4 +1,4 @@
-Example 007: Sample library output with @default value
+Example 012: Framed library objects with @explicit set to true-original
 ---
 "@context":
   "@vocab": http://example.org/
@@ -13,7 +13,5 @@ Example 007: Sample library output with @default value
       "@type": Chapter
       description: An introductory chapter on The Republic.
       title: The Introduction
-    creator: Plato
-    description: A great book.
     title: The Republic
   description: 
