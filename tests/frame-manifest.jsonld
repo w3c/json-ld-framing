@@ -464,6 +464,15 @@
       "frame": "frame/0053-frame.jsonld",
       "expect": "invalid frame"
     }, {
+      "@id": "#t0054",
+      "@type": ["jld:NegativeEvaluationTest", "jld:FrameTest"],
+      "name": "Out of range @embed value",
+      "purpose": "Any other value for @embed is invalid and indicates that an invalid @embed value error has been detected and processing is aborted.",
+      "option": {"specVersion": "json-ld-1.1"},
+      "input": "frame/0054-in.jsonld",
+      "frame": "frame/0054-frame.jsonld",
+      "expect": "invalid @embed value"
+    }, {
       "@id": "#tg001",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "Library framing example with @graph and omitGraph is true.",
