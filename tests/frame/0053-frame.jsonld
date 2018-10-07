@@ -1,4 +1,4 @@
 {
   "@context": {"ex": "http://example.org/"},
-  "@id": ["ex:Type1", "_:Type2"]
+  "@type": ["ex:Type1", "_:Type2"]
 }
