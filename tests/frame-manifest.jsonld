@@ -473,6 +473,41 @@
       "frame": "frame/0054-frame.jsonld",
       "expect": "invalid @embed value"
     }, {
+      "@id": "#t0055",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "Framing list with mixed values",
+      "purpose": "Framing list values which are mixed.",
+      "input": "frame/0055-in.jsonld",
+      "frame": "frame/0055-frame.jsonld",
+      "expect": "frame/0055-out.jsonld"
+    }, {
+      "@id": "#t0056",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "Frame matching on matching value in list",
+      "purpose": "Lists match on any matching value.",
+      "option": {"specVersion": "json-ld-1.1"},
+      "input": "frame/0056-in.jsonld",
+      "frame": "frame/0056-frame.jsonld",
+      "expect": "frame/0056-out.jsonld"
+    }, {
+      "@id": "#t0057",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "Frame matching on any matching value in list",
+      "purpose": "Lists match on any matching value.",
+      "option": {"specVersion": "json-ld-1.1"},
+      "input": "frame/0057-in.jsonld",
+      "frame": "frame/0057-frame.jsonld",
+      "expect": "frame/0057-out.jsonld"
+    }, {
+      "@id": "#t0058",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "Frame matching with no matching value in list",
+      "purpose": "Lists match on any matching value.",
+      "option": {"specVersion": "json-ld-1.1"},
+      "input": "frame/0058-in.jsonld",
+      "frame": "frame/0058-frame.jsonld",
+      "expect": "frame/0058-out.jsonld"
+    }, {
       "@id": "#tg001",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "Library framing example with @graph and omitGraph is true.",
