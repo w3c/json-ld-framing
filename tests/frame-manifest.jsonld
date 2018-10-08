@@ -115,7 +115,7 @@
       "@id": "#t0014",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "Replace existing embed on 2nd pass",
-      "purpose": "An embedded node with matches the top-level frame (on @type) is framed under @graph and continues to be embedded. Other nodes continue to be embedded.",
+      "purpose": "An embedded node which matches the top-level frame (on @type) is framed under @graph and continues to be embedded. Other nodes continue to be embedded.",
       "input": "frame/0014-in.jsonld",
       "frame": "frame/0014-frame.jsonld",
       "expect": "frame/0014-out.jsonld"
@@ -507,6 +507,14 @@
       "input": "frame/0058-in.jsonld",
       "frame": "frame/0058-frame.jsonld",
       "expect": "frame/0058-out.jsonld"
+    }, {
+      "@id": "#t0059",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "@embed: @last replaces previous embed values with node reference",
+      "purpose": "Verify that within a matched node, by default only the last reference will be embedded.",
+      "input": "frame/0059-in.jsonld",
+      "frame": "frame/0059-frame.jsonld",
+      "expect": "frame/0059-out.jsonld"
     }, {
       "@id": "#tg001",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
