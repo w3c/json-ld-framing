@@ -162,6 +162,7 @@ DEPENDENCIES
   json-ld!
   linkeddata
   nokogiri
+  nokogumbo
   rake
 
 BUNDLED WITH
