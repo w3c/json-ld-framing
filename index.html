@@ -24,9 +24,9 @@
 
       // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
       // and its maturity status
-      prevVersion:            "https://www.w3.org/TR/2018/WD-json-ld11-framing-20180911/",
-      previousPublishDate:    "2018-09-11",
-      previousMaturity:       "FPWD",
+      prevVersion:            "https://www.w3.org/TR/2018/WD-json-ld11-framing-20181012/",
+      previousPublishDate:    "2018-10-12",
+      previousMaturity:       "WD",
       github:                 "https://github.com/w3c/json-ld-framing/",
 
       // if there a publicly available Editor's Draft, this is the link
@@ -43,6 +43,7 @@
       includePermalinks:    true,
       doJsonLd:             true,
       highlightVars:        true,
+      pluralize:              true,
 
       // editors, add as many as you like
       // only "name" is required
@@ -308,14 +309,14 @@ Data in JSON. The document is primarily intended for the following audiences:
 
 <p>
 To understand the basics in this specification you must first be familiar with
-<a data-cite="RFC8259">JSON</a>, which is detailed in [[!RFC8259]]. You must also understand the
-JSON-LD 1.1 Syntax specification [[!JSON-LD11]], which is the base syntax used by all of the
+<a data-cite="RFC8259">JSON</a>, which is detailed in [[RFC8259]]. You must also understand the
+JSON-LD 1.1 Syntax specification [[JSON-LD11]], which is the base syntax used by all of the
 algorithms in this document,
-and the JSON-LD 1.1 API [[!JSON-LD11-API]]. To understand the API and how it is
+and the JSON-LD 1.1 API [[JSON-LD11-API]]. To understand the API and how it is
 intended to operate  in a programming environment, it is useful to have working
 knowledge of the JavaScript programming language [[ECMASCRIPT]] and
-WebIDL [[!WEBIDL]]. To understand how JSON-LD maps to RDF, it is helpful to be
-familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
+WebIDL [[WEBIDL]]. To understand how JSON-LD maps to RDF, it is helpful to be
+familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
 </section>
 
@@ -346,8 +347,8 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
 <section>
     <h2>Terminology</h2>
 
-    <p>This document uses the following terms as defined in JSON [[!RFC8259]]. Refer
-      to the <a data-cite="RFC8259#section-2">JSON Grammar section</a> in [[!RFC8259]] for formal definitions.</p>
+    <p>This document uses the following terms as defined in JSON [[RFC8259]]. Refer
+      to the <a data-cite="RFC8259#section-2">JSON Grammar section</a> in [[RFC8259]] for formal definitions.</p>
 
     <div data-include="common/terms.html"
          data-oninclude="restrictReferences">
@@ -1016,7 +1017,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
   <h2>Syntax Tokens and Keywords</h2>
 
   <p>This specification adds a number of <a>keywords</a> (<dfn>framing keywords</dfn>) to
-    the ones defined in the JSON-LD 1.1 Syntax specification [[!JSON-LD11]]:</p>
+    the ones defined in the JSON-LD 1.1 Syntax specification [[JSON-LD11]]:</p>
 
   <dl data-sort>
     <dt><code>@default</code></dt>
@@ -1457,7 +1458,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
 
     <p>The <a data-cite="JSON-LD11-API#dfn-json-ld-processors">JSON-LD Processor</a> interface is the high-level programming structure that developers
       use to access the JSON-LD transformation methods. The definition below is an experimental
-      extension of the interface defined in the JSON-LD 1.1 API [[!JSON-LD11-API]].</p>
+      extension of the interface defined in the JSON-LD 1.1 API [[JSON-LD11-API]].</p>
 
     <pre class="idl" data-transform="unComment"><!--
       [Constructor]
@@ -1574,7 +1575,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
         <a>IRI</a>, or an array of <a class="changed">dictionaries</a>
         and <a>strings</a>.</p>
 
-    <p>See <a data-cite="JSON-LD11-API#dom-jsonldcontext">JsonLdContext</a> definition in the JSON-LD 1.1 API [[!JSON-LD11-API]].</p>
+    <p>See <a data-cite="JSON-LD11-API#dom-jsonldcontext">JsonLdContext</a> definition in the JSON-LD 1.1 API [[JSON-LD11-API]].</p>
     </section>
 
     <section>
@@ -1648,7 +1649,7 @@ familiar with the basic RDF concepts [[!RDF11-CONCEPTS]].</p>
         Always use a <a>node reference</a> when serializing matching values.</dd>
     </dl>
 
-    <p>See <a data-cite="JSON-LD11-API#dom-jsonldoptions">JsonLdOptions</a> definition in the JSON-LD 1.1 API [[!JSON-LD11-API]].</p>
+    <p>See <a data-cite="JSON-LD11-API#dom-jsonldoptions">JsonLdOptions</a> definition in the JSON-LD 1.1 API [[JSON-LD11-API]].</p>
   </section>
   </section>
 
