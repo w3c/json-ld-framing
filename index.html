@@ -797,7 +797,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     </section>
   </section>
 
-  <section class="informative">
+  <section class="informative changed">
     <h3>Reverse Framing</h3>
     <p>A frame may include <code>@reverse</code>, or a value of a term defined using <code>@reverse</code>
       to invert the relationships in the output object. For example, the
@@ -867,6 +867,16 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       -->
       </pre>
     </aside>
+
+    <div class="note">
+      <p>There is an asymmetry between regular properties and reverse properties.
+        Normally, when framing a <a>node object</a>, unless the <a>explicit inclusion flag</a> is set,
+        all properties of the node are included in the output, but reverse
+        properties are not, as they are not actually properties of the node.</p>
+      <p>To include reverse properties in the output, add them explicitly to the frame.
+        Note that if the reverse relationship does not exist, it will simply be
+        left out of the output.</p>
+    </div>
   </section>
 
   <section class="informative changed">
@@ -1730,8 +1740,6 @@ becomes a W3C Recommendation.</p>
 <section class="appendix informative preserve">
   <h4>Open Issues</h4>
   <p>The following is a list of issues open at the time of publication.</p>
-  <p class="issue" data-number="5">It would be nice to have the same possiblity of infinite recursion in the @reverse properties as there are in non-reverse ones, currently recursion only works as many times as the frame defines it.</p>
-  <p class="issue" data-number="9">Clarification required on the use of blank node identifiers in frames.</p>
 </section>
 
 <section class="appendix informative">
@@ -1770,10 +1778,13 @@ becomes a W3C Recommendation.</p>
       <a data-link-for="JsonLdOptions">omitDefault</a> API option and/or
       the current <a>processing mode</a>.</li>
     <li>The API now adds an <a data-link-for="JsonLdOptions">ordered</a>
-       option, defaulting to <code>false</code> This is used in algorithms to
-       control interation of <a>dictionary member</a> keys. Previously, the
-       algorithms always required such an order. The instructions for
-       evaluating test results have been updated accordingly.</li>
+      option, defaulting to <code>false</code> This is used in algorithms to
+      control interation of <a>dictionary member</a> keys. Previously, the
+      algorithms always required such an order. The instructions for
+      evaluating test results have been updated accordingly.</li>
+    <li>Frames may include reverse properties using <code>@reverse</code>, or a term
+      defined with <code>@reverse</code>, which can cause nodes referencing a
+      node targeted by a frame to have a reverse reference created.</li>
   </ul>
 </section>
 
