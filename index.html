@@ -264,8 +264,10 @@
 
 <section id='introduction'>
 <h1>Introduction</h1>
-<p>A JSON-LD document is a representation of a directed graph. A single
-  directed graph can have many different serializations, each expressing
+<p>JSON-LD is a lightweight syntax to serialize Linked Data [[LINKED-DATA]] in JSON [[RFC8259]].
+  Its design allows existing JSON to be interpreted as Linked Data with minimal changes.
+  As with other representations, of Linked Data which describe directed graphs,
+  A single directed graph can have many different serializations, each expressing
   exactly the same information. Developers typically work with trees, represented as
   <a>JSON objects</a>. While mapping a graph to
   a tree can be done, the layout of the end result must be specified in advance.
@@ -278,7 +280,7 @@
   to reference other subjects through the use of their identifiers, expressed
   as strings.</p>
 
-<p>However, given that JSON-LD represents a <a>graph</a> of information,
+<p>However, given that JSON-LD represents one or more <a>graphs</a> of information,
   there is more than one way to frame the statements about several related
   subjects into a whole document. In fact, a graph of information can be
   thought of as a long list of independent statements (aka <a>triples</a> or
@@ -388,7 +390,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <p>For example, assume the following JSON-LD frame:</p>
     <pre id="sample-library-frame"
          class="example" data-transform="updateExample"
-         data-content-type="application/ld-frame+json"
+         data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
          data-frame-for="Flattened library objects"
          title="Sample library frame">
     <!--
@@ -536,7 +538,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       finding default values. Note the <em>description</em> value for <em>Library</em> in the following example.</p>
     <pre id="sample-library-frame-with-default-value"
          class="example nohighlight" data-transform="updateExample"
-         data-content-type="application/ld-frame+json"
+         data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
          data-frame-for="Flattened library objects"
          title="Sample library frame with @default value">
     <!--
@@ -615,7 +617,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         based on the default <code>@last</code> value of the <a>object embed flag</a>:</p>
 
       <pre class="example" data-transform="updateExample"
-           data-content-type="application/ld-frame+json"
+           data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
            data-frame-for="Flattened library objects"
            title="Sample library frame with implicit @embed set to @last">
       <!--
@@ -637,7 +639,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
       <pre id="sample-library-frame-with-explicit-embed-set-to-never"
            class="example nohighlight" data-transform="updateExample"
-           data-content-type="application/ld-frame+json"
+           data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
            data-frame-for="Flattened library objects"
            title="Sample library frame with explicit @embed set to @never">
       <!--
@@ -696,7 +698,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
       <pre id="sample-library-frame-with-explicit-set-to-true"
            class="example nohighlight" data-transform="updateExample"
-           data-content-type="application/ld-frame+json"
+           data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
            data-frame-for="Flattened library objects"
            title="Sample library frame with @explicit set to true">
       <!--
@@ -805,7 +807,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
     <pre id="inverted-library-frame"
          class="example nohighlight" data-transform="updateExample"
-         data-content-type="application/ld-frame+json"
+         data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
          data-frame-for="Flattened library objects"
          title="Inverted library frame">
     <!--
@@ -893,7 +895,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
     <pre id="frame-with-named-graphs"
          class="example nohighlight" data-transform="updateExample"
-         data-content-type="application/ld-frame+json"
+         data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
          data-frame-for="Flattened Input with named graphs"
          title="Frame with named graphs">
     <!--
@@ -1665,36 +1667,74 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
 </section>
 
-<section class="appendix informative">
+<section class="appendix normative">
 <h2>IANA Considerations</h2>
 
 <p>This section is included merely for standards community review and will be
 submitted to the Internet Engineering Steering Group if this specification
 becomes a W3C Recommendation.</p>
 
-<h3>application/ld-frame+json</h3>
+<p>A JSON-LD Frame uses the same MIME media type described in [[JSON-LD11]]
+  along with a required <code>profile</code> parameter.</p>
+
+<h3>application/ld+json</h3>
 <dl>
   <dt>Type name:</dt>
   <dd>application</dd>
   <dt>Subtype name:</dt>
-  <dd>ld-frame+json</dd>
-  <dt>Required parameters:</dt>
-  <dd>None</dd>
+  <dd class="changed">ld+json</dd>
+  <dt class="changed">Required parameters:</dt>
+  <dd class="changed">
+    <dl>
+      <dt><code>profile</code></dt>
+      <dd>
+        <p>A single URI identifying the resource as a JSON-LD <a>Frame</a>.
+          A profile does not change the semantics of the resource representation
+          when processed without profile knowledge, so that clients both with
+          and without knowledge of a profiled resource can safely use the same
+          representation.</p>
+        <dl>
+          <dt><code>http://www.w3.org/ns/json-ld#framed</code></dt>
+          <dd>To specify a JSON-LD <a>Frame</a>.</dd>
+        </dl>
+      </dd>
+    </dl>
+  </dd>
   <dt>Optional parameters:</dt>
-  <dd>None</dd>
+  <dd>None.</dd>
   <dt>Encoding considerations:</dt>
-  <dd>The same as the <code>application/json</code> MIME media type.</dd>
+  <dd>See <a data-cite="RFC8259#section-11">RFC&nbsp;8259, section 11</a>.</dd>
   <dt>Security considerations:</dt>
-  <dd>Since a JSON-LD frame is intended to specify a deterministic layout
-    for a JSON-LD graph, the serialization SHOULD NOT be passed through a
-    code execution mechanism such as JavaScript's <code>eval()</code>
-    function. It is RECOMMENDED that a conforming parser does not attempt to
-    directly evaluate the JSON-LD frame and instead purely parse the
-    input into a language-native data structure.</dd>
+  <dd>See <a data-cite="RFC8259#section-12">RFC&nbsp;8259, section 12</a> [[RFC8259]]
+    <p>Since JSON-LD is intended to be a pure data exchange format for
+      directed graphs, the serialization SHOULD NOT be passed through a
+      code execution mechanism such as JavaScript's <code>eval()</code>
+      function to be parsed. An (invalid) document may contain code that,
+      when executed, could lead to unexpected side effects compromising
+      the security of a system.</p>
+    <p>When processing JSON-LD documents, links to remote contexts are
+      typically followed automatically, resulting in the transfer of files
+      without the explicit request of the user for each one. If remote
+      contexts are served by third parties, it may allow them to gather
+      usage patterns or similar information leading to privacy concerns.
+      Specific implementations, such as the API defined in the
+      JSON-LD 1.1 Processing Algorithms and API specification [[JSON-LD11-API]],
+      may provide fine-grained mechanisms to control this behavior.</p>
+    <p>JSON-LD contexts that are loaded from the Web over non-secure connections,
+      such as HTTP, run the risk of being altered by an attacker such that
+      they may modify the JSON-LD <a>active context</a> in a way that
+      could compromise security. It is advised that any application that
+      depends on a remote context for mission critical purposes vet and
+      cache the remote context before allowing the system to use it.</p>
+    <p>Given that JSON-LD allows the substitution of long IRIs with short terms,
+      JSON-LD documents may expand considerably when processed and, in the worst case,
+      the resulting data might consume all of the recipient's resources. Applications
+      should treat any data with due skepticism.</p>
+  </dd>
   <dt>Interoperability considerations:</dt>
   <dd>Not Applicable</dd>
   <dt>Published specification:</dt>
-  <dd>The <a href="https://json-ld.org/spec/latest/">JSON-LD</a> specification.</dd>
+  <dd>https://www.w3.org/TR/json-ld11-framing</dd>
   <dt>Applications that use this media type:</dt>
   <dd>Any programming environment that requires the exchange of
     directed graphs. Implementations of JSON-LD have been created for
@@ -1706,13 +1746,13 @@ becomes a W3C Recommendation.</p>
       <dt>Magic number(s):</dt>
       <dd>Not Applicable</dd>
       <dt>File extension(s):</dt>
-      <dd>.jsonldf</dd>
+      <dd>.jsonld</dd>
       <dt>Macintosh file type code(s):</dt>
       <dd>TEXT</dd>
     </dl>
   </dd>
   <dt>Person &amp; email address to contact for further information:</dt>
-  <dd>Manu Sporny &lt;msporny@digitalbazaar.com&gt;</dd>
+  <dd>Ivan Herman &lt;ivan@w3.org&gt;</dd>
   <dt>Intended usage:</dt>
   <dd>Common</dd>
   <dt>Restrictions on usage:</dt>
@@ -1723,8 +1763,10 @@ becomes a W3C Recommendation.</p>
   <dd>W3C</dd>
 </dl>
 
-<p>Fragment identifiers have no meaning with
-  <a href="#application-ld-frame-json">application/ld-frame+json</a> resources.</p>
+<p>Fragment identifiers used with <a href="#application-ld-json">application/ld+json</a>
+  are treated as in RDF syntaxes, as per
+  <a data-cite="RDF11-CONCEPTS#section-fragID">RDF 1.1 Concepts and Abstract Syntax</a>
+  [[RDF11-CONCEPTS]].</p>
 
 </section>
 
@@ -1792,10 +1834,12 @@ becomes a W3C Recommendation.</p>
   <h2>Changes since JSON-LD Community Group Final Report</h2>
   <ul>
     <li>The API now adds an <a data-link-for="JsonLdOptions">ordered</a>
-       option, defaulting to <code>false</code> This is used in algorithms to
-       control interation of <a>dictionary member</a> keys. Previously, the
-       algorithms always required such an order. The instructions for
-       evaluating test results have been updated accordingly.</li>
+      option, defaulting to <code>false</code> This is used in algorithms to
+      control interation of <a>dictionary member</a> keys. Previously, the
+      algorithms always required such an order. The instructions for
+      evaluating test results have been updated accordingly.</li>
+    <li>The IANA registration is changed from <code>application/ld-frame+json</code> to
+      <code>application/ld+json</code> with a required <code>profile</code> parameter.</li>
   </ul>
 </section>
 
