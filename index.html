@@ -688,10 +688,10 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         The default value is <code>false</code>, which means that properties
         present in an input <a>node object</a> that are not in the associated frame will be
         included in the output object.
-        The initial value for the <a>explicit inclusion flag</a> is set using the
-        <a data-link-for="JsonLdOptions">explicit</a> option.
         If <code>true</code>, only properties present in
-        the input frame will be placed into the output.</p>
+        the input frame will be placed into the output.
+        The initial value for the <a>explicit inclusion flag</a> is set using the
+        <a data-link-for="JsonLdOptions">explicit</a> option.</p>
 
       <p>For example, take an expanded version of the library frame which include
         some properties from the input, but omit others.</p>
@@ -759,7 +759,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     </aside>
 
     <p>Note that the <em>Library</em> object contains a <code>null</code>
-      <em>description</em> property, as it is explicitly called for in the fram
+      <em>description</em> property, as it is explicitly called for in the frame
       using <code>"description": {}</code>. The <em>creator</em> property does
       not exist in the output, because it is not explicit.</p>
     </section>
@@ -1145,7 +1145,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
 <p>The recursive algorithm operates with a <a>framing state</a> (<var>state</var>),
   created initially using
-  the <a>object embed flag</a> set to <code>true</code>,
+  the <a>object embed flag</a> set to <code>@always</code>,
   the <a>explicit inclusion flag</a> set to <code>false</code>,
   the <a>require all flag</a> set to <code>true</code>,
   the <a>omit default flag</a> set to <code>false</code>,
