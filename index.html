@@ -616,7 +616,8 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         Consider the following frame
         based on the default <code>@last</code> value of the <a>object embed flag</a>:</p>
 
-      <pre class="example" data-transform="updateExample"
+      <pre id="sample-library-frame-with-explicit-embed-set-to-last"
+           class="example" data-transform="updateExample"
            data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
            data-frame-for="Flattened library objects"
            title="Sample library frame with implicit @embed set to @last">
@@ -627,6 +628,41 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       }
       -->
       </pre>
+
+      <aside class="example ds-selector-tabs"
+             title="Framed library objects with @embed set to @last">
+        <div class="selectors">
+          <a class="playground"
+             data-result-for="#flattened-library-objects"
+             data-frame="#sample-library-frame-with-explicit-embed-set-to-last"
+             target="_blank"></a>
+        </div>
+        <pre class="selected original nohighlight" data-transform="updateExample"
+             data-frame="Sample library frame with implicit @embed set to @last"
+             data-result-for="Flattened library objects">
+        <!--
+        {
+          "@context": {"@vocab": "http://example.org/"},
+          "@graph": [{
+            "@id": "http://example.org/library",
+            "@type": "Library",
+            "contains": {
+              "@id": "http://example.org/library/the-republic",
+              "@type": "Book",
+              "contains": {
+                "@id": "http://example.org/library/the-republic#introduction",
+                "@type": "Chapter",
+                "description": "An introductory chapter on The Republic.",
+                "title": "The Introduction"
+              },
+              "creator": "Plato",
+              "title": "The Republic"
+            }
+          }]
+        }
+       -->
+        </pre>
+      </aside>
 
       <p>Because, the default for the <a>object embed flag</a> is <code>@last</code>
          (in addition to the <a>explicit inclusion flag</a> being <code>false</code>),
@@ -679,6 +715,143 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         -->
         </pre>
       </aside>
+
+      <p>To illustrate the case where <code>@last</code> does not expand values,
+        consider an alternate library example where books are doubly indexed.</p>
+
+      <pre id="flattened-library-objects-with-double-index"
+           class="example" data-transform="updateExample"
+           title="Flattened library objects with double index">
+      <!--
+      {
+        "@context": {
+          "@vocab": "http://example.org/",
+          ****"books": {"@type": "@id"},****
+          "contains": {"@type": "@id"}
+        },
+        "@graph": [{
+          "@id": "http://example.org/library",
+          "@type": "Library",
+          ****"books": "http://example.org/library/the-republic",****
+          "contains": "http://example.org/library/the-republic"
+        }, {
+          "@id": "http://example.org/library/the-republic",
+          "@type": "Book",
+          "creator": "Plato",
+          "title": "The Republic",
+          "contains": "http://example.org/library/the-republic#introduction"
+        }, {
+          "@id": "http://example.org/library/the-republic#introduction",
+          "@type": "Chapter",
+          "description": "An introductory chapter on The Republic.",
+          "title": "The Introduction"
+        }]
+      }
+      -->
+      </pre>
+
+      <aside class="example ds-selector-tabs"
+             title="Framed library objects with double index">
+        <div class="selectors">
+          <a class="playground"
+             data-result-for="#flattened-library-objects-with-double-index"
+             data-frame="#sample-library-frame-with-explicit-embed-set-to-last"
+             target="_blank"></a>
+        </div>
+        <pre class="selected original nohighlight" data-transform="updateExample"
+             data-frame="Sample library frame with implicit @embed set to @last"
+             data-result-for="Flattened library objects with double index">
+        <!--
+        {
+          "@context": {"@vocab": "http://example.org/"},
+          "@graph": [{
+            "@id": "http://example.org/library",
+            "@type": "Library",
+            ****"books": {"@id": "http://example.org/library/the-republic"},****
+            "contains": {
+              "@id": "http://example.org/library/the-republic",
+              "@type": "Book",
+              "contains": {
+                "@id": "http://example.org/library/the-republic#introduction",
+                "@type": "Chapter",
+                "description": "An introductory chapter on The Republic.",
+                "title": "The Introduction"
+              },
+              "creator": "Plato",
+              "title": "The Republic"
+            }
+          }]
+        }
+       -->
+        </pre>
+      </aside>
+
+      <p>When framed using the same frame with the default <code>@embed</code> of <code>@last</code>,
+        only the <em>"contains"</em> property will have content, and the <em>"books"</em> property will use a reference.</p>
+
+      <p>If we use a frame using <code>@embed</code> <code>@always</code>,
+        both properties will include expanded values.</p>
+
+      <pre id="sample-library-frame-with-explicit-embed-set-to-always"
+           class="example nohighlight" data-transform="updateExample"
+           data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
+           data-frame-for="Flattened library objects with double index"
+           title="Sample library frame with explicit @embed set to @always">
+      <!--
+      {
+        "@context": {"@vocab": "http://example.org/"},
+        "@type": "Library",
+        ****"@embed": "@always"****
+      }
+      -->
+      </pre>
+      <aside class="example ds-selector-tabs"
+             title="Framed library objects with double index and @always">
+        <div class="selectors">
+          <a class="playground"
+             data-result-for="#flattened-library-objects-with-double-index"
+             data-frame="#sample-library-frame-with-explicit-embed-set-to-always"
+             target="_blank"></a>
+        </div>
+        <pre class="selected original nohighlight" data-transform="updateExample"
+             data-frame="Sample library frame with explicit @embed set to @always"
+             data-result-for="Flattened library objects with double index">
+        <!--
+        {
+          "@context": {"@vocab": "http://example.org/"},
+          "@graph": [{
+            "@id": "http://example.org/library",
+            "@type": "Library",
+            ****"books": {
+              "@id": "http://example.org/library/the-republic",
+              "@type": "Book",
+              "contains": {
+                "@id": "http://example.org/library/the-republic#introduction",
+                "@type": "Chapter",
+                "description": "An introductory chapter on The Republic.",
+                "title": "The Introduction"
+              },
+              "creator": "Plato",
+              "title": "The Republic"
+            },****
+            "contains": {
+              "@id": "http://example.org/library/the-republic",
+              "@type": "Book",
+              "contains": {
+                "@id": "http://example.org/library/the-republic#introduction",
+                "@type": "Chapter",
+                "description": "An introductory chapter on The Republic.",
+                "title": "The Introduction"
+              },
+              "creator": "Plato",
+              "title": "The Republic"
+            }
+          }]
+        }
+       -->
+        </pre>
+      </aside>
+
     </section>
 
     <section class="informative">
@@ -1207,7 +1380,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
 <p>The recursive algorithm operates with a <a>framing state</a> (<var>state</var>),
   created initially using
-  the <a>object embed flag</a> set to <code>@always</code>,
+  the <a>object embed flag</a> set to <code>@last</code>,
   the <a>explicit inclusion flag</a> set to <code>false</code>,
   the <a>require all flag</a> set to <code>true</code>,
   the <a>omit default flag</a> set to <code>false</code>,
@@ -1246,7 +1419,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     using the <a href="#frame-matching">Frame Matching algorithm</a>
     with <var>state</var>, <var>subjects</var>, <var>frame</var>, and <var>requireAll</var>.</li>
   <li>For each <var>id</var> and associated <a>node object</a> <var>node</var>
-    from the set of matched subjects, ordered lexographically by <var>id</var>
+    from the set of matched subjects, ordered lexicographically by <var>id</var>
     <span class="changed">if the optional <a data-link-for="JsonLdOptions">ordered</a> flag is <code>true</code></span>:
     <ol>
       <li>Initialize <var>output</var> to a new <a>dictionary</a> with <code>@id</code> and <var>id</var>.</li>
@@ -1285,7 +1458,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
               </li>
             </ol>
           </li>
-          <li>For each <var>property</var> and <var>objects</var> in <var>node</var>, ordered lexographically by <var>property</var>
+          <li>For each <var>property</var> and <var>objects</var> in <var>node</var>, ordered lexicographically by <var>property</var>
             <span class="changed">if the optional <a data-link-for="JsonLdOptions">ordered</a> flag is <code>true</code></span>:
             <ol>
               <li>If <var>property</var> is a <a>keyword</a>, add <var>property</var> and <var>objects</var>
@@ -1878,12 +2051,12 @@ becomes a W3C Recommendation.</p>
       to JSON.</li>
     <li>Preserved values are compacted using the properties of the referencing term.</li>
     <li>Removed support for <code>@link</code> and in-memory object linking.</li>
-    <li>Added the <a>omit default flag</a>, controled via the
+    <li>Added the <a>omit default flag</a>, controlled via the
       <a data-link-for="JsonLdOptions">omitDefault</a> API option and/or
       the current <a>processing mode</a>.</li>
     <li>The API now adds an <a data-link-for="JsonLdOptions">ordered</a>
       option, defaulting to <code>false</code> This is used in algorithms to
-      control interation of <a>dictionary member</a> keys. Previously, the
+      control interaction of <a>dictionary member</a> keys. Previously, the
       algorithms always required such an order. The instructions for
       evaluating test results have been updated accordingly.</li>
     <li>Frames may include reverse properties using <code>@reverse</code>, or a term
@@ -1897,7 +2070,7 @@ becomes a W3C Recommendation.</p>
   <ul>
     <li>The API now adds an <a data-link-for="JsonLdOptions">ordered</a>
       option, defaulting to <code>false</code> This is used in algorithms to
-      control interation of <a>dictionary member</a> keys. Previously, the
+      control interaction of <a>dictionary member</a> keys. Previously, the
       algorithms always required such an order. The instructions for
       evaluating test results have been updated accordingly.</li>
     <li>The IANA registration is changed from <code>application/ld-frame+json</code> to
