@@ -945,20 +945,21 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         <a data-link-for="JsonLdOptions">omitDefault</a> option.
         See <a href="#default-content" class="sectionRef"></a> for a further discussion.</p>
 
-      <pre id="sample-library-frame-with-omitDefault-set-to-true"
+      <pre id="sample-library-frame-with-default-value-and-omitDefault"
            class="example nohighlight" data-transform="updateExample"
            data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
            data-frame-for="Flattened library objects"
-           title="Sample library frame with @omitDefault set to true">
+           title="Sample library frame with @default value and @omitDefault">
       <!--
       {
         "@context": {"@vocab": "http://example.org/"},
         "@type": "Library",
-        ****"description": {},****
         "contains": {
           "@type": "Book",
-          ****"@explicit": true,****
-          ****"title": {},****
+          "description": {
+            ****"@omitDefault": true,****
+            "@default": "A great book."
+          },
           "contains": {
             "@type": "Chapter"
           }
@@ -970,42 +971,41 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       <p>The resulting output will exclude properties for Book which are not explicitly
         listed in the <a>frame object</a>:</p>
 
-    <aside class="example ds-selector-tabs"
-           title="Framed library objects with @omitDefault set to true">
-      <div class="selectors">
-        <a class="playground"
-           data-result-for="#flattened-library-objects"
-           data-frame="#sample-library-frame-with-explicit-set-to-true"
-           target="_blank"></a>
-      </div>
-      <pre id="lib-example-output"
-           class="selected original nohighlight" data-transform="updateExample"
-           data-frame="Sample library frame with @omitDefault set to true"
-           data-result-for="Flattened library objects">
-      <!--
-      {
-        "@context": {"@vocab": "http://example.org/"},
-        "@graph": [{
-          "@id": "http://example.org/library",
-          "@type": "Library",
-          "contains": {
-            "@id": "http://example.org/library/the-republic",
-            "@type": "Book",
+      <aside class="example ds-selector-tabs"
+             title="Sample library output with @default value and @omitDefault">
+        <div class="selectors">
+          <a class="playground"
+             data-result-for="#flattened-library-objects"
+             data-frame="#sample-library-frame-with-default-value-and-omitDefault"
+             target="_blank"></a>
+        </div>
+        <pre class="selected original nohighlight" data-transform="updateExample"
+             data-frame="Sample library frame with @default value and @omitDefault"
+             data-result-for="Flattened library objects">
+        <!--
+        {
+          "@context": {"@vocab": "http://example.org/"},
+          "@graph": [{
+            "@id": "http://example.org/library",
+            "@type": "Library",
             "contains": {
-              "@id": "http://example.org/library/the-republic#introduction",
-              "@type": "Chapter",
-              "description": "An introductory chapter on The Republic.",
-              "title": "The Introduction"
-            },
-            ####"creator": "Plato", ← This property is omitted####
-            "title": "The Republic"
-          },
-          ****"description": null**** ####← This property is explicit####
-        }]
-      }
-      -->
-      </pre>
-    </aside>
+              "@id": "http://example.org/library/the-republic",
+              "@type": "Book",
+              "contains": {
+                "@id": "http://example.org/library/the-republic#introduction",
+                "@type": "Chapter",
+                "description": "An introductory chapter on The Republic.",
+                "title": "The Introduction"
+              },
+              "creator": "Plato",
+              ####"description": "A great book." ← This property is omitted,####
+              "title": "The Republic"
+            }
+          }]
+        }
+        -->
+        </pre>
+      </aside>
     </section>
 
     <section class="informative changed">
