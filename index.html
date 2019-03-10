@@ -628,13 +628,13 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         The initial value for the <a>object embed flag</a> is set using the
         <a data-link-for="JsonLdOptions">embed</a> option.
         Consider the following frame
-        based on the default <code>@last</code> value of the <a>object embed flag</a>:</p>
+        based on the default <code>@first</code> value of the <a>object embed flag</a>:</p>
 
-      <pre id="sample-library-frame-with-explicit-embed-set-to-last"
+      <pre id="sample-library-frame-with-explicit-embed-set-to-first"
            class="example frame" data-transform="updateExample"
            data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
            data-frame-for="Flattened library objects"
-           title="Sample library frame with implicit @embed set to @last">
+           title="Sample library frame with implicit @embed set to @first">
       <!--
       {
         "@context": {"@vocab": "http://example.org/"},
@@ -644,15 +644,15 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       </pre>
 
       <aside class="example ds-selector-tabs"
-             title="Framed library objects with @embed set to @last">
+             title="Framed library objects with @embed set to @first">
         <div class="selectors">
           <a class="playground"
              data-result-for="#flattened-library-objects"
-             data-frame="#sample-library-frame-with-explicit-embed-set-to-last"
+             data-frame="#sample-library-frame-with-explicit-embed-set-to-first"
              target="_blank"></a>
         </div>
         <pre class="selected original nohighlight" data-transform="updateExample"
-             data-frame="Sample library frame with implicit @embed set to @last"
+             data-frame="Sample library frame with implicit @embed set to @first"
              data-result-for="Flattened library objects">
         <!--
         {
@@ -678,7 +678,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         </pre>
       </aside>
 
-      <p>Because, the default for the <a>object embed flag</a> is <code>@last</code>
+      <p>Because, the default for the <a>object embed flag</a> is <code>@first</code>
          (in addition to the <a>explicit inclusion flag</a> being <code>false</code>),
          non-listed properties are added to the output, and implicitly embedded
          using a default empty frame. As a result, the same output used in the
@@ -1293,11 +1293,15 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
           Always embed <a>node objects</a> as property values, unless this would
           cause a circular reference.
         </dd>
-        <dt><code>@last</code></dt><dd>
-          Only the last value within a given <a>node object</a> should be embedded,
-          previous values of other properties use a <a>node reference</a>. This is the
+        <dt class="changed"><code>@first</code></dt><dd class="changed">
+          Only the first value within a given <a>node object</a> should be embedded,
+          subsequent values of other properties use a <a>node reference</a>. This is the
           default value if neither <code>@embed</code> nor <a>object embed flag</a>
           is not specified.
+        </dd>
+        <dt><code>@last</code></dt><dd>
+          Only the last value within a given <a>node object</a> should be embedded,
+          previous values of other properties use a <a>node reference</a>.
         </dd>
         <dt><code>@never</code></dt><dd>
           Always use a <a>node reference</a> when serializing matching values.
@@ -1441,77 +1445,79 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         circular reference would be created by an embed,
         add <var>output</var> to <var>parent</var>
         and do not perform additional processing for this <var>node</var>.</li>
+      <li class="changed">Otherwise, if <var>embed</var> is <code>@first</code>
+        and parent has an existing embedded node in <var>parent</var> associated with
+        <var>graph name</var> and <var>id</var> in <var>state</var>,
+        add <var>output</var> to <var>parent</var>
+        and do not perform additional processing for this <var>node</var>.
+        <span class="ednote">Requires sorting of subjects.</span></li>
       <li>Otherwise, if <var>embed</var> is <code>@last</code>,
-        remove any existing embedded node from <var>parent</var> associate with
-        <var>graph name</var> in <var>state</var>.
+        remove any existing embedded node from <var>parent</var> associated with
+        <var>graph name</var> and <var>id</var> in <var>state</var>.
         <span class="ednote">Requires sorting of subjects. We could consider <code>@sample</code>, to embed
           just the first matched node. With sorting, we could also consider <code>@first</code>.</span></li>
-      <li>If <var>embed</var> is <code>@last</code> or <code>@always</code>
+      <li class="changed">If <var>graph map</var> in <var>state</var> has an entry for <var>id</var>:
         <ol>
-          <li class="changed">If <var>graph map</var> in <var>state</var> has an entry for <var>id</var>:
+          <li>If <var>frame</var> does not have a <code>@graph</code> <a>member</a>,
+            set <var>recurse</var> to <code>true</code>, unless <var>graph name</var> in <var>state</var> is <code>@merged</code>
+            and set <var>subframe</var> to a new empty <a>dictionary</a>.</li>
+          <li>Otherwise, set <var>subframe</var> to the first entry for <code>@graph</code> in <var>frame</var>,
+            or a new empty <a>dictionary</a>, if it does not exist, and
+            set <var>recurse</var> to <code>true</code>, unless <var>id</var>
+            is <code>@merged</code> or <code>@default</code>.</li>
+          <li>If <var>recurse</var> is <code>true</code>:
             <ol>
-              <li>If <var>frame</var> does not have a <code>@graph</code> <a>member</a>,
-                set <var>recurse</var> to <code>true</code>, unless <var>graph name</var> in <var>state</var> is <code>@merged</code>
-                and set <var>subframe</var> to a new empty <a>dictionary</a>.</li>
-              <li>Otherwise, set <var>subframe</var> to the first entry for <code>@graph</code> in <var>frame</var>,
-                or a new empty <a>dictionary</a>, if it does not exist, and
-                set <var>recurse</var> to <code>true</code>, unless <var>id</var>
-                is <code>@merged</code> or <code>@default</code>.</li>
-              <li>If <var>recurse</var> is <code>true</code>:
-                <ol>
-                  <li>Push <var>graph name</var> from <var>state</var> onto <var>graph stack</var>
-                  in <var>state</var>.</li>
-                  <li>Set the value of <var>graph name</var> in <var>state</var> to <var>id</var>.</li>
-                  <li>Invoke the recursive algorithm using <var>state</var>,
-                    the keys from the <var>graph map</var> in <var>state</var> associated with id as <var>subjects</var>,
-                    <var>subframe</var> as <var>frame</var>,
-                    <var>output</var> as <var>parent</var>, and <code>@graph</code> as <var>active property</var>.
-                  <li>Pop the value from <var>graph stack</var> in <var>state</var> and set <var>graph name</var> in <var>state</var>
-                    back to that value.</li>
-                </ol>
-              </li>
+              <li>Push <var>graph name</var> from <var>state</var> onto <var>graph stack</var>
+              in <var>state</var>.</li>
+              <li>Set the value of <var>graph name</var> in <var>state</var> to <var>id</var>.</li>
+              <li>Invoke the recursive algorithm using <var>state</var>,
+                the keys from the <var>graph map</var> in <var>state</var> associated with id as <var>subjects</var>,
+                <var>subframe</var> as <var>frame</var>,
+                <var>output</var> as <var>parent</var>, and <code>@graph</code> as <var>active property</var>.
+              <li>Pop the value from <var>graph stack</var> in <var>state</var> and set <var>graph name</var> in <var>state</var>
+                back to that value.</li>
             </ol>
           </li>
-          <li>For each <var>property</var> and <var>objects</var> in <var>node</var>, ordered lexicographically by <var>property</var>
-            <span class="changed">if the optional <a data-link-for="JsonLdOptions">ordered</a> flag is <code>true</code></span>:
+        </ol>
+      </li>
+      <li>For each <var>property</var> and <var>objects</var> in <var>node</var>, ordered lexicographically by <var>property</var>
+        <span class="changed">if the optional <a data-link-for="JsonLdOptions">ordered</a> flag is <code>true</code></span>:
+        <ol>
+          <li>If <var>property</var> is a <a>keyword</a>, add <var>property</var> and <var>objects</var>
+            to <var>output</var>.</li>
+          <li>Otherwise, if <var>property</var> is not in <var>frame</var>, and <var>explicit</var> is <code>true</code>,
+            <a>processors</a> MUST NOT add any values for <var>property</var> to <var>output</var>, and the following
+            steps are skipped.</li>
+          <li>For each <var>item</var> in <var>objects</var>:
             <ol>
-              <li>If <var>property</var> is a <a>keyword</a>, add <var>property</var> and <var>objects</var>
-                to <var>output</var>.</li>
-              <li>Otherwise, if <var>property</var> is not in <var>frame</var>, and <var>explicit</var> is <code>true</code>,
-                <a>processors</a> MUST NOT add any values for <var>property</var> to <var>output</var>, and the following
-                steps are skipped.</li>
-              <li>For each <var>item</var> in <var>objects</var>:
+              <li>If <var>item</var> is a <a>dictionary</a> with the property <code>@list</code>, then each
+                <var>listitem</var> in the list is processed in sequence and added to a new list <a>dictionary</a>
+                in output:
                 <ol>
-                  <li>If <var>item</var> is a <a>dictionary</a> with the property <code>@list</code>, then each
-                    <var>listitem</var> in the list is processed in sequence and added to a new list <a>dictionary</a>
-                    in output:
-                    <ol>
-                      <li>If <var>listitem</var> is a <a>node reference</a>,
-                        invoke the recursive algorithm using <var>state</var>,
-                        the value of <code>@id</code> from <var>listitem</var>
-                        as the sole item in a new <var>subjects</var> <a>array</a>,
-                        the first value from <code>@list</code> in <var>frame</var> as <var>frame</var>,
-                        <var>list</var> as <var>parent</var>, and <code>@list</code> as <var>active property</var>.
-                        If <var>frame</var> does not exist, create a new <var>frame</var> using a new <a>dictionary</a>
-                        with properties for <code>@embed</code>, <code>@explicit</code> and <code>@requireAll</code>
-                        taken from <var>embed</var>, <var>explicit</var> and <var>requireAll</var>.
-                        <span class="ednote">Could this use the <var>list</var> <a>array</a>, and <code>null</code> for <var>active property</var>?</span></li>
-                      <li>Otherwise, append a copy of <var>listitem</var> to <code>@list</code> in <var>list</var>.</li>
-                    </ol>
-                  </li>
-                  <li>If <var>item</var> is a <a>node reference</a>,
+                  <li>If <var>listitem</var> is a <a>node reference</a>,
                     invoke the recursive algorithm using <var>state</var>,
-                    the value of <code>@id</code> from <var>item</var>
+                    the value of <code>@id</code> from <var>listitem</var>
                     as the sole item in a new <var>subjects</var> <a>array</a>,
-                    the first value from <var>property</var> in <var>frame</var> as <var>frame</var>,
-                    <var>output</var> as <var>parent</var>, and <var>property</var> as <var>active property</var>.
+                    the first value from <code>@list</code> in <var>frame</var> as <var>frame</var>,
+                    <var>list</var> as <var>parent</var>, and <code>@list</code> as <var>active property</var>.
                     If <var>frame</var> does not exist, create a new <var>frame</var> using a new <a>dictionary</a>
                     with properties for <code>@embed</code>, <code>@explicit</code> and <code>@requireAll</code>
-                    taken from <var>embed</var>, <var>explicit</var> and <var>requireAll</var>.</li>
-                  <li>Otherwise, append a copy of <var>item</var> to <a>active property</a> in
-                    <var>output</var>.</li>
+                    taken from <var>embed</var>, <var>explicit</var> and <var>requireAll</var>.
+                    <span class="ednote">Could this use the <var>list</var> <a>array</a>, and <code>null</code> for <var>active property</var>?</span></li>
+                  <li>Otherwise, append a copy of <var>listitem</var> to <code>@list</code> in <var>list</var>.</li>
                 </ol>
               </li>
+              <li>If <var>item</var> is a <a>node reference</a>,
+                invoke the recursive algorithm using <var>state</var>,
+                the value of <code>@id</code> from <var>item</var>
+                as the sole item in a new <var>subjects</var> <a>array</a>,
+                the first value from <var>property</var> in <var>frame</var> as <var>frame</var>,
+                <var>output</var> as <var>parent</var>, and <var>property</var> as <var>active property</var>.
+                If <var>frame</var> does not exist, create a new <var>frame</var> using a new <a>dictionary</a>
+                with properties for <code>@embed</code>, <code>@explicit</code> and <code>@requireAll</code>
+                taken from <var>embed</var>, <var>explicit</var> and <var>requireAll</var>.</li>
+              <li>Otherwise, append a copy of <var>item</var> to <a>active property</a> in
+                <var>output</var>.</li>
             </ol>
           </li>
 
@@ -1844,7 +1850,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
     <pre class="idl" data-transform="unComment"><!--
       dictionary JsonLdOptions {
-        (JsonLdEmbed or boolean)  embed = "@last";
+        (JsonLdEmbed or boolean)  embed = "@first";
         boolean                   explicit    = false;
         boolean                   omitDefault = false;
         boolean                   omitGraph;
@@ -1855,6 +1861,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
       enum JsonLdEmbed {
         "@always",
+        "@first",
         "@last",
         "@never"
       };
@@ -1899,11 +1906,14 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       <dt><dfn data-dfn-for="JsonLdEmbed">@always</dfn></dt><dd>
         Always embed <a>node objects</a> as property values, unless this would
         cause a circular reference.</dd>
-      <dt><dfn data-dfn-for="JsonLdEmbed">@last</dfn></dt><dd>
-        Only the last value within a given <a>node object</a> should be embedded,
-        previous values of other properties use a <a>node reference</a>. This is the
+      <dt><dfn data-dfn-for="JsonLdEmbed">@first</dfn></dt><dd>
+        Only the first value within a given <a>node object</a> should be embedded,
+        subsequent values of other properties use a <a>node reference</a>. This is the
         default value if neither <code>@embed</code> nor <a>object embed flag</a>
         is not specified.</dd>
+      <dt><dfn data-dfn-for="JsonLdEmbed">@last</dfn></dt><dd>
+        Only the last value within a given <a>node object</a> should be embedded,
+        previous values of other properties use a <a>node reference</a>.</dd>
       <dt class="changed"><dfn data-dfn-for="JsonLdEmbed">@never</dfn></dt><dd class="changed">
         Always use a <a>node reference</a> when serializing matching values.</dd>
     </dl>
