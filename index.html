@@ -630,7 +630,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         Consider the following frame
         based on the default <code>@first</code> value of the <a>object embed flag</a>:</p>
 
-      <pre id="sample-library-frame-with-explicit-embed-set-to-first"
+      <pre id="sample-library-frame-with-implicit-embed-set-to-first"
            class="example frame" data-transform="updateExample"
            data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
            data-frame-for="Flattened library objects"
@@ -648,7 +648,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         <div class="selectors">
           <a class="playground"
              data-result-for="#flattened-library-objects"
-             data-frame="#sample-library-frame-with-explicit-embed-set-to-first"
+             data-frame="#sample-library-frame-with-implicit-embed-set-to-first"
              target="_blank"></a>
         </div>
         <pre class="selected original nohighlight" data-transform="updateExample"
@@ -730,7 +730,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         </pre>
       </aside>
 
-      <p>To illustrate the case where <code>@last</code> does not expand values,
+      <p>To illustrate the case where <code>@first</code> does not expand values,
         consider an alternate library example where books are doubly indexed.</p>
 
       <pre id="flattened-library-objects-with-double-index"
@@ -769,11 +769,11 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         <div class="selectors">
           <a class="playground"
              data-result-for="#flattened-library-objects-with-double-index"
-             data-frame="#sample-library-frame-with-explicit-embed-set-to-last"
+             data-frame="#sample-library-frame-with-implicit-embed-set-to-first"
              target="_blank"></a>
         </div>
         <pre class="selected original nohighlight" data-transform="updateExample"
-             data-frame="Sample library frame with implicit @embed set to @last"
+             data-frame="Sample library frame with implicit @embed set to @first"
              data-result-for="Flattened library objects with double index">
         <!--
         {
@@ -781,8 +781,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
           "@graph": [{
             "@id": "http://example.org/library",
             "@type": "Library",
-            ****"books": {"@id": "http://example.org/library/the-republic"},****
-            "contains": {
+            ****"books": {
               "@id": "http://example.org/library/the-republic",
               "@type": "Book",
               "contains": {
@@ -793,17 +792,70 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
               },
               "creator": "Plato",
               "title": "The Republic"
-            }
+            },****
+            "contains": {****"@id": "http://example.org/library/the-republic"****}
           }]
         }
        -->
         </pre>
       </aside>
 
-      <p>When framed using the same frame with the default <code>@embed</code> of <code>@last</code>,
-        only the <em>"contains"</em> property will have content, and the <em>"books"</em> property will use a reference.</p>
+      <p>When framed using the same frame with the default <code>@embed</code> of <code>@first</code>,
+        only the <em>"books"</em> property will have content, and the <em>"contains"</em> property will use a reference.</p>
 
-      <p>If we use a frame using <code>@embed</code> <code>@always</code>,
+      <p>If we use a frame using <code>"@embed": "@last"</code>,
+        only the "contains" property will use a reference.</p>
+
+      <pre id="sample-library-frame-with-explicit-embed-set-to-last"
+           class="example frame nohighlight" data-transform="updateExample"
+           data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
+           data-frame-for="Flattened library objects with double index"
+           title="Sample library frame with explicit @embed set to @last">
+      <!--
+      {
+        "@context": {"@vocab": "http://example.org/"},
+        "@type": "Library",
+        ****"@embed": "@last"****
+      }
+      -->
+      </pre>
+      <aside class="example ds-selector-tabs"
+             title="Framed library objects with double index and @last">
+        <div class="selectors">
+          <a class="playground"
+             data-result-for="#flattened-library-objects-with-double-index"
+             data-frame="#sample-library-frame-with-explicit-embed-set-to-last"
+             target="_blank"></a>
+        </div>
+        <pre class="selected original nohighlight" data-transform="updateExample"
+             data-frame="Sample library frame with explicit @embed set to @last"
+             data-result-for="Flattened library objects with double index">
+        <!--
+        {
+          "@context": {"@vocab": "http://example.org/"},
+          "@graph": [{
+            "@id": "http://example.org/library",
+            "@type": "Library",
+            ****"books": {"@id": "http://example.org/library/the-republic"},****
+            ****"contains": {
+              "@id": "http://example.org/library/the-republic",
+              "@type": "Book",
+              "contains": {
+                "@id": "http://example.org/library/the-republic#introduction",
+                "@type": "Chapter",
+                "description": "An introductory chapter on The Republic.",
+                "title": "The Introduction"
+              },
+              "creator": "Plato",
+              "title": "The Republic"
+            }****
+          }]
+        }
+       -->
+        </pre>
+      </aside>
+
+      <p>If we use a frame using <code>"@embed": "@always"</code>,
         both properties will include expanded values.</p>
 
       <pre id="sample-library-frame-with-explicit-embed-set-to-always"
