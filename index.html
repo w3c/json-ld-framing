@@ -1450,7 +1450,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
 <p>The recursive algorithm operates with a <a>framing state</a> (<var>state</var>),
   created initially using
-  the <a>object embed flag</a> set to <code>@last</code>,
+  the <a>object embed flag</a> set to <code>@first</code>,
   the <a>explicit inclusion flag</a> set to <code>false</code>,
   the <a>require all flag</a> set to <code>true</code>,
   the <a>omit default flag</a> set to <code>false</code>,
@@ -1502,12 +1502,13 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         <var>graph name</var> and <var>id</var> in <var>state</var>,
         add <var>output</var> to <var>parent</var>
         and do not perform additional processing for this <var>node</var>.
-        <span class="ednote">Requires sorting of subjects.</span></li>
+        <span class="ednote">Requires sorting of subjects.
+          We could consider <code>@sample</code>, to embed in a property, rather than the lexicographically first.</span></li>
       <li>Otherwise, if <var>embed</var> is <code>@last</code>,
         remove any existing embedded node from <var>parent</var> associated with
         <var>graph name</var> and <var>id</var> in <var>state</var>.
-        <span class="ednote">Requires sorting of subjects. We could consider <code>@sample</code>, to embed
-          just the first matched node. With sorting, we could also consider <code>@first</code>.</span></li>
+        <span class="ednote">Requires sorting of subjects.
+          We could consider <code>@sample</code>, to embed in a property, rather than the lexicographically last.</span></li>
       <li class="changed">If <var>graph map</var> in <var>state</var> has an entry for <var>id</var>:
         <ol>
           <li>If <var>frame</var> does not have a <code>@graph</code> <a>member</a>,
