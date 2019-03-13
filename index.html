@@ -759,7 +759,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     </aside>
 
     <p>Note that the <em>Library</em> object contains a <code>null</code>
-      <em>description</em> property, as it is explicitly called for in the fram
+      <em>description</em> property, as it is explicitly called for in the frame
       using <code>"description": {}</code>. The <em>creator</em> property does
       not exist in the output, because it is not explicit.</p>
     </section>
@@ -1186,7 +1186,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     using the <a href="#frame-matching">Frame Matching algorithm</a>
     with <var>state</var>, <var>subjects</var>, <var>frame</var>, and <var>requireAll</var>.</li>
   <li>For each <var>id</var> and associated <a>node object</a> <var>node</var>
-    from the set of matched subjects, ordered lexographically by <var>id</var>
+    from the set of matched subjects, ordered lexicographically by <var>id</var>
     <span class="changed">if the optional <a data-link-for="JsonLdOptions">ordered</a> flag is <code>true</code></span>:
     <ol>
       <li>Initialize <var>output</var> to a new <a>dictionary</a> with <code>@id</code> and <var>id</var>.</li>
@@ -1225,7 +1225,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
               </li>
             </ol>
           </li>
-          <li>For each <var>property</var> and <var>objects</var> in <var>node</var>, ordered lexographically by <var>property</var>
+          <li>For each <var>property</var> and <var>objects</var> in <var>node</var>, ordered lexicographically by <var>property</var>
             <span class="changed">if the optional <a data-link-for="JsonLdOptions">ordered</a> flag is <code>true</code></span>:
             <ol>
               <li>If <var>property</var> is a <a>keyword</a>, add <var>property</var> and <var>objects</var>
@@ -1385,7 +1385,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <div class="note">Framing works on <a>map of flattened subjects</a>,
       and the act of flattening ensures that all subjects have an
       <code>@id</code> property; thus the <code>"@id": []</code> pattern would
-      never match any <a>node object</a>. the <code>"@id": [{}]</code> pattern would
+      never match any <a>node object</a>. The <code>"@id": [{}]</code> pattern would
       match any <a>node object</a> and is equivalent to not specifying a
       <code>@id</code> property in <var>frame</var> at all</div>
   </li>
@@ -1818,12 +1818,12 @@ becomes a W3C Recommendation.</p>
       to JSON.</li>
     <li>Preserved values are compacted using the properties of the referencing term.</li>
     <li>Removed support for <code>@link</code> and in-memory object linking.</li>
-    <li>Added the <a>omit default flag</a>, controled via the
+    <li>Added the <a>omit default flag</a>, controlled via the
       <a data-link-for="JsonLdOptions">omitDefault</a> API option and/or
       the current <a>processing mode</a>.</li>
     <li>The API now adds an <a data-link-for="JsonLdOptions">ordered</a>
       option, defaulting to <code>false</code> This is used in algorithms to
-      control interation of <a>dictionary member</a> keys. Previously, the
+      control iteration of <a>dictionary member</a> keys. Previously, the
       algorithms always required such an order. The instructions for
       evaluating test results have been updated accordingly.</li>
     <li>Frames may include reverse properties using <code>@reverse</code>, or a term
@@ -1837,7 +1837,7 @@ becomes a W3C Recommendation.</p>
   <ul>
     <li>The API now adds an <a data-link-for="JsonLdOptions">ordered</a>
       option, defaulting to <code>false</code> This is used in algorithms to
-      control interation of <a>dictionary member</a> keys. Previously, the
+      control iteration of <a>dictionary member</a> keys. Previously, the
       algorithms always required such an order. The instructions for
       evaluating test results have been updated accordingly.</li>
     <li>The IANA registration is changed from <code>application/ld-frame+json</code> to
