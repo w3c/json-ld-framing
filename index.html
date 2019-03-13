@@ -137,6 +137,20 @@
     color: #999;
     text-decoration: line-through;
   }
+  div.example > pre.frame:before {
+    content: "Frame";
+    float: right;
+    font: x-large Arial, sans-serif;
+    color: gray;
+    padding-top: -20px;
+  }
+  div.example > pre.input:before {
+    content: "Input";
+    float: right;
+    font: x-large Arial, sans-serif;
+    color: gray;
+    padding-top: -20px;
+  }
   .diff { font-weight:bold; color:#0a3; }
   .error a {
     color:  #ff4500;
@@ -389,7 +403,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
     <p>For example, assume the following JSON-LD frame:</p>
     <pre id="sample-library-frame"
-         class="example" data-transform="updateExample"
+         class="example frame" data-transform="updateExample"
          data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
          data-frame-for="Flattened library objects"
          title="Sample library frame">
@@ -416,7 +430,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
     <p>When using a flattened set of objects that match the frame components:</p>
     <pre id="flattened-library-objects"
-         class="example" data-transform="updateExample"
+         class="example input" data-transform="updateExample"
          title="Flattened library objects">
     <!--
     {
@@ -485,7 +499,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <p>If <a>processing mode</a> is <code>json-ld-1.1</code>, or the <a>omit graph flag</a> is <code>true</code>,
       the top-level <code>@graph</code> <a>member</a> may be omitted.</p>
 
-    <pre class="example" data-transform="updateExample"
+    <pre class="example frame" data-transform="updateExample"
          data-frame="Sample library frame"
          data-result-for="Flattened library objects"
          data-options="omitGraph=true"
@@ -537,7 +551,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       used in the output document. It's purpose is for frame matching and
       finding default values. Note the <em>description</em> value for <em>Library</em> in the following example.</p>
     <pre id="sample-library-frame-with-default-value"
-         class="example nohighlight" data-transform="updateExample"
+         class="example frame nohighlight" data-transform="updateExample"
          data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
          data-frame-for="Flattened library objects"
          title="Sample library frame with @default value">
@@ -616,7 +630,8 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         Consider the following frame
         based on the default <code>@last</code> value of the <a>object embed flag</a>:</p>
 
-      <pre class="example" data-transform="updateExample"
+      <pre id="sample-library-frame-with-explicit-embed-set-to-last"
+           class="example frame" data-transform="updateExample"
            data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
            data-frame-for="Flattened library objects"
            title="Sample library frame with implicit @embed set to @last">
@@ -628,6 +643,41 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       -->
       </pre>
 
+      <aside class="example ds-selector-tabs"
+             title="Framed library objects with @embed set to @last">
+        <div class="selectors">
+          <a class="playground"
+             data-result-for="#flattened-library-objects"
+             data-frame="#sample-library-frame-with-explicit-embed-set-to-last"
+             target="_blank"></a>
+        </div>
+        <pre class="selected original nohighlight" data-transform="updateExample"
+             data-frame="Sample library frame with implicit @embed set to @last"
+             data-result-for="Flattened library objects">
+        <!--
+        {
+          "@context": {"@vocab": "http://example.org/"},
+          "@graph": [{
+            "@id": "http://example.org/library",
+            "@type": "Library",
+            "contains": {
+              "@id": "http://example.org/library/the-republic",
+              "@type": "Book",
+              "contains": {
+                "@id": "http://example.org/library/the-republic#introduction",
+                "@type": "Chapter",
+                "description": "An introductory chapter on The Republic.",
+                "title": "The Introduction"
+              },
+              "creator": "Plato",
+              "title": "The Republic"
+            }
+          }]
+        }
+       -->
+        </pre>
+      </aside>
+
       <p>Because, the default for the <a>object embed flag</a> is <code>@last</code>
          (in addition to the <a>explicit inclusion flag</a> being <code>false</code>),
          non-listed properties are added to the output, and implicitly embedded
@@ -638,7 +688,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
          value of <code>@never</code>, the values for <em>Book</em> and <em>Chapter</em> will be excluded.</p>
 
       <pre id="sample-library-frame-with-explicit-embed-set-to-never"
-           class="example nohighlight" data-transform="updateExample"
+           class="example frame nohighlight" data-transform="updateExample"
            data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
            data-frame-for="Flattened library objects"
            title="Sample library frame with explicit @embed set to @never">
@@ -679,6 +729,143 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         -->
         </pre>
       </aside>
+
+      <p>To illustrate the case where <code>@last</code> does not expand values,
+        consider an alternate library example where books are doubly indexed.</p>
+
+      <pre id="flattened-library-objects-with-double-index"
+           class="example input" data-transform="updateExample"
+           title="Flattened library objects with double index">
+      <!--
+      {
+        "@context": {
+          "@vocab": "http://example.org/",
+          ****"books": {"@type": "@id"},****
+          "contains": {"@type": "@id"}
+        },
+        "@graph": [{
+          "@id": "http://example.org/library",
+          "@type": "Library",
+          ****"books": "http://example.org/library/the-republic",****
+          "contains": "http://example.org/library/the-republic"
+        }, {
+          "@id": "http://example.org/library/the-republic",
+          "@type": "Book",
+          "creator": "Plato",
+          "title": "The Republic",
+          "contains": "http://example.org/library/the-republic#introduction"
+        }, {
+          "@id": "http://example.org/library/the-republic#introduction",
+          "@type": "Chapter",
+          "description": "An introductory chapter on The Republic.",
+          "title": "The Introduction"
+        }]
+      }
+      -->
+      </pre>
+
+      <aside class="example ds-selector-tabs"
+             title="Framed library objects with double index">
+        <div class="selectors">
+          <a class="playground"
+             data-result-for="#flattened-library-objects-with-double-index"
+             data-frame="#sample-library-frame-with-explicit-embed-set-to-last"
+             target="_blank"></a>
+        </div>
+        <pre class="selected original nohighlight" data-transform="updateExample"
+             data-frame="Sample library frame with implicit @embed set to @last"
+             data-result-for="Flattened library objects with double index">
+        <!--
+        {
+          "@context": {"@vocab": "http://example.org/"},
+          "@graph": [{
+            "@id": "http://example.org/library",
+            "@type": "Library",
+            ****"books": {"@id": "http://example.org/library/the-republic"},****
+            "contains": {
+              "@id": "http://example.org/library/the-republic",
+              "@type": "Book",
+              "contains": {
+                "@id": "http://example.org/library/the-republic#introduction",
+                "@type": "Chapter",
+                "description": "An introductory chapter on The Republic.",
+                "title": "The Introduction"
+              },
+              "creator": "Plato",
+              "title": "The Republic"
+            }
+          }]
+        }
+       -->
+        </pre>
+      </aside>
+
+      <p>When framed using the same frame with the default <code>@embed</code> of <code>@last</code>,
+        only the <em>"contains"</em> property will have content, and the <em>"books"</em> property will use a reference.</p>
+
+      <p>If we use a frame using <code>@embed</code> <code>@always</code>,
+        both properties will include expanded values.</p>
+
+      <pre id="sample-library-frame-with-explicit-embed-set-to-always"
+           class="example frame nohighlight" data-transform="updateExample"
+           data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
+           data-frame-for="Flattened library objects with double index"
+           title="Sample library frame with explicit @embed set to @always">
+      <!--
+      {
+        "@context": {"@vocab": "http://example.org/"},
+        "@type": "Library",
+        ****"@embed": "@always"****
+      }
+      -->
+      </pre>
+      <aside class="example ds-selector-tabs"
+             title="Framed library objects with double index and @always">
+        <div class="selectors">
+          <a class="playground"
+             data-result-for="#flattened-library-objects-with-double-index"
+             data-frame="#sample-library-frame-with-explicit-embed-set-to-always"
+             target="_blank"></a>
+        </div>
+        <pre class="selected original nohighlight" data-transform="updateExample"
+             data-frame="Sample library frame with explicit @embed set to @always"
+             data-result-for="Flattened library objects with double index">
+        <!--
+        {
+          "@context": {"@vocab": "http://example.org/"},
+          "@graph": [{
+            "@id": "http://example.org/library",
+            "@type": "Library",
+            ****"books": {
+              "@id": "http://example.org/library/the-republic",
+              "@type": "Book",
+              "contains": {
+                "@id": "http://example.org/library/the-republic#introduction",
+                "@type": "Chapter",
+                "description": "An introductory chapter on The Republic.",
+                "title": "The Introduction"
+              },
+              "creator": "Plato",
+              "title": "The Republic"
+            },****
+            "contains": {
+              "@id": "http://example.org/library/the-republic",
+              "@type": "Book",
+              "contains": {
+                "@id": "http://example.org/library/the-republic#introduction",
+                "@type": "Chapter",
+                "description": "An introductory chapter on The Republic.",
+                "title": "The Introduction"
+              },
+              "creator": "Plato",
+              "title": "The Republic"
+            }
+          }]
+        }
+       -->
+        </pre>
+      </aside>
+
     </section>
 
     <section class="informative">
@@ -688,16 +875,16 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         The default value is <code>false</code>, which means that properties
         present in an input <a>node object</a> that are not in the associated frame will be
         included in the output object.
-        The initial value for the <a>explicit inclusion flag</a> is set using the
-        <a data-link-for="JsonLdOptions">explicit</a> option.
         If <code>true</code>, only properties present in
-        the input frame will be placed into the output.</p>
+        the input frame will be placed into the output.
+        The initial value for the <a>explicit inclusion flag</a> is set using the
+        <a data-link-for="JsonLdOptions">explicit</a> option.</p>
 
       <p>For example, take an expanded version of the library frame which include
         some properties from the input, but omit others.</p>
 
       <pre id="sample-library-frame-with-explicit-set-to-true"
-           class="example nohighlight" data-transform="updateExample"
+           class="example frame nohighlight" data-transform="updateExample"
            data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
            data-frame-for="Flattened library objects"
            title="Sample library frame with @explicit set to true">
@@ -771,6 +958,68 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         The initial value for the <a>omit default flag</a> is set using the
         <a data-link-for="JsonLdOptions">omitDefault</a> option.
         See <a href="#default-content" class="sectionRef"></a> for a further discussion.</p>
+
+      <pre id="sample-library-frame-with-default-value-and-omitDefault"
+           class="example frame nohighlight" data-transform="updateExample"
+           data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
+           data-frame-for="Flattened library objects"
+           title="Sample library frame with @default value and @omitDefault">
+      <!--
+      {
+        "@context": {"@vocab": "http://example.org/"},
+        "@type": "Library",
+        "contains": {
+          "@type": "Book",
+          "description": {
+            ****"@omitDefault": true,****
+            "@default": "A great book."
+          },
+          "contains": {
+            "@type": "Chapter"
+          }
+        }
+      }
+      -->
+      </pre>
+
+      <p>The resulting output will exclude properties for Book which are not explicitly
+        listed in the <a>frame object</a>:</p>
+
+      <aside class="example input ds-selector-tabs"
+             title="Sample library output with @default value and @omitDefault">
+        <div class="selectors">
+          <a class="playground"
+             data-result-for="#flattened-library-objects"
+             data-frame="#sample-library-frame-with-default-value-and-omitDefault"
+             target="_blank"></a>
+        </div>
+        <pre class="selected original nohighlight" data-transform="updateExample"
+             data-frame="Sample library frame with @default value and @omitDefault"
+             data-result-for="Flattened library objects">
+        <!--
+        {
+          "@context": {"@vocab": "http://example.org/"},
+          "@graph": [{
+            "@id": "http://example.org/library",
+            "@type": "Library",
+            "contains": {
+              "@id": "http://example.org/library/the-republic",
+              "@type": "Book",
+              "contains": {
+                "@id": "http://example.org/library/the-republic#introduction",
+                "@type": "Chapter",
+                "description": "An introductory chapter on The Republic.",
+                "title": "The Introduction"
+              },
+              "creator": "Plato",
+              ####"description": "A great book." ← This property is omitted,####
+              "title": "The Republic"
+            }
+          }]
+        }
+        -->
+        </pre>
+      </aside>
     </section>
 
     <section class="informative changed">
@@ -806,7 +1055,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       Library example can be inverted using the following frame:</p>
 
     <pre id="inverted-library-frame"
-         class="example nohighlight" data-transform="updateExample"
+         class="example frame nohighlight" data-transform="updateExample"
          data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
          data-frame-for="Flattened library objects"
          title="Inverted library frame">
@@ -894,7 +1143,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       is split between the <a>default graph</a>, and a graph named <code>http://example.org/graphs/books</code>:</p>
 
     <pre id="frame-with-named-graphs"
-         class="example nohighlight" data-transform="updateExample"
+         class="example frame nohighlight" data-transform="updateExample"
          data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
          data-frame-for="Flattened Input with named graphs"
          title="Frame with named graphs">
@@ -913,7 +1162,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     </pre>
 
     <pre id="flattened-input-with-named-graphs"
-         class="example" data-transform="updateExample"
+         class="example input" data-transform="updateExample"
          title="Flattened Input with named graphs">
     <!--
     [{
@@ -1053,8 +1302,6 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         <dt><code>@never</code></dt><dd>
           Always use a <a>node reference</a> when serializing matching values.
         </dd>
-        <dt><code>true</code></dt><dd>(equivalent to <code>@last</code>).</dd>
-        <dt><code>false</code></dt><dd>(equivalent to <code>@never</code>).</dd>
       </dl>
       <p>Any other value for <code>@embed</code> is invalid and indicates that an
         <a data-link-for="JsonLdFramingErrorCode">invalid @embed value</a>
@@ -1070,7 +1317,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <dt><code>@omitDefault</code></dt>
     <dd>Used in <a href="#framing">Framing</a> to override the
       value of <a>omit default flag</a> within a specific frame.
-      <div class="issue">Is this flag really useful? Easier to simply not have a default value,
+      <div class="issue" data-number="41">Is this flag really useful? Easier to simply not have a default value,
         if it shouldn't match.</div>
     </dd>
     <dt class="changed"><code>@requireAll</code></dt>
@@ -1147,7 +1394,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
 <p>The recursive algorithm operates with a <a>framing state</a> (<var>state</var>),
   created initially using
-  the <a>object embed flag</a> set to <code>true</code>,
+  the <a>object embed flag</a> set to <code>@last</code>,
   the <a>explicit inclusion flag</a> set to <code>false</code>,
   the <a>require all flag</a> set to <code>true</code>,
   the <a>omit default flag</a> set to <code>false</code>,
