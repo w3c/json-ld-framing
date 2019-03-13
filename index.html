@@ -1632,7 +1632,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <div class="note">Framing works on <a>map of flattened subjects</a>,
       and the act of flattening ensures that all subjects have an
       <code>@id</code> property; thus the <code>"@id": []</code> pattern would
-      never match any <a>node object</a>. the <code>"@id": [{}]</code> pattern would
+      never match any <a>node object</a>. The <code>"@id": [{}]</code> pattern would
       match any <a>node object</a> and is equivalent to not specifying a
       <code>@id</code> property in <var>frame</var> at all</div>
   </li>
@@ -2070,7 +2070,7 @@ becomes a W3C Recommendation.</p>
       the current <a>processing mode</a>.</li>
     <li>The API now adds an <a data-link-for="JsonLdOptions">ordered</a>
       option, defaulting to <code>false</code> This is used in algorithms to
-      control interaction of <a>dictionary member</a> keys. Previously, the
+      control iteration of <a>dictionary member</a> keys. Previously, the
       algorithms always required such an order. The instructions for
       evaluating test results have been updated accordingly.</li>
     <li>Frames may include reverse properties using <code>@reverse</code>, or a term
@@ -2084,7 +2084,7 @@ becomes a W3C Recommendation.</p>
   <ul>
     <li>The API now adds an <a data-link-for="JsonLdOptions">ordered</a>
       option, defaulting to <code>false</code> This is used in algorithms to
-      control interaction of <a>dictionary member</a> keys. Previously, the
+      control iteration of <a>dictionary member</a> keys. Previously, the
       algorithms always required such an order. The instructions for
       evaluating test results have been updated accordingly.</li>
     <li>The IANA registration is changed from <code>application/ld-frame+json</code> to
