@@ -516,6 +516,14 @@
       "frame": "frame/0059-frame.jsonld",
       "expect": "frame/0059-out.jsonld"
     }, {
+      "@id": "#t0060",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "@embed: @first only embeds first value with node reference",
+      "purpose": "Verify that within a matched node and @embed: @first, by only the first reference will be embedded.",
+      "input": "frame/0060-in.jsonld",
+      "frame": "frame/0060-frame.jsonld",
+      "expect": "frame/0060-out.jsonld"
+    }, {
       "@id": "#tg001",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "Library framing example with @graph and omitGraph is true.",
