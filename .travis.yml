@@ -14,11 +14,18 @@ jobs:
       name: "Verify examples are consistent"
       language: ruby
       rvm: 2.5
+      before_install:
+        - 'gem update --system --conservative || (gem i "rubygems-update:~>2.7" --no-document && update_rubygems)'
+        - 'gem update bundler --conservative'
       bundler_args: --without debug
       script: "rake test"
     - stage: links
       name: "Check internal links and HTML"
       language: ruby
+      rvm: 2.5
+      before_install:
+        - 'gem update --system --conservative || (gem i "rubygems-update:~>2.7" --no-document && update_rubygems)'
+        - 'gem update bundler --conservative'
       sudo: required
       services:
         - docker
