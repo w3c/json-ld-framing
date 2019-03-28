@@ -1011,62 +1011,152 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         <a data-link-for="JsonLdOptions">omitDefault</a> option.
         See <a href="#default-content" class="sectionRef"></a> for a further discussion.</p>
 
-      <pre id="sample-library-frame-with-default-value-and-omitDefault"
-           class="example frame nohighlight" data-transform="updateExample"
-           data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
-           data-frame-for="Flattened library objects"
-           title="Sample library frame with @default value and @omitDefault">
+      <p>Consider the following input document:</p>
+
+      <pre id="sample-input-for-omitDefault"
+           class="example nohighlight" data-transform="updateExample"
+           title="Sample parent/child relationship data">
       <!--
       {
-        "@context": {"@vocab": "http://example.org/"},
-        "@type": "Library",
-        "contains": {
-          "@type": "Book",
-          "description": {
-            ****"@omitDefault": true,****
-            "@default": "A great book."
-          },
-          "contains": {
-            "@type": "Chapter"
-          }
+        "@context": {
+          "@vocab": "http://example.org/",
+          "child": {"@type": "@id"}
+        },
+        "@graph": [{
+          "@id": "http://example.org#John",
+          "@type": "Person",
+          "name": "John",
+          "child": "http://example.org#Jane"
+        }, {
+          "@id": "http://example.org#Jane",
+          "@type": "Person",
+          "name": "Jane"
+        }]
+      }
+      -->
+      </pre>
+
+      <p>To illustrate where the <a>omit default flag</a> is useful, consider the following
+        frame, which does <em>not</em> use <code>@omitDefault</code>:</p>
+
+      <pre id="sample-library-frame-without-omitDefault"
+           class="example frame nohighlight" data-transform="updateExample"
+           data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
+           data-frame-for="Sample parent/child relationship data"
+           title="Sample parent/child relationship frame without @omitDefault">
+      <!--
+      {
+        "@context": {
+          "@vocab": "http://example.org/",
+          "child": {"@type": "@id"}
+        },
+        "@type": "Person",
+        "child": {
+          "@embed": "@always"
         }
       }
       -->
       </pre>
 
-      <p>The resulting output will exclude properties for Book which are not explicitly
-        listed in the <a>frame object</a>:</p>
+      <p>The resulting output will include a "child" property with the value
+        <code>null</code>, which may not always be desired:</p>
 
       <aside class="example input ds-selector-tabs"
-             title="Sample library output with @default value and @omitDefault">
+             title="Sample parent/child relationship output without @omitDefault">
         <div class="selectors">
           <a class="playground"
-             data-result-for="#flattened-library-objects"
-             data-frame="#sample-library-frame-with-default-value-and-omitDefault"
+             data-result-for="#sample-input-for-omitDefault"
+             data-frame="#sample-library-frame-without-omitDefault"
              target="_blank"></a>
         </div>
         <pre class="selected original nohighlight" data-transform="updateExample"
-             data-frame="Sample library frame with @default value and @omitDefault"
-             data-result-for="Flattened library objects">
+             data-frame="Sample parent/child relationship frame without @omitDefault"
+             data-result-for="Sample parent/child relationship data">
         <!--
         {
-          "@context": {"@vocab": "http://example.org/"},
+          "@context": {
+            "@vocab": "http://example.org/",
+            "child": {"@type": "@id"}
+          },
           "@graph": [{
-            "@id": "http://example.org/library",
-            "@type": "Library",
-            "contains": {
-              "@id": "http://example.org/library/the-republic",
-              "@type": "Book",
-              "contains": {
-                "@id": "http://example.org/library/the-republic#introduction",
-                "@type": "Chapter",
-                "description": "An introductory chapter on The Republic.",
-                "title": "The Introduction"
-              },
-              "creator": "Plato",
-              ####"description": "A great book." ← This property is omitted,####
-              "title": "The Republic"
-            }
+            "@id": "http://example.org#John",
+            "@type": "Person",
+            "child": {
+              "@id": "http://example.org#Jane",
+              "@type": "Person",
+              "name": "Jane"
+            },
+            "name": "John"
+          }, {
+            "@id": "http://example.org#Jane",
+            "@type": "Person",
+            ****"child": null****,
+            "name": "Jane"
+          }]
+        }
+        -->
+        </pre>
+      </aside>
+
+      <p>Note that because the option <code>"@embed": "@always"</code> is specified in the frame
+        under the child property, that <code>"child": null</code> appears in the output
+        for matches that do not have that property, which may be undesirable.
+        To prevent this default <code>null</code> output from occurring,
+        the <code>@omitDefault</code> may be set to true like so:</p>
+
+      <pre id="sample-library-frame-with-omitDefault"
+           class="example frame nohighlight" data-transform="updateExample"
+           data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
+           data-frame-for="Sample parent/child relationship data"
+           title="Sample parent/child relationship frame with @omitDefault">
+      <!--
+      {
+        "@context": {
+          "@vocab": "http://example.org/",
+          "child": {"@type": "@id"}
+        },
+        "@type": "Person",
+        "child": {
+          "@embed": "@always",
+          "@omitDefault": true
+        }
+      }
+      -->
+      </pre>
+
+      <p>Which yields this (desirable) output:</p>
+
+      <aside class="example input ds-selector-tabs"
+             title="Sample parent/child relationship output with @omitDefault">
+        <div class="selectors">
+          <a class="playground"
+             data-result-for="#sample-input-for-omitDefault"
+             data-frame="#sample-library-frame-with-omitDefault"
+             target="_blank"></a>
+        </div>
+        <pre class="selected original nohighlight" data-transform="updateExample"
+             data-frame="Sample parent/child relationship frame with @omitDefault"
+             data-result-for="Sample parent/child relationship data">
+        <!--
+        {
+          "@context": {
+            "@vocab": "http://example.org/",
+            "child": {"@type": "@id"}
+          },
+          "@graph": [{
+            "@id": "http://example.org#John",
+            "@type": "Person",
+            "child": {
+              "@id": "http://example.org#Jane",
+              "@type": "Person",
+              "name": "Jane"
+            },
+            "name": "John"
+          }, {
+            "@id": "http://example.org#Jane",
+            "@type": "Person",
+            "name": "Jane"
+            ####← Does not include "child" property####
           }]
         }
         -->
