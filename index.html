@@ -130,32 +130,35 @@
   })
 </script>
 <style>
-  div.example .highlight .hljs-string {
-    font-weight: bold;
+  .hl-bold {font-weight: bold; color: #0a3;}
+  .comment {color: #999;}
+  table, thead, tr, td { padding: 5px; border-width: 1px; border-spacing: 0px; border-style: solid; border-collapse: collapse; }
+  table.example {width: 100%;}
+  .error a {
+    color:  #ff4500;
+    border-bottom:  1px dotted #ff4500;
+    text-decoration: none;
   }
-  div.example .comment .hljs-string {
-    color: #999;
-    text-decoration: line-through;
+  .example > pre.context:before {
+    content: "Context";
+    float: right;
+    font: x-large Arial, sans-serif;
+    color: gray;
+    padding-top: -20px;
   }
-  div.example > pre.frame:before {
+  .example > pre.frame:before {
     content: "Frame";
     float: right;
     font: x-large Arial, sans-serif;
     color: gray;
     padding-top: -20px;
   }
-  div.example > pre.input:before {
+  .example > pre.input:before {
     content: "Input";
     float: right;
     font: x-large Arial, sans-serif;
     color: gray;
     padding-top: -20px;
-  }
-  .diff { font-weight:bold; color:#0a3; }
-  .error a {
-    color:  #ff4500;
-    border-bottom:  1px dotted #ff4500;
-    text-decoration: none;
   }
   .algorithm ol {
     counter-reset: numsection;
@@ -168,13 +171,6 @@
     font-weight: bold;
     counter-increment: numsection;
     content: counters(numsection, ".") ") ";
-  }
-  .hl-bold {
-    font-weight: bold;
-    color: #0a3;
-  }
-  .comment {
-    color: #999;
   }
   .changed {
     background-color: rgb(215, 238, 197);
