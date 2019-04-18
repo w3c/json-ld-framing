@@ -1,10 +1,10 @@
 {
-  "@context": "https://json-ld.org/test-suite/context.jsonld",
+  "@context": "https://w3c.github.io/json-ld-api/tests/context.jsonld",
   "@id": "",
   "@type": "mf:Manifest",
   "name": "Framing",
   "description": "JSON-LD framing tests use object comparison.",
-  "baseIri": "https://json-ld.org/test-suite/tests/",
+  "baseIri": "https://w3c.github.io/json-ld-api/tests/",
   "sequence": [
     {
       "@id": "#t0001",
