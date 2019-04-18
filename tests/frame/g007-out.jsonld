@@ -1,6 +1,6 @@
 {
   "@context": {
-    "dc": "http://purl.org/dc/elements/1.1/",
+    "dcterms": "http://purl.org/dc/terms/",
     "ex": "http://example.org/vocab#"
   },
   "@graph": [
@@ -10,52 +10,52 @@
       "ex:contains": {
         "@id": "http://example.org/test#book",
         "@type": "ex:Book",
-        "dc:contributor": "Writer",
-        "dc:title": "My Book",
+        "dcterms:contributor": "Writer",
+        "dcterms:title": "My Book",
         "ex:contains": [
           {
             "@id": "http://example.org/test#chapter",
             "@type": "ex:Chapter",
-            "dc:description": "Fun",
-            "dc:title": "Chapter One",
+            "dcterms:description": "Fun",
+            "dcterms:title": "Chapter One",
             "ex:topic": [
               {
                 "@id": "http://example.org/test#subject1",
                 "@type": "ex:Topic",
-                "dc:description": "Topic 1"
+                "dcterms:description": "Topic 1"
               },
               {
                 "@id": "http://example.org/test#subject2",
                 "@type": "ex:Topic",
-                "dc:description": "Topic 2"
+                "dcterms:description": "Topic 2"
               },
               {
                 "@id": "http://example.org/test#subject3",
                 "@type": "ex:Topic",
-                "dc:description": "Topic 3"
+                "dcterms:description": "Topic 3"
               }
             ]
           },
           {
             "@id": "http://example.org/test#chapter2",
             "@type": "ex:Chapter",
-            "dc:description": "More Fun",
-            "dc:title": "Chapter Two",
+            "dcterms:description": "More Fun",
+            "dcterms:title": "Chapter Two",
             "ex:topic": [
               {
                 "@id": "http://example.org/test#subject1",
                 "@type": "ex:Topic",
-                "dc:description": "Topic 1"
+                "dcterms:description": "Topic 1"
               },
               {
                 "@id": "http://example.org/test#subject4",
                 "@type": "ex:Topic",
-                "dc:description": "Topic 4"
+                "dcterms:description": "Topic 4"
               },
               {
                 "@id": "http://example.org/test#subject5",
                 "@type": "ex:Topic",
-                "dc:description": "Topic 5"
+                "dcterms:description": "Topic 5"
               }
             ]
           }
@@ -63,23 +63,23 @@
         "ex:bookmark": {
           "@id": "http://example.org/test#chapter",
           "@type": "ex:Chapter",
-          "dc:description": "Fun",
-          "dc:title": "Chapter One",
+          "dcterms:description": "Fun",
+          "dcterms:title": "Chapter One",
           "ex:topic": [
             {
               "@id": "http://example.org/test#subject1",
               "@type": "ex:Topic",
-              "dc:description": "Topic 1"
+              "dcterms:description": "Topic 1"
             },
             {
               "@id": "http://example.org/test#subject2",
               "@type": "ex:Topic",
-              "dc:description": "Topic 2"
+              "dcterms:description": "Topic 2"
             },
             {
               "@id": "http://example.org/test#subject3",
               "@type": "ex:Topic",
-              "dc:description": "Topic 3"
+              "dcterms:description": "Topic 3"
             }
           ]
         }
