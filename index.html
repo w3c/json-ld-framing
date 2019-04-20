@@ -1410,8 +1410,6 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <dt><code>@omitDefault</code></dt>
     <dd>Used in <a href="#framing">Framing</a> to override the
       value of <a>omit default flag</a> within a specific frame.
-      <div class="issue" data-number="41">Is this flag really useful? Easier to simply not have a default value,
-        if it shouldn't match.</div>
     </dd>
     <dt class="changed"><code>@requireAll</code></dt>
     <dd class="changed">Used in <a href="#framing">Framing</a> to override the
@@ -1678,9 +1676,10 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
   <p>The Frame Matching Algorithm is used as part of the <a href="#framing-algorithm">Framing algorithm</a>
     to determine if a particular <a>node object</a> matches the criteria set in a <a>frame</a>.
     In general, a node object matches a frame if it meets the matches on <code>@type</code>,
-    or <code>@id</code>,
-    or if it matches given one of several different properties (or all properties, if the
-    <a>require all flag</a> is present.).</p>
+    <code>@id</code>,
+    or if it matches given one of several different properties.
+    If the <a>require all flag</a> is <code>true</code>, all properties much has defaults
+    or match for the frame to match.</p>
 
   <p class="note">As matching is performed on expanded node objects, all values will be in the form of an array.</p>
 
@@ -1708,29 +1707,30 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
   a <a>frame</a> to match against (<var>frame</var>), and the <var>requireAll</var> flag
   and returns a list of matched subjects by filtering each <var>node</var> in <var>subjects</var> as follows:</p>
 
-<p>Frame matching follows an order of precedence, first attempting to match on a particular <code>@id</code>, then
-  a particular <code>@type</code> (or lack of <code>@type</code>), then by matching on any or all
-  of a set of properties, if neither <code>@id</code>, nor <code>@type</code> are in the frame.</p>
+<p>All properties, including <code>@id</code> and <code>@type</code>, but no other <a>keywords</a> are considered
+  whem matching a frame..</p>
 
 <ol>
-  <li><var>node</var> matches if it has an <code>@id</code> property value
-    which is also a value of the <code>@id</code> property in <var>frame</var>.
-    Otherwise, <var>node</var> does not match if <var>frame</var> has a non-empty
-    <code>@id</code> property, other than an empty <a>dictionary</a>.
-    Otherwise, frame must not have a <code>@id</code> property; continue to the next step.
-    <div class="note">Framing works on <a>map of flattened subjects</a>,
-      and the act of flattening ensures that all subjects have an
-      <code>@id</code> property; thus the <code>"@id": []</code> pattern would
-      never match any <a>node object</a>. The <code>"@id": [{}]</code> pattern would
-      match any <a>node object</a> and is equivalent to not specifying a
-      <code>@id</code> property in <var>frame</var> at all</div>
-  </li>
-  <li><var>node</var> matches if frame has no non-<code>keyword</code> properties.</li>
-  <li>If <var>requireAll</var> is <strong>true</strong>, <var>node</var> matches if all non-<a>keyword</a> properties (<var>property</var>) in <var>frame</var> match any of the following conditions.
-    Or, if <var>requireAll</var> is <strong>false</strong>, if any of the non-<a>keyword</a> properties (<var>property</var>) in <var>frame</var> match any of the following conditions.
+  <li><var>node</var> matches if frame has no properties.</li>
+  <li>If <var>requireAll</var> is <strong>true</strong>, <var>node</var> matches if all properties (<var>property</var>)
+    in <var>frame</var> match any of the following conditions.
+    Or, if <var>requireAll</var> is <strong>false</strong>, if any of the properties (<var>property</var>)
+    in <var>frame</var> match any of the following conditions.
     For the <var>values</var> of each <var>property</var> from <var>frame</var> in <var>node</var>:
     <ol>
-      <li>If <var>property</var> is <code>@type</code>:
+      <li>If <var>property</var> is <code>@id</code>:
+        <ol>
+          <li><var>property</var> matches if the <code>@id</code> property in frame includes any <a>IRI</a> in <var>values</var>.</li>
+          <li>Otherwise, <var>property</var> matches if the <code>@type</code> property in <var>frame</var> is <code><a>wildcard</a></code> or <code><a>match none</a></code>.</li>
+        </ol>
+        <div class="note">Framing works on <a>map of flattened subjects</a>,
+          and the act of flattening ensures that all subjects have an
+          <code>@id</code> property; thus the <code>"@id": []</code> pattern would
+          never match any <a>node object</a>. The <code>"@id": [{}]</code> pattern would
+          match any <a>node object</a> and is equivalent to not specifying a
+          <code>@id</code> property in <var>frame</var> at all</div>
+      </li>
+      <li>Otherwise, if <var>property</var> is <code>@type</code>:
         <ol>
           <li><var>property</var> matches if the <code>@type</code> property in frame includes any <a>IRI</a> in <var>values</var>.</li>
           <li>Otherwise, <var>property</var> matches if <var>values</var> is not empty and the <code>@type</code> property in <var>frame</var> is <code><a>wildcard</a></code>.</li>
@@ -1738,6 +1738,8 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
           <li>Otherwise, <var>property</var> does not match.</li>
         </ol>
       </li>
+      <li>If <var>property</var> is <code>@id</code> or <code>@type</code> and does not match,
+        <var>node</var> does not match, and processing is terminated.</li>
       <li>Otherwise, the value of <var>property</var> in <var>frame</var> MUST be empty, or an array
         containing a valid <a>frame</a>.</li>
       <li><var>property</var> matches if <var>values</var> is empty, or non existent,
@@ -2194,6 +2196,8 @@ becomes a W3C Recommendation.</p>
       evaluating test results have been updated accordingly.</li>
     <li>The IANA registration is changed from <code>application/ld-frame+json</code> to
       <code>application/ld+json</code> with a required <code>profile</code> parameter.</li>
+    <li>The <a>require all flag</a> now needs all properties to be present, including
+      <code>@id</code> and <code>@type</code>.</li>
     <li>Removed <code>@first</code> and <code>@last</code> values for the
       <a>object embed flag</a> in favor of <code>@once</code>.</li>
   </ul>
