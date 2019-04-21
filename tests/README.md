@@ -35,6 +35,7 @@ Implementations create their own infrastructure for running the test suite. In p
 
 * Some algorithms, may not preserve the order of statements listed in the input document, and provision should be taken for performing unordered array comparison, for arrays other than values of `@list`. (This may be difficult for compacted results, where array value ordering is dependent on the associated term definition).
 * Some implementations may choose an alternative Blank Node Label algorithm, the comparison between documents containing blank node labels should take this into consideration. (One way to do this may be to reduce both results and _expected_ to datsets to extract a bijective mapping of blank node labels between the two datasets as described in [RDF Dataset Isomorphism](https://www.w3.org/TR/rdf11-concepts/#dfn-dataset-isomorphism)).
+* Note that the `"@embed": "@once"` test behavior requires that the `ordered` option be set to `true` for repeatability.
 
 # Contributing
 
