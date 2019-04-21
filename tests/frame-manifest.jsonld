@@ -82,7 +82,7 @@
       "@id": "#t0010",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "property CURIE conflict",
-      "purpose": "(Not really framing) A term looking like a CURIE becomes a CURIE when framing/compacting if defined as such in frame/context.",
+      "purpose": "(Not really framing) A term looking like a CURIE becomes a CURIE when framing/compacting if defined as such in frame/context in json-ld-1.0 mode.",
       "input": "frame/0010-in.jsonld",
       "frame": "frame/0010-frame.jsonld",
       "expect": "frame/0010-out.jsonld",
@@ -90,11 +90,12 @@
     }, {
       "@id": "#t0011",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
-      "name": "@embed",
-      "purpose": "@embed within a frame controls the object embed flag when processing that frame (true and false values).",
+      "name": "@embed true/false",
+      "purpose": "@embed within a frame controls the object embed flag when processing that frame (true and false values) in json-ld-1.0 mode.",
       "input": "frame/0011-in.jsonld",
       "frame": "frame/0011-frame.jsonld",
-      "expect": "frame/0011-out.jsonld"
+      "expect": "frame/0011-out.jsonld",
+      "options": {"spec-version": "json-ld-1.1", "processingMode": "json-ld-1.0"}
     }, {
       "@id": "#t0012",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
@@ -163,7 +164,7 @@
       "@id": "#t0020",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "Blank nodes in an array",
-      "purpose": "Empty frame matches all nodes at top-level, and repeats where embedded.",
+      "purpose": "Empty frame matches all nodes at top-level, and repeats where embedded in json-ld-1.0 mode.",
       "input": "frame/0020-in.jsonld",
       "frame": "frame/0020-frame.jsonld",
       "expect": "frame/0020-out.jsonld",
@@ -172,7 +173,7 @@
       "@id": "#t0021",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "Blank nodes in @type",
-      "purpose": "Empty frame matches all nodes at top-level, and repeats where embedded (with list content).",
+      "purpose": "Empty frame matches all nodes at top-level, and repeats where embedded (with list content) in json-ld-1.0 mode.",
       "input": "frame/0021-in.jsonld",
       "frame": "frame/0021-frame.jsonld",
       "expect": "frame/0021-out.jsonld",
@@ -251,7 +252,7 @@
     }, {
       "@id": "#t0030",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
-      "name": "@embed",
+      "name": "@embed @always/@never",
       "purpose": "@embed within a frame controls the object embed flag when processing that frame (@always and @never values).",
       "option": {"specVersion": "json-ld-1.1"},
       "input": "frame/0030-in.jsonld",
@@ -396,7 +397,7 @@
       "@id": "#t0046",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "Merge graphs if no outer @graph is used",
-      "purpose": "Unless @graph exists at the top level, framing uses merged node objects.",
+      "purpose": "Unless @graph exists at the top level, framing uses merged node objects in json-ld-1.0 mode.",
       "input": "frame/0046-in.jsonld",
       "frame": "frame/0046-frame.jsonld",
       "expect": "frame/0046-out.jsonld",
@@ -423,7 +424,7 @@
       "@id": "#t0049",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "Merge one graph and deep preserve another",
-      "purpose": "@graph used within a property value frames embedded values from a named graph.",
+      "purpose": "@graph used within a property value frames embedded values from a named graph in json-ld-1.0 mode.",
       "input": "frame/0049-in.jsonld",
       "frame": "frame/0049-frame.jsonld",
       "expect": "frame/0049-out.jsonld",
@@ -511,18 +512,29 @@
       "@id": "#t0059",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "@embed: @last replaces previous embed values with node reference",
-      "purpose": "Verify that within a matched node, by default only the last reference will be embedded.",
+      "purpose": "Verify that within a matched node, by default only the last reference will be embedded in json-ld-1.0 mode.",
       "input": "frame/0059-in.jsonld",
       "frame": "frame/0059-frame.jsonld",
-      "expect": "frame/0059-out.jsonld"
+      "expect": "frame/0059-out.jsonld",
+      "options": {"spec-version": "json-ld-1.1", "processingMode": "json-ld-1.0"}
     }, {
       "@id": "#t0060",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
-      "name": "@embed: @first only embeds first value with node reference",
+      "name": "@embed: @once only embeds first value with node reference",
       "purpose": "Verify that within a matched node and @embed: @first, by only the first reference will be embedded.",
       "input": "frame/0060-in.jsonld",
       "frame": "frame/0060-frame.jsonld",
-      "expect": "frame/0060-out.jsonld"
+      "expect": "frame/0060-out.jsonld",
+      "options": {"spec-version": "json-ld-1.1", "ordered": true}
+    }, {
+      "@id": "#teo01",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "@embed true/false",
+      "purpose": "@embed within a frame controls the object embed flag when processing that frame (true and false values).",
+      "input": "frame/eo01-in.jsonld",
+      "frame": "frame/eo01-frame.jsonld",
+      "expect": "frame/eo01-out.jsonld",
+      "option": {"specVersion": "json-ld-1.1", "processingMode": "json-ld-1.1"}
     }, {
       "@id": "#tg001",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],

@@ -624,13 +624,13 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         The initial value for the <a>object embed flag</a> is set using the
         <a data-link-for="JsonLdOptions">embed</a> option.
         Consider the following frame
-        based on the default <code>@first</code> value of the <a>object embed flag</a>:</p>
+        based on the default <code>@once</code> value of the <a>object embed flag</a>:</p>
 
-      <pre id="sample-library-frame-with-implicit-embed-set-to-first"
+      <pre id="sample-library-frame-with-implicit-embed-set-to-once"
            class="example frame" data-transform="updateExample"
            data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
            data-frame-for="Flattened library objects"
-           title="Sample library frame with implicit @embed set to @first">
+           title="Sample library frame with implicit @embed set to @once">
       <!--
       {
         "@context": {"@vocab": "http://example.org/"},
@@ -640,15 +640,15 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       </pre>
 
       <aside class="example ds-selector-tabs"
-             title="Framed library objects with @embed set to @first">
+             title="Framed library objects with @embed set to @once">
         <div class="selectors">
           <a class="playground"
              data-result-for="#flattened-library-objects"
-             data-frame="#sample-library-frame-with-implicit-embed-set-to-first"
+             data-frame="#sample-library-frame-with-implicit-embed-set-to-once"
              target="_blank"></a>
         </div>
         <pre class="selected original nohighlight" data-transform="updateExample"
-             data-frame="Sample library frame with implicit @embed set to @first"
+             data-frame="Sample library frame with implicit @embed set to @once"
              data-result-for="Flattened library objects">
         <!--
         {
@@ -674,11 +674,12 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         </pre>
       </aside>
 
-      <p>Because, the default for the <a>object embed flag</a> is <code>@first</code>
+      <p>Because, the default for the <a>object embed flag</a> is <code>@once</code>
          (in addition to the <a>explicit inclusion flag</a> being <code>false</code>),
          non-listed properties are added to the output, and implicitly embedded
          using a default empty frame. As a result, the same output used in the
-         <a href="#lib-example-output">Framed library objects</a> above is generated.</p>
+         <a href="#lib-example-output">Framed library objects</a> above is generated,
+         assuming that the <a data-link-for="JsonLdOptions">ordered</a> flag is <code>true</code>.</p>
 
       <p>However, if the <code>@embed</code> property is added explicitly with a
          value of <code>@never</code>, the values for <em>Book</em> and <em>Chapter</em> will be excluded.</p>
@@ -726,7 +727,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         </pre>
       </aside>
 
-      <p>To illustrate the case where <code>@first</code> does not expand values,
+      <p>To illustrate the case where <code>@once</code> does not expand values,
         consider an alternate library example where books are doubly indexed.</p>
 
       <pre id="flattened-library-objects-with-double-index"
@@ -765,11 +766,11 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         <div class="selectors">
           <a class="playground"
              data-result-for="#flattened-library-objects-with-double-index"
-             data-frame="#sample-library-frame-with-implicit-embed-set-to-first"
+             data-frame="#sample-library-frame-with-implicit-embed-set-to-once"
              target="_blank"></a>
         </div>
         <pre class="selected original nohighlight" data-transform="updateExample"
-             data-frame="Sample library frame with implicit @embed set to @first"
+             data-frame="Sample library frame with implicit @embed set to @once"
              data-result-for="Flattened library objects with double index">
         <!--
         {
@@ -796,60 +797,10 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         </pre>
       </aside>
 
-      <p>When framed using the same frame with the default <code>@embed</code> of <code>@first</code>,
-        only the <em>"books"</em> property will have content, and the <em>"contains"</em> property will use a reference.</p>
-
-      <p>If we use a frame using <code>"@embed": "@last"</code>,
-        only the "contains" property will use a reference.</p>
-
-      <pre id="sample-library-frame-with-explicit-embed-set-to-last"
-           class="example frame nohighlight" data-transform="updateExample"
-           data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
-           data-frame-for="Flattened library objects with double index"
-           title="Sample library frame with explicit @embed set to @last">
-      <!--
-      {
-        "@context": {"@vocab": "http://example.org/"},
-        "@type": "Library",
-        ****"@embed": "@last"****
-      }
-      -->
-      </pre>
-      <aside class="example ds-selector-tabs"
-             title="Framed library objects with double index and @last">
-        <div class="selectors">
-          <a class="playground"
-             data-result-for="#flattened-library-objects-with-double-index"
-             data-frame="#sample-library-frame-with-explicit-embed-set-to-last"
-             target="_blank"></a>
-        </div>
-        <pre class="selected original nohighlight" data-transform="updateExample"
-             data-frame="Sample library frame with explicit @embed set to @last"
-             data-result-for="Flattened library objects with double index">
-        <!--
-        {
-          "@context": {"@vocab": "http://example.org/"},
-          "@graph": [{
-            "@id": "http://example.org/library",
-            "@type": "Library",
-            ****"books": {"@id": "http://example.org/library/the-republic"},****
-            ****"contains": {
-              "@id": "http://example.org/library/the-republic",
-              "@type": "Book",
-              "contains": {
-                "@id": "http://example.org/library/the-republic#introduction",
-                "@type": "Chapter",
-                "description": "An introductory chapter on The Republic.",
-                "title": "The Introduction"
-              },
-              "creator": "Plato",
-              "title": "The Republic"
-            }****
-          }]
-        }
-       -->
-        </pre>
-      </aside>
+      <p>When framed using the same frame with the default <code>@embed</code> of <code>@once</code>,
+        only the <em>"books"</em> property will have content,
+        if the <a data-link-for="JsonLdOptions">ordered</a> flag is <code>true</code>,
+        and the <em>"contains"</em> property will use a reference.</p>
 
       <p>If we use a frame using <code>"@embed": "@always"</code>,
         both properties will include expanded values.</p>
@@ -1431,15 +1382,15 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
           Always embed <a>node objects</a> as property values, unless this would
           cause a circular reference.
         </dd>
-        <dt class="changed"><code>@first</code></dt><dd class="changed">
-          Only the first value within a given <a>node object</a> should be embedded,
-          subsequent values of other properties use a <a>node reference</a>. This is the
+        <dt class="changed"><code>@once</code></dt><dd class="changed">
+          Juse a single value within a given <a>node object</a> should be embedded,
+          other values of other properties use a <a>node reference</a>. This is the
           default value if neither <code>@embed</code> nor <a>object embed flag</a>
           is not specified.
-        </dd>
-        <dt><code>@last</code></dt><dd>
-          Only the last value within a given <a>node object</a> should be embedded,
-          previous values of other properties use a <a>node reference</a>.
+          <div class="note">The specific <a>node object</a> chosen to embed depends on
+            ordering. if the <a data-link-for="JsonLdOptions">ordered</a> flag is <code>true</code>,
+            this will be the first <a>node object</a> encountered,
+            otherwise, it may be any node object.</div>
         </dd>
         <dt><code>@never</code></dt><dd>
           Always use a <a>node reference</a> when serializing matching values.
@@ -1536,7 +1487,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
 <p>The recursive algorithm operates with a <a>framing state</a> (<var>state</var>),
   created initially using
-  the <a>object embed flag</a> set to <code>@first</code>,
+  the <a>object embed flag</a> set to <code>@once</code>,
   the <a>explicit inclusion flag</a> set to <code>false</code>,
   the <a>require all flag</a> set to <code>true</code>,
   the <a>omit default flag</a> set to <code>false</code>,
@@ -1583,18 +1534,11 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         circular reference would be created by an embed,
         add <var>output</var> to <var>parent</var>
         and do not perform additional processing for this <var>node</var>.</li>
-      <li class="changed">Otherwise, if <var>embed</var> is <code>@first</code>
+      <li class="changed">Otherwise, if <var>embed</var> is <code>@once</code>
         and parent has an existing embedded node in <var>parent</var> associated with
         <var>graph name</var> and <var>id</var> in <var>state</var>,
         add <var>output</var> to <var>parent</var>
-        and do not perform additional processing for this <var>node</var>.
-        <span class="ednote">Requires sorting of subjects.
-          We could consider <code>@sample</code>, to embed in a property, rather than the lexicographically first.</span></li>
-      <li>Otherwise, if <var>embed</var> is <code>@last</code>,
-        remove any existing embedded node from <var>parent</var> associated with
-        <var>graph name</var> and <var>id</var> in <var>state</var>.
-        <span class="ednote">Requires sorting of subjects.
-          We could consider <code>@sample</code>, to embed in a property, rather than the lexicographically last.</span></li>
+        and do not perform additional processing for this <var>node</var>.</li>
       <li class="changed">If <var>graph map</var> in <var>state</var> has an entry for <var>id</var>:
         <ol>
           <li>If <var>frame</var> does not have a <code>@graph</code> <a>member</a>,
@@ -1989,19 +1933,18 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
     <pre class="idl" data-transform="unComment"><!--
       dictionary JsonLdOptions {
-        (JsonLdEmbed or boolean)  embed = "@first";
-        boolean                   explicit    = false;
-        boolean                   omitDefault = false;
+        (JsonLdEmbed or boolean)  embed         = "@once";
+        boolean                   explicit      = false;
+        boolean                   omitDefault   = false;
         boolean                   omitGraph;
-        boolean                   requireAll  = false;
+        boolean                   requireAll    = false;
         boolean                   frameDefault  = false;
-        boolean                   ordered = false;
+        boolean                   ordered       = false;
       };
 
       enum JsonLdEmbed {
         "@always",
-        "@first",
-        "@last",
+        "@once",
         "@never"
       };
     -->
@@ -2015,7 +1958,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       <dd>Sets the value <a>object embed flag</a> used in the
         <a href="#framing-algorithm">Framing Algorithm</a>.
         A boolean value of <code>true</code> sets the flag to
-        <code>@last</code>, while an value of <code>false</code> sets the flag
+        <code>@once</code>, while an value of <code>false</code> sets the flag
         to <code>@never</code>.</dd>
       <dt><dfn data-dfn-for="JsonLdOptions">explicit</dfn></dt>
       <dd>Sets the value <a>explicit inclusion flag</a> used in the
@@ -2045,14 +1988,11 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       <dt><dfn data-dfn-for="JsonLdEmbed">@always</dfn></dt><dd>
         Always embed <a>node objects</a> as property values, unless this would
         cause a circular reference.</dd>
-      <dt><dfn data-dfn-for="JsonLdEmbed">@first</dfn></dt><dd>
-        Only the first value within a given <a>node object</a> should be embedded,
-        subsequent values of other properties use a <a>node reference</a>. This is the
+      <dt><dfn data-dfn-for="JsonLdEmbed">@once</dfn></dt><dd>
+        Only a single value within a given <a>node object</a> should be embedded,
+        other values of other properties use a <a>node reference</a>. This is the
         default value if neither <code>@embed</code> nor <a>object embed flag</a>
         is not specified.</dd>
-      <dt><dfn data-dfn-for="JsonLdEmbed">@last</dfn></dt><dd>
-        Only the last value within a given <a>node object</a> should be embedded,
-        previous values of other properties use a <a>node reference</a>.</dd>
       <dt class="changed"><dfn data-dfn-for="JsonLdEmbed">@never</dfn></dt><dd class="changed">
         Always use a <a>node reference</a> when serializing matching values.</dd>
     </dl>
@@ -2238,6 +2178,8 @@ becomes a W3C Recommendation.</p>
       evaluating test results have been updated accordingly.</li>
     <li>The IANA registration is changed from <code>application/ld-frame+json</code> to
       <code>application/ld+json</code> with a required <code>profile</code> parameter.</li>
+    <li>Removed <code>@first</code> and <code>@last</code> values for the
+      <a>object embed flag</a> in favor of <code>@once</code>.</li>
   </ul>
 </section>
 
