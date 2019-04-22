@@ -2042,7 +2042,7 @@ becomes a W3C Recommendation.</p>
   </dd>
   <dt>Encoding considerations:</dt>
   <dd>See <a data-cite="RFC8259#section-11">RFC&nbsp;8259, section 11</a>.</dd>
-  <dt>Security considerations:</dt>
+  <dt id="iana-security">Security considerations:</dt>
   <dd>See <a data-cite="RFC8259#section-12">RFC&nbsp;8259, section 12</a> [[RFC8259]]
     <p>Since JSON-LD is intended to be a pure data exchange format for
       directed graphs, the serialization SHOULD NOT be passed through a
@@ -2068,6 +2068,10 @@ becomes a W3C Recommendation.</p>
       JSON-LD documents may expand considerably when processed and, in the worst case,
       the resulting data might consume all of the recipient's resources. Applications
       should treat any data with due skepticism.</p>
+    <p>As JSON-LD places no limits on the IRI schemes that may be used,
+      and vocabulary-relative IRIs use string concatenation rather than
+      IRI resolution, it is possible to construct IRIs that may be
+      used maliciously, if dereferenced.</p>
   </dd>
   <dt>Interoperability considerations:</dt>
   <dd>Not Applicable</dd>
@@ -2110,8 +2114,17 @@ becomes a W3C Recommendation.</p>
 
 <section id="security" class="appendix">
   <h3>Security Considerations</h3>
-  <p class="ednote">Consider requirements from <a href="https://w3ctag.github.io/security-questionnaire/">Self-Review Questionnaire: Security and Privacy</a>.</p>
-  <p>See, <a href="#iana-considerations" class="sectionRef"></a></p>
+  <p>See, <a href="#iana-security">Security Considerations</a> in <a href="#iana-considerations" class="sectionRef"></a>.</p>
+</section>
+
+<section id="privacy" class="appendix">
+  <h3>Privacy Considerations</h3>
+  <p>See, <a data-cite="JSON-LD11#privacy">Privacy Considerations</a> in [[JSON-LD11]].</p>
+</section>
+
+<section id="internationalization" class="appendix">
+  <h3>Internationalization Considerations</h3>
+  <p>See, <a data-cite="JSON-LD11#internationalization">Internationalization Considerations</a> in [[JSON-LD11]].</p>
 </section>
 
 <section id="idl-index" class="appendix informative">
