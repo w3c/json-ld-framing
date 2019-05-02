@@ -198,7 +198,7 @@
     }, {
       "@id": "#t0024",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
-      "name": "match on any common properties if @requireAll: true",
+      "name": "match on any common properties if @requireAll: false",
       "purpose": "Match if @requireAll is false and both node and frame contain common non-keyword properties of any value.",
       "option": {"specVersion": "json-ld-1.1"},
       "input": "frame/0024-in.jsonld",
@@ -670,6 +670,33 @@
       "frame": "frame/p050-frame.jsonld",
       "expect": "frame/p050-out.jsonld",
       "option": {"processingMode": "json-ld-1.1", "specVersion": "json-ld-1.1"}
+    }, {
+      "@id": "#tra01",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "@requireAll only matches if @type and other properties are present",
+      "purpose": "If @requireAll is true, then all listed properties, including @type, must be present to match.",
+      "input": "frame/ra01-in.jsonld",
+      "frame": "frame/ra01-frame.jsonld",
+      "expect": "frame/ra01-out.jsonld",
+      "option": {"specVersion": "json-ld-1.1"}
+    }, {
+      "@id": "#tra02",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "@requireAll only matches if @id and @type match",
+      "purpose": "If @requireAll is true, then all listed properties, including @id and @type, must be present to match.",
+      "input": "frame/ra02-in.jsonld",
+      "frame": "frame/ra02-frame.jsonld",
+      "expect": "frame/ra02-out.jsonld",
+      "option": {"specVersion": "json-ld-1.1"}
+    }, {
+      "@id": "#tra03",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "@requireAll with type and properties",
+      "purpose": "If @requireAll is true, then all listed properties, including @type, must be present to match.",
+      "input": "frame/ra03-in.jsonld",
+      "frame": "frame/ra03-frame.jsonld",
+      "expect": "frame/ra03-out.jsonld",
+      "option": {"specVersion": "json-ld-1.1"}
     }
   ]
 }
