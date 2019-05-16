@@ -1,11 +1,11 @@
-Example 017: Framed library objects with @explicit set to true-original
+Example 013: Framed library objects with double index-original
 ---
 "@context":
   "@vocab": http://example.org/
 "@graph":
 - "@id": http://example.org/library
   "@type": Library
-  contains:
+  books:
     "@id": http://example.org/library/the-republic
     "@type": Book
     contains:
@@ -13,5 +13,7 @@ Example 017: Framed library objects with @explicit set to true-original
       "@type": Chapter
       description: An introductory chapter on The Republic.
       title: The Introduction
+    creator: Plato
     title: The Republic
-  description: 
+  contains:
+    "@id": http://example.org/library/the-republic

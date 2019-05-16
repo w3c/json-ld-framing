@@ -1,0 +1,21 @@
+{
+  "@context": {
+    "@vocab": "http://example.org/",
+    "child": {"@type": "@id"}
+  },
+  "@graph": [{
+    "@id": "http://example.org#John",
+    "@type": "Person",
+    "child": {
+      "@id": "http://example.org#Jane",
+      "@type": "Person",
+      "name": "Jane"
+    },
+    "name": "John"
+  }, {
+    "@id": "http://example.org#Jane",
+    "@type": "Person",
+    "child": null,
+    "name": "Jane"
+  }]
+}

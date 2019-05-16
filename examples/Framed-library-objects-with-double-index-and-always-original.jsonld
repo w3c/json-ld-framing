@@ -3,6 +3,18 @@
   "@graph": [{
     "@id": "http://example.org/library",
     "@type": "Library",
+    "books": {
+      "@id": "http://example.org/library/the-republic",
+      "@type": "Book",
+      "contains": {
+        "@id": "http://example.org/library/the-republic#introduction",
+        "@type": "Chapter",
+        "description": "An introductory chapter on The Republic.",
+        "title": "The Introduction"
+      },
+      "creator": "Plato",
+      "title": "The Republic"
+    },
     "contains": {
       "@id": "http://example.org/library/the-republic",
       "@type": "Book",
@@ -13,9 +25,7 @@
         "title": "The Introduction"
       },
       "creator": "Plato",
-      "description": "A great book.",
       "title": "The Republic"
-    },
-    "description": null
+    }
   }]
 }

@@ -1,0 +1,10 @@
+{
+  "@context": {
+    "@vocab": "http://example.org/",
+    "child": {"@type": "@id"}
+  },
+  "@type": "Person",
+  "child": {
+    "@embed": "@always"
+  }
+}

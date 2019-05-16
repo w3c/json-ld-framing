@@ -1,0 +1,22 @@
+Example 012: Flattened library objects with double index
+---
+"@context":
+  "@vocab": http://example.org/
+  books:
+    "@type": "@id"
+  contains:
+    "@type": "@id"
+"@graph":
+- "@id": http://example.org/library
+  "@type": Library
+  books: http://example.org/library/the-republic
+  contains: http://example.org/library/the-republic
+- "@id": http://example.org/library/the-republic
+  "@type": Book
+  creator: Plato
+  title: The Republic
+  contains: http://example.org/library/the-republic#introduction
+- "@id": http://example.org/library/the-republic#introduction
+  "@type": Chapter
+  description: An introductory chapter on The Republic.
+  title: The Introduction

@@ -1,5 +1,0 @@
-Example 008: Sample library frame with implicit @embed set to @last
----
-"@context":
-  "@vocab": http://example.org/
-"@type": Library

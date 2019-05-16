@@ -3,7 +3,7 @@
   "@graph": [{
     "@id": "http://example.org/library",
     "@type": "Library",
-    "contains": {
+    "books": {
       "@id": "http://example.org/library/the-republic",
       "@type": "Book",
       "contains": {
@@ -13,9 +13,8 @@
         "title": "The Introduction"
       },
       "creator": "Plato",
-      "description": "A great book.",
       "title": "The Republic"
     },
-    "description": null
+    "contains": {"@id": "http://example.org/library/the-republic"}
   }]
 }

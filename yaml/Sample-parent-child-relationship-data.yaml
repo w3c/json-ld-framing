@@ -1,0 +1,14 @@
+Example 018: Sample parent/child relationship data
+---
+"@context":
+  "@vocab": http://example.org/
+  child:
+    "@type": "@id"
+"@graph":
+- "@id": http://example.org#John
+  "@type": Person
+  name: John
+  child: http://example.org#Jane
+- "@id": http://example.org#Jane
+  "@type": Person
+  name: Jane
