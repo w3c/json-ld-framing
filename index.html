@@ -140,18 +140,40 @@
     float: right;
     font: x-large Arial, sans-serif;
     color: gray;
+    border: solid thin black;
+    padding: 0.2em;
   }
   .example > pre.frame:before {
     content: "Frame";
     float: right;
     font: x-large Arial, sans-serif;
     color: gray;
+    border: solid thin black;
+    padding: 0.2em;
   }
   .example > pre.input:before {
     content: "Input";
     float: right;
     font: x-large Arial, sans-serif;
     color: gray;
+    border: solid thin black;
+    padding: 0.2em;
+  }
+  .example > pre.result:before {
+    content: "Result";
+    float: right;
+    font: x-large Arial, sans-serif;
+    color: gray;
+    border: solid thin black;
+    padding: 0.2em;
+  }
+  .example > pre.turtle:before {
+    content: "Turtle";
+    float: right;
+    font: x-large Arial, sans-serif;
+    color: gray;
+    border: solid thin black;
+    padding: 0.2em;
   }
   .algorithm ol {
     counter-reset: numsection;
@@ -212,7 +234,7 @@
     color: #202020;
     cursor: pointer;
   }
-  .ds-selector-tabs pre, .ds-selector-tabs table {
+  .ds-selector-tabs pre:not(.preserve), .ds-selector-tabs table:not(.preserve) {
     display: none;
   }
   .ds-selector-tabs pre.selected, .ds-selector-tabs table.selected {
@@ -458,7 +480,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
            data-frame="#sample-library-frame"
            target="_blank"></a>
       </div>
-      <pre class="selected original" data-transform="updateExample"
+      <pre class="selected result" data-transform="updateExample"
            data-frame="Sample library frame"
            data-result-for="Flattened library objects">
       <!--
@@ -488,7 +510,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <p>If <a>processing mode</a> is <code>json-ld-1.1</code>, or the <a>omit graph flag</a> is <code>true</code>,
       the top-level <code>@graph</code> <a>member</a> may be omitted.</p>
 
-    <pre class="example frame" data-transform="updateExample"
+    <pre class="example result" data-transform="updateExample"
          data-frame="Sample library frame"
          data-result-for="Flattened library objects"
          data-options="omitGraph=true"
@@ -568,7 +590,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
            data-frame="#sample-library-frame-with-default-value"
            target="_blank"></a>
       </div>
-      <pre class="selected original nohighlight" data-transform="updateExample"
+      <pre class="selected result nohighlight" data-transform="updateExample"
            data-frame="Sample library frame with @default value"
            data-result-for="Flattened library objects">
       <!--
@@ -640,7 +662,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
              data-frame="#sample-library-frame-with-implicit-embed-set-to-once"
              target="_blank"></a>
         </div>
-        <pre class="selected original nohighlight" data-transform="updateExample"
+        <pre class="selected result nohighlight" data-transform="updateExample"
              data-frame="Sample library frame with implicit @embed set to @once"
              data-result-for="Flattened library objects">
         <!--
@@ -702,7 +724,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
              data-frame="#sample-library-frame-with-explicit-embed-set-to-never"
              target="_blank"></a>
         </div>
-        <pre class="selected original nohighlight" data-transform="updateExample"
+        <pre class="selected result nohighlight" data-transform="updateExample"
              data-frame="Sample library frame with explicit @embed set to @never"
              data-result-for="Flattened library objects">
         <!--
@@ -762,7 +784,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
              data-frame="#sample-library-frame-with-implicit-embed-set-to-once"
              target="_blank"></a>
         </div>
-        <pre class="selected original nohighlight" data-transform="updateExample"
+        <pre class="selected result nohighlight" data-transform="updateExample"
              data-frame="Sample library frame with implicit @embed set to @once"
              data-result-for="Flattened library objects with double index">
         <!--
@@ -819,7 +841,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
              data-frame="#sample-library-frame-with-explicit-embed-set-to-always"
              target="_blank"></a>
         </div>
-        <pre class="selected original nohighlight" data-transform="updateExample"
+        <pre class="selected result nohighlight" data-transform="updateExample"
              data-frame="Sample library frame with explicit @embed set to @always"
              data-result-for="Flattened library objects with double index">
         <!--
@@ -909,7 +931,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
            target="_blank"></a>
       </div>
       <pre id="lib-example-output"
-           class="selected original nohighlight" data-transform="updateExample"
+           class="selected result nohighlight" data-transform="updateExample"
            data-frame="Sample library frame with @explicit set to true"
            data-result-for="Flattened library objects">
       <!--
@@ -954,7 +976,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       <p>Consider the following input document:</p>
 
       <pre id="sample-input-for-omitDefault"
-           class="example nohighlight" data-transform="updateExample"
+           class="example input nohighlight" data-transform="updateExample"
            title="Sample parent/child relationship data">
       <!--
       {
@@ -1009,7 +1031,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
              data-frame="#sample-library-frame-without-omitDefault"
              target="_blank"></a>
         </div>
-        <pre class="selected original nohighlight" data-transform="updateExample"
+        <pre class="selected result nohighlight" data-transform="updateExample"
              data-frame="Sample parent/child relationship frame without @omitDefault"
              data-result-for="Sample parent/child relationship data">
         <!--
@@ -1074,7 +1096,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
              data-frame="#sample-library-frame-with-omitDefault"
              target="_blank"></a>
         </div>
-        <pre class="selected original nohighlight" data-transform="updateExample"
+        <pre class="selected result nohighlight" data-transform="updateExample"
              data-frame="Sample parent/child relationship frame with @omitDefault"
              data-result-for="Sample parent/child relationship data">
         <!--
@@ -1168,7 +1190,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
            data-frame="#inverted-library-frame"
            target="_blank"></a>
       </div>
-      <pre class="selected original" data-transform="updateExample"
+      <pre class="selected result" data-transform="updateExample"
            data-frame="Inverted library frame"
            data-result-for="Flattened library objects"
            title="Inverted library output">
@@ -1282,7 +1304,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
            data-frame="#frame-with-named-graphs"
            target="_blank"></a>
       </div>
-      <pre class="selected original nohighlight" data-transform="updateExample"
+      <pre class="selected result nohighlight" data-transform="updateExample"
            data-frame="Frame with named graphs"
            data-result-for="Flattened Input with named graphs">
       <!--
