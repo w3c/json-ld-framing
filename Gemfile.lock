@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/ruby-rdf/json-ld.git
-  revision: bed726ac881379724aab4fa0c4f21580e81bf41e
+  revision: 813e1ff914cc1a1025db14de392fd738b4cbb674
   branch: develop
   specs:
     json-ld (3.0.2)
@@ -79,7 +79,7 @@ GEM
       mini_portile2 (~> 2.4.0)
     nokogumbo (1.5.0)
       nokogiri
-    public_suffix (3.1.0)
+    public_suffix (3.1.1)
     rack (2.0.7)
     rake (12.3.2)
     rdf (3.0.12)
@@ -117,13 +117,13 @@ GEM
       rdf (~> 3.0)
       rdf-vocab (~> 3.0)
       rdf-xsd (~> 3.0)
-    rdf-tabular (2.2.1)
+    rdf-tabular (2.2.2)
       addressable (~> 2.3)
       bcp47 (~> 0.3, >= 0.3.3)
       json-ld (>= 2.1, < 4.0)
-      rdf (>= 2.2, < 4.0)
-      rdf-vocab (>= 2.2, < 4.0)
-      rdf-xsd (>= 2.2, < 4.0)
+      rdf (~> 3.0)
+      rdf-vocab (~> 3.0)
+      rdf-xsd (~> 3.0)
     rdf-trig (3.0.1)
       ebnf (~> 1.1)
       rdf (~> 3.0)

@@ -82,11 +82,11 @@
       "@id": "#t0010",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "property CURIE conflict",
-      "purpose": "(Not really framing) A term looking like a CURIE becomes a CURIE when framing/compacting if defined as such in frame/context in json-ld-1.0 mode.",
+      "purpose": "(Not really framing) A term looking like a CURIE becomes a CURIE when framing/compacting if defined as such in frame/context in json-ld-1.0.",
       "input": "frame/0010-in.jsonld",
       "frame": "frame/0010-frame.jsonld",
       "expect": "frame/0010-out.jsonld",
-      "option": {"specVersion": "json-ld-1.1", "processingMode": "json-ld-1.0"}
+      "option": {"specVersion": "json-ld-1.0"}
     }, {
       "@id": "#t0011",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
@@ -616,15 +616,6 @@
       "frame": "frame/g009-frame.jsonld",
       "expect": "frame/g009-out.jsonld",
       "option": {"specVersion": "json-ld-1.1"}
-    }, {
-      "@id": "#tp010",
-      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
-      "name": "property CURIE conflict (prune bnodes)",
-      "purpose": "(Not really framing) A term looking like a CURIE becomes a CURIE when framing/compacting if defined as such in frame/context.",
-      "input": "frame/0010-in.jsonld",
-      "frame": "frame/0010-frame.jsonld",
-      "expect": "frame/p010-out.jsonld",
-      "option": {"processingMode": "json-ld-1.1", "specVersion": "json-ld-1.1"}
     }, {
       "@id": "#tp020",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
