@@ -5,11 +5,13 @@ be used to verify JSON-LD Processor conformance to the set of specifications
 that constitute JSON-LD. The goal of the suite is to provide an easy and
 comprehensive JSON-LD testing solution for developers creating JSON-LD Processors.
 
+More information and an RDFS definition of the test vocabulary can be found at [vocab](https://w3c.github.io/json-ld-api/tests/vocab).
+
 # Design
 
-Tests are for _framing_:
+Tests driven from a top-level [manifest](manifest.jsonld) and are defined for [frame](frame-manifest.jsonld):
 
-* _frame_ tests have _input_, _frame_ and _expected_ documents. The _expected_ results can be compared using [JSON-LD object comparison](#json-ld-object-comparison) with the processor output. Additionally, if the `ordered` option is not set, result should be expanded and compared with the expanded _expected_ document also using [JSON-LD object comparison](#json-ld-object-comparison).
+* [frame](frame-manifest.jsonld) tests have _input_, _frame_ and _expected_ documents. The _expected_ results can be compared using [JSON-LD object comparison](#json-ld-object-comparison) with the processor output. Additionally, if the `ordered` option is not set, result should be expanded and compared with the expanded _expected_ document also using [JSON-LD object comparison](#json-ld-object-comparison).
 
   For *NegativeEvaluationTests*, the result is a string associated with the expected error code.
 
@@ -31,6 +33,7 @@ Note that some tests require re-expansion and comparison, as list values may exi
 
 # Running tests
 
+The top-level [manifest](manifest.jsonld) references the specific test manifests, which in turn reference each test associated with a particular type of behavior.
 Implementations create their own infrastructure for running the test suite. In particular, the following should be considered:
 
 * Some algorithms, may not preserve the order of statements listed in the input document, and provision should be taken for performing unordered array comparison, for arrays other than values of `@list`. (This may be difficult for compacted results, where array value ordering is dependent on the associated term definition).
