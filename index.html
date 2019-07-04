@@ -3,11 +3,10 @@
 <head>
 <title>JSON-LD 1.1 Framing</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-<script type="text/javascript" src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove" defer></script>
-<script type="text/javascript" src="common/common.js" class="remove" defer></script>
-<script type="text/javascript" src="common/jsonld.js" class="remove"></script>
-<script type="text/javascript" class="remove">
-//<![CDATA[
+<script src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove" defer></script>
+<script src="common/common.js" class="remove" defer></script>
+<script src="common/jsonld.js" class="remove"></script>
+<script class="remove">
   var respecConfig = {
       // extend the bibliography entries
       localBiblio:          jsonld.localBiblio,
@@ -109,7 +108,6 @@
       maxTocLevel: 4
       ///alternateFormats: [ {uri: "diff-20120830.html", label: "diff to previous version"} ],
   };
-//]]>
 </script>
 <script>
   // Add example button selection logic
@@ -280,9 +278,9 @@
       <a href="https://www.w3.org/2018/json-ld-wg/">JSON-LD Working Group</a>:</p>
 
     <ul>
-      <li><a data-cite="JSON-LD11">JSON-LD 1.1</a></li>
-      <li><a data-cite="JSON-LD11-API">JSON-LD 1.1 Processing Algorithms and API</a></li>
-      <li><a data-cite="JSON-LD11-FRAMING">JSON-LD 1.1 Framing</a></li>
+      <li>[[[JSON-LD11]]]</li>
+      <li>[[[JSON-LD11-API]]]</li>
+      <li><a href="">JSON-LD 1.1 Framing</a></li>
     </ul>
   </section>
 </section>
@@ -308,8 +306,7 @@
 <p>However, given that JSON-LD represents one or more <a>graphs</a> of information,
   there is more than one way to frame the statements about several related
   subjects into a whole document. In fact, a graph of information can be
-  thought of as a long list of independent statements (aka <a>triples</a> or
-  <a>quads</a>) that are not bundled together in any way.</p>
+  thought of as a long list of independent statements (aka <a>triples</a>) that are not bundled together in any way.</p>
 
 <p>The
   <a href="#the-application-programming-interface" class="sectionRef">JSON-LD Framing API</a>
@@ -336,7 +333,7 @@ Data in JSON. The document is primarily intended for the following audiences:
 
 <p>
 To understand the basics in this specification you must first be familiar with
-<a data-cite="RFC8259">JSON</a>, which is detailed in [[RFC8259]]. You must also understand the
+<a data-cite="RFC8259" data-no-xref="">JSON</a>, which is detailed in [[RFC8259]]. You must also understand the
 JSON-LD 1.1 Syntax specification [[JSON-LD11]], which is the base syntax used by all of the
 algorithms in this document,
 and the JSON-LD 1.1 API [[JSON-LD11-API]]. To understand the API and how it is
@@ -1887,6 +1884,23 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       <dd>A set of options that MAY affect the framing algorithm such as, e.g., the
         input document's base <a>IRI</a>.</dd>
     </dl>
+
+    <pre class="idl changed" data-transform="unComment"><!--
+      dictionary JsonLdDictionary {};
+    --></pre>
+    <p class="changed">The <dfn>JsonLdDictionary</dfn> is the definition of a <a>dictionary</a>
+      used to contain arbitrary <a>dictionary members</a>
+      which are the result of parsing a <a>JSON Object</a>.
+
+    <pre class="idl changed" data-transform="unComment"><!--
+      typedef (JsonLdDictionary or sequence&lt;JsonLdDictionary> or USVString) JsonLdInput;
+    --></pre>
+
+    <p class="changed">The <dfn>JsonLdInput</dfn> type is used to refer to an input value
+      that that may be a <a>dictionary</a>,
+      an array of <a>dictionaries </a>,
+      or a <a>string</a> representing an <a>IRI</a>
+      which can be dereferenced to retrieve a valid JSON document.</p>
 
   </section>
 
