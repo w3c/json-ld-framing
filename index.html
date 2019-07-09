@@ -42,7 +42,10 @@
       includePermalinks:    true,
       doJsonLd:             true,
       highlightVars:        true,
-      pluralize:              true,
+      pluralize:            true,
+
+      // Cross-reference definitions
+      xref: ["json-ld11", "json-ld11-api", "json-ld11-framing"],
 
       // editors, add as many as you like
       // only "name" is required
@@ -1959,7 +1962,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
     <section>
     <h3>JsonLdOptions</h3>
-    <p>The <dfn data-cite="JSON-LD11-API#dom-jsonldoptions">JsonLdOptions</dfn> type is used to pass various options to the
+    <p>The <dfn>JsonLdOptions</dfn> type is used to pass various options to the
       <a>JsonLdProcessor</a> methods.</p>
 
     <pre class="idl" data-transform="unComment"><!--
