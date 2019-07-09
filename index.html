@@ -1451,12 +1451,12 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
   The <a data-cite="JSON-LD11#json-ld-grammar">Grammar</a> defined in the JSON-LD 1.1 Syntax specification [[JSON-LD11]]
   is extended as follows:</p>
   <ul>
-    <li>Framing adds <a>framing keywords</a> which may be used as <a>members</a> of a <a>node object</a>, which MUST be preserved when expanding.
-    <li>Values of <a>members</a> in a <a>frame object</a> that are not <a>keyword</a> MAY also include a <a>default object</a>.
+    <li>Framing adds <a>framing keywords</a> which may be used as <a>entries</a> of a <a>node object</a>, which MUST be preserved when expanding.
+    <li>Values of <a>entries</a> in a <a>frame object</a> that are not <a>keyword</a> MAY also include a <a>default object</a>.
       Values of <code>@default</code> MAY include the value <code>@null</code>,
       or an <a>array</a> containing only <code>@null</code>, in addition to other values
       allowed in the grammar for values of <a>member</a> keys expanding to <a>absolute IRIs</a>.
-      <a>Processors</a> MUST preserve this value when expanding. All other <a>members</a> of
+      <a>Processors</a> MUST preserve this value when expanding. All other <a>entries</a> of
       a <a>default object</a> MUST be ignored.</li>
     <li>The values of <code>@id</code> and <code>@type</code> may also be an empty <a>dictionary</a>,
       <span class="changed">an <a>absolute IRI</a></span>,
@@ -1675,7 +1675,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
   of <var>compacted results</var> into a <a>dictionary</a> contained within the array value of
   <code>@graph</code>. If the <a>omit graph flag</a> is <code>true</code>, a
   top-level <code>@graph</code> <a>member</a> is used only to contain multiple <a>node objects</a>.</p>
-<p>Recursively, replace all <a>members</a> in <var>compacted results</var>
+<p>Recursively, replace all <a>entries</a> in <var>compacted results</var>
   where the key is <code>@preserve</code> with the value of the <a>member</a>.
   If the value of the <a>member</a> is <code>@null</code>, replace the value with <code>null</code>.
   <span class="changed">If, after replacement, an array contains a single array value, replace the array with that value.</span>
@@ -1892,7 +1892,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       dictionary JsonLdDictionary {};
     --></pre>
     <p class="changed">The <dfn>JsonLdDictionary</dfn> is the definition of a <a>dictionary</a>
-      used to contain arbitrary <a>dictionary members</a>
+      used to contain arbitrary <a>map entries</a>
       which are the result of parsing a <a>JSON Object</a>.
 
     <pre class="idl changed" data-transform="unComment"><!--
@@ -1901,7 +1901,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
     <p class="changed">The <dfn>JsonLdInput</dfn> type is used to refer to an input value
       that that may be a <a>dictionary</a>,
-      an array of <a>dictionaries </a>,
+      an array of <a>maps </a>,
       or a <a>string</a> representing an <a>IRI</a>
       which can be dereferenced to retrieve a valid JSON document.</p>
 
@@ -1954,7 +1954,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <h3>JsonLdContext</h3>
     <p>The <a data-cite="JSON-LD11-API#dom-jsonldcontext">JsonLdContext</a> type is used to refer to a value that
         that may be a <a>dictionary</a>, a <a>string</a> representing an
-        <a>IRI</a>, or an array of <a class="changed">dictionaries</a>
+        <a>IRI</a>, or an array of <a class="changed">maps</a>
         and <a>strings</a>.</p>
 
     <p>See <a data-cite="JSON-LD11-API#dom-jsonldcontext">JsonLdContext</a> definition in the JSON-LD 1.1 API [[JSON-LD11-API]].</p>
@@ -2197,7 +2197,7 @@ becomes a W3C Recommendation.</p>
     <li>Frames can use one or more values for <code>@id</code> to allow for matching
       specific objects in a frame.</li>
     <li>If <a>processing mode</a> is <code>json-ld-1.1</code>,
-      <code>@id</code> <a>members</a> with <a>blank node identifiers</a>
+      <code>@id</code> <a>entries</a> with <a>blank node identifiers</a>
       used only for that <code>@id</code> are removed.</li>
     <li>The JSON syntax has been abstracted into an <a>internal representation</a>
       to allow for other serialization formats that are functionally equivalent
@@ -2209,7 +2209,7 @@ becomes a W3C Recommendation.</p>
       the current <a>processing mode</a>.</li>
     <li>The API now adds an <a data-link-for="JsonLdOptions">ordered</a>
       option, defaulting to <code>false</code> This is used in algorithms to
-      control iteration of <a>dictionary member</a> keys. Previously, the
+      control iteration of <a>map entry</a> keys. Previously, the
       algorithms always required such an order. The instructions for
       evaluating test results have been updated accordingly.</li>
     <li>Frames may include reverse properties using <code>@reverse</code>, or a term
@@ -2223,7 +2223,7 @@ becomes a W3C Recommendation.</p>
   <ul>
     <li>The API now adds an <a data-link-for="JsonLdOptions">ordered</a>
       option, defaulting to <code>false</code> This is used in algorithms to
-      control iteration of <a>dictionary member</a> keys. Previously, the
+      control iteration of <a>map entry</a> keys. Previously, the
       algorithms always required such an order. The instructions for
       evaluating test results have been updated accordingly.</li>
     <li>The IANA registration is changed from <code>application/ld-frame+json</code> to
