@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/ruby-rdf/json-ld.git
-  revision: 813e1ff914cc1a1025db14de392fd738b4cbb674
+  remote: https://github.com/ruby-rdf/json-ld.git
+  revision: 74095b73cdb722b681f34d0f165599c9cb48d844
   branch: develop
   specs:
     json-ld (3.0.2)
@@ -133,7 +133,7 @@ GEM
     rdf-turtle (3.0.6)
       ebnf (~> 1.1)
       rdf (~> 3.0)
-    rdf-vocab (3.0.6)
+    rdf-vocab (3.0.7)
       rdf (~> 3.0, >= 3.0.11)
     rdf-xsd (3.0.1)
       rdf (~> 3.0)
@@ -174,4 +174,4 @@ DEPENDENCIES
   rake
 
 BUNDLED WITH
-   2.0.1
+   2.0.2
