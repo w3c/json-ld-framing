@@ -1824,15 +1824,15 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       use to access the JSON-LD transformation methods. The definition below is an experimental
       extension of the interface defined in the JSON-LD 1.1 API [[JSON-LD11-API]].</p>
 
-    <pre class="idl" data-transform="unComment"><!--
-      [Constructor]
+    <pre class="idl">
+      [Exposed=Window]
       interface JsonLdProcessor {
           static Promise&lt;JsonLdDictionary> frame(
             JsonLdInput input,
             (JsonLdDictionary or USVString) frame,
-            optional JsonLdOptions? options);
+            optional JsonLdOptions options = {});
       };
-    --></pre>
+    </pre>
     <p>The <dfn>JsonLdProcessor</dfn> interface
       <dfn data-dfn-for="JsonLdProcessor">frame()</dfn> method
       <a href="#framing">Frames</a>
@@ -1887,16 +1887,16 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         input document's base <a>IRI</a>.</dd>
     </dl>
 
-    <pre class="idl changed" data-transform="unComment"><!--
+    <pre class="idl changed">
       dictionary JsonLdDictionary {};
-    --></pre>
+    </pre>
     <p class="changed">The <dfn>JsonLdDictionary</dfn> is the definition of a <a>dictionary</a>
       used to contain arbitrary <a>map entries</a>
       which are the result of parsing a <a>JSON Object</a>.
 
-    <pre class="idl changed" data-transform="unComment"><!--
+    <pre class="idl changed">
       typedef (JsonLdDictionary or sequence&lt;JsonLdDictionary> or USVString) JsonLdInput;
-    --></pre>
+    </pre>
 
     <p class="changed">The <dfn>JsonLdInput</dfn> type is used to refer to an input value
       that that may be a <a>dictionary</a>,
@@ -1910,7 +1910,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <h3>Error Handling</h3>
     <p>The <dfn>JsonLdFramingError</dfn> type is used to report processing errors.</p>
 
-    <pre class="idl" data-transform="unComment"><!--
+    <pre class="idl">
       dictionary JsonLdFramingError {
         JsonLdFramingErrorCode code;
         USVString? message = null;
@@ -1919,7 +1919,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         "invalid frame",
         "invalid @embed value"
       };
-    --></pre>
+    </pre>
     <p>JSON-LD Framing extends the error interface and codes defined in
       <a data-cite="JSON-LD11-API#error-handling"></a> the JSON-LD 1.1 API [[JSON-LD11-API]].
 
@@ -1964,7 +1964,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <p>The <dfn>JsonLdOptions</dfn> type is used to pass various options to the
       <a>JsonLdProcessor</a> methods.</p>
 
-    <pre class="idl" data-transform="unComment"><!--
+    <pre class="idl">
       dictionary JsonLdOptions {
         (JsonLdEmbed or boolean)  embed         = "@once";
         boolean                   explicit      = false;
@@ -1980,7 +1980,6 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         "@once",
         "@never"
       };
-    -->
     </pre>
 
     <p>In addition to those options defined in the JSON-LD 1.1 API [[JSON-LD11-API]], framing defines these
