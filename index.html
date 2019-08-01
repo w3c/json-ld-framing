@@ -1575,6 +1575,11 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
           </li>
         </ol>
       </li>
+      <li class="changed">
+        If <var>frame</var> has an `@included` <a>entry</a>,
+        invoke the recursive algorithm using <var>state</var>, <var>subjects</var>, <var>frame</var>,
+        <var>output</var> as <var>parent</var>, and `@included` as <var>active property</var>.
+      </li>
       <li>For each <var>property</var> and <var>objects</var> in <var>node</var>, ordered lexicographically by <var>property</var>
         <span class="changed">if the optional <a data-link-for="JsonLdOptions">ordered</a> flag is <code>true</code></span>:
         <ol>
