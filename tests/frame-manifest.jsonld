@@ -527,6 +527,15 @@
       "expect": "frame/0060-out.jsonld",
       "options": {"spec-version": "json-ld-1.1", "ordered": true}
     }, {
+      "@id": "#t0061",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "Matching embedded nodes with @default",
+      "purpose": "Verify that embedded nodes match with @default and a wildcard @id.",
+      "input": "frame/0061-in.jsonld",
+      "frame": "frame/0061-frame.jsonld",
+      "expect": "frame/0061-out.jsonld",
+      "options": {"spec-version": "json-ld-1.1"}
+    }, {
       "@id": "#teo01",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "@embed true/false",
