@@ -536,6 +536,15 @@
       "expect": "frame/0061-out.jsonld",
       "options": {"spec-version": "json-ld-1.1"}
     }, {
+      "@id": "#t0062",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "An array with a single value remains an array if container is @set.",
+      "purpose": "Cleaning up @preserve/@null does not violate container: @set.",
+      "input": "frame/0062-in.jsonld",
+      "frame": "frame/0062-frame.jsonld",
+      "expect": "frame/0062-out.jsonld",
+      "options": {"spec-version": "json-ld-1.1"}
+    }, {
       "@id": "#teo01",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "@embed true/false",
