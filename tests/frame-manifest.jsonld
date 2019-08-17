@@ -545,6 +545,15 @@
       "expect": "frame/0062-out.jsonld",
       "options": {"spec-version": "json-ld-1.1"}
     }, {
+      "@id": "#t0063",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "Using @null in @default.",
+      "purpose": "@null may be used as an @default value and is preserved in output.",
+      "input": "frame/0063-in.jsonld",
+      "frame": "frame/0063-frame.jsonld",
+      "expect": "frame/0063-out.jsonld",
+      "options": {"spec-version": "json-ld-1.1"}
+    }, {
       "@id": "#teo01",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "@embed true/false",
