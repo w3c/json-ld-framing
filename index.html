@@ -377,16 +377,17 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <p>This document uses the following terms as defined in external specifications
       and defines terms specific to JSON-LD.</p>
 
-    <!-- FIXME: restrictReferences stopped working properly, so removing for now. -->
-    <div data-include="common/terms.html"></div>
+    <div data-include="common/terms.html"
+         data-oninclude="restrictReferences">
+    </div>
 
   <section>
     <h4>Algorithm Terms</h4>
 
     <p>The Following terms are used within specific algorithms.</p>
 
-    <div data-include="common/algorithm-terms.html">
-    </div>
+    <div data-include="common/algorithm-terms.html"
+         data-oninclude="restrictReferences">
   </section>
 
 </section>
