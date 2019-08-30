@@ -1500,6 +1500,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 <p>The recursive algorithm operates with a <a>framing state</a> (<var>state</var>),
   created initially using
   the <a>object embed flag</a> set to <code>@once</code>,
+  <span class="changed">the <dfn>embedded flag</dfn>, set to `false`,</span>
   the <a>explicit inclusion flag</a> set to <code>false</code>,
   the <a>require all flag</a> set to <code>true</code>,
   the <a>omit default flag</a> set to <code>false</code>,
@@ -1542,12 +1543,19 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <span class="changed">if the optional <a data-link-for="JsonLdOptions">ordered</a> flag is <code>true</code></span>:
     <ol>
       <li>Initialize <var>output</var> to a new <a>map</a> with <code>@id</code> and <var>id</var>.</li>
-      <li>Otherwise, if <var>embed</var> is <code>@never</code> or if a
+      <li class="changed">If the <a>embedded flag</a> in <var>state</var> is `false`
+        and there is an existing embedded node in <var>parent</var> associated with
+        <var>graph name</var> and <var>id</var> in <var>state</var>,
+        do not perform additional processing for this <var>node</var>.
+      </li>
+      <li class="changed">Otherwise, if the <a>embedded flag</a> in <var>state</var> is `true`
+        and either <var>embed</var> is <code>@never</code> or if a
         circular reference would be created by an embed,
         add <var>output</var> to <var>parent</var>
         and do not perform additional processing for this <var>node</var>.</li>
-      <li class="changed">Otherwise, if <var>embed</var> is <code>@once</code>
-        and parent has an existing embedded node in <var>parent</var> associated with
+      <li class="changed">Otherwise, if the <a>embedded flag</a> in <var>state</var> is `true`,
+        <var>embed</var> is <code>@once</code>,
+        and there is an existing embedded node in <var>parent</var> associated with
         <var>graph name</var> and <var>id</var> in <var>state</var>,
         add <var>output</var> to <var>parent</var>
         and do not perform additional processing for this <var>node</var>.</li>
@@ -1565,19 +1573,24 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
               <li>Push <var>graph name</var> from <var>state</var> onto <var>graph stack</var>
               in <var>state</var>.</li>
               <li>Set the value of <var>graph name</var> in <var>state</var> to <var>id</var>.</li>
-              <li>Invoke the recursive algorithm using <var>state</var>,
+              <li>Set the value of <a>embedded flag</a> in <var>state</var> to `false`.</li>
+              <li>Invoke the recursive algorithm
+                using a copy of <var>state</var>
+                with the value of <var>graph name</var> set to <var>id</var>
+                and the value of <a>embedded flag</a> set to `false`,
                 the keys from the <var>graph map</var> in <var>state</var> associated with id as <var>subjects</var>,
                 <var>subframe</var> as <var>frame</var>,
                 <var>output</var> as <var>parent</var>, and <code>@graph</code> as <var>active property</var>.
-              <li>Pop the value from <var>graph stack</var> in <var>state</var> and set <var>graph name</var> in <var>state</var>
-                back to that value.</li>
+              <li>Pop the value from <var>graph stack</var> in <var>state</var>.</li>
             </ol>
           </li>
         </ol>
       </li>
       <li class="changed">
         If <var>frame</var> has an `@included` <a>entry</a>,
-        invoke the recursive algorithm using <var>state</var>, <var>subjects</var>, <var>frame</var>,
+        invoke the recursive algorithm
+        using a copy of <var>state</var> with the value of <a>embedded flag</a> set to `true`,
+        <var>subjects</var>, <var>frame</var>,
         <var>output</var> as <var>parent</var>, and `@included` as <var>active property</var>.
       </li>
       <li>For each <var>property</var> and <var>objects</var> in <var>node</var>, ordered lexicographically by <var>property</var>
@@ -1595,7 +1608,8 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
                 in output:
                 <ol>
                   <li>If <var>listitem</var> is a <a>node reference</a>,
-                    invoke the recursive algorithm using <var>state</var>,
+                    invoke the recursive algorithm
+                    <span class="changed">using a copy of <var>state</var> with the value of <a>embedded flag</a> set to `true`</span>,
                     the value of <code>@id</code> from <var>listitem</var>
                     as the sole item in a new <var>subjects</var> <a>array</a>,
                     the first value from <code>@list</code> in <var>frame</var> as <var>frame</var>,
@@ -1608,7 +1622,8 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
                 </ol>
               </li>
               <li>If <var>item</var> is a <a>node reference</a>,
-                invoke the recursive algorithm using <var>state</var>,
+                invoke the recursive algorithm
+                <span class="changed">using a copy of <var>state</var> with the value of <a>embedded flag</a> set to `true`</span>,
                 the value of <code>@id</code> from <var>item</var>
                 as the sole item in a new <var>subjects</var> <a>array</a>,
                 the first value from <var>property</var> in <var>frame</var> as <var>frame</var>,
@@ -1646,7 +1661,8 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
                 <var>reverse property</var> containing a <a>node reference</a> with an <code>@id</code> of <var>id</var>:
                 <ol>
                   <li>Add <var>reverse property</var> to <var>reverse dict</var> with a new empty <a>array</a> as its value.</li>
-                  <li>Invoke the recursive algorithm using <var>state</var>,
+                  <li>Invoke the recursive algorithm
+                    <span class="changed">using a copy of <var>state</var> with the value of <a>embedded flag</a> set to `true`</span>,
                     the <var>reverse id</var>
                     as the sole item in a new <var>subjects</var> <a>array</a>,
                     <var>sub frame</var> as <var>frame</var>,

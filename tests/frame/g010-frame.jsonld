@@ -5,8 +5,6 @@
   },
   "@graph": {
     "subject": {},
-    "proof": {
-      "@type": "ex:Proof"
-    }
+    "proof": {}
   }
 }
