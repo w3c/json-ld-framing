@@ -3,7 +3,7 @@
   "@id": "",
   "@type": "mf:Manifest",
   "name": "Framing",
-  "description": "JSON-LD framing tests use object comparison.",
+  "description": "JSON-LD Framing tests.",
   "baseIri": "https://w3c.github.io/json-ld-api/tests/",
   "sequence": [
     {
