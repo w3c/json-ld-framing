@@ -693,7 +693,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
          non-listed properties are added to the output, and implicitly embedded
          using a default empty frame. As a result, the same output used in the
          <a href="#lib-example-output">Framed library objects</a> above is generated,
-         assuming that the <a data-link-for="JsonLdOptions">ordered</a> flag is <code>true</code>.</p>
+         assuming that the {{jsonldoptions/ordered}} flag is <code>true</code>.</p>
 
       <p>However, if the <code>@embed</code> property is added explicitly with a
          value of <code>@never</code>, the values for <em>Book</em> and <em>Chapter</em> will be excluded.</p>
@@ -813,7 +813,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
       <p>When framed using the same frame with the default <code>@embed</code> of <code>@once</code>,
         only the <em>"books"</em> property will have content,
-        if the <a data-link-for="JsonLdOptions">ordered</a> flag is <code>true</code>,
+        if the {{jsonldoptions/ordered}} flag is <code>true</code>,
         and the <em>"contains"</em> property will use a reference.</p>
 
       <p>If we use a frame using <code>"@embed": "@always"</code>,
@@ -1402,7 +1402,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
           default value if neither <code>@embed</code> nor <a>object embed flag</a>
           is specified.
           <div class="note">The specific <a>node object</a> chosen to embed depends on
-            ordering. If the <a data-link-for="JsonLdOptions">ordered</a> flag is <code>true</code>,
+            ordering. If the {{jsonldoptions/ordered}} flag is <code>true</code>,
             this will be the first <a>node object</a> encountered,
             otherwise, it may be any node object.</div>
         </dd>
@@ -1540,7 +1540,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     with <var>state</var>, <var>subjects</var>, <var>frame</var>, and <var>requireAll</var>.</li>
   <li>For each <var>id</var> and associated <a>node object</a> <var>node</var>
     from the set of matched subjects, ordered lexicographically by <var>id</var>
-    <span class="changed">if the optional <a data-link-for="JsonLdOptions">ordered</a> flag is <code>true</code></span>:
+    <span class="changed">if the optional {{jsonldoptions/ordered}} flag is <code>true</code></span>:
     <ol>
       <li>Initialize <var>output</var> to a new <a>map</a> with <code>@id</code> and <var>id</var>.</li>
       <li class="changed">If the <a>embedded flag</a> in <var>state</var> is `false`
@@ -1594,7 +1594,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         <var>output</var> as <var>parent</var>, and `@included` as <var>active property</var>.
       </li>
       <li>For each <var>property</var> and <var>objects</var> in <var>node</var>, ordered lexicographically by <var>property</var>
-        <span class="changed">if the optional <a data-link-for="JsonLdOptions">ordered</a> flag is <code>true</code></span>:
+        <span class="changed">if the optional {{jsonldoptions/ordered}} flag is <code>true</code></span>:
         <ol>
           <li>If <var>property</var> is a <a>keyword</a>, add <var>property</var> and <var>objects</var>
             to <var>output</var>.</li>
@@ -1867,7 +1867,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       <li>Set <var>expanded input</var> to the result of using the
         <a data-cite="JSON-LD11-API#dom-jsonldprocessor-expand">expand</a>
         method using <a data-lt="JsonLdProcessor-frame-input">input</a> and <a data-lt="JsonLdProcessor-frame-options">options</a>
-        <span class="changed">with <a data-link-for="JsonldOptions">ordered</a> set to <code>false</code></span>.
+        <span class="changed">with {{jsonldoptions/ordered}} set to <code>false</code></span>.
       <li>Set <var>expanded frame</var> to the result of using the
         <code class="idlMemberName"><a data-cite="JSON-LD11-API#dom-jsonldprocessor-expand">expand</a></code>
         method using
@@ -1875,7 +1875,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         <a data-lt="JsonLdProcessor-frame-options">options</a> with
         <code class="idlMemberName"><a data-cite="JSON-LD11-API#dom-jsonldoptions-expandcontext">expandContext</a></code> set to <code>null</code>,
         the <a data-cite="JSON-LD11-API#dom-jsonldoptions-frameexpansion">frameExpansion</a> option set to <code>true</code>,
-        <span class="changed">and the <a data-link-for="JsonldOptions">ordered</a> option set to <code>false</code></span>.
+        <span class="changed">and the {{jsonldoptions/ordered}} option set to <code>false</code></span>.
       <li>Set <var>context</var> to the value of <code>@context</code>
         from <a data-lt="JsonLdProcessor-frame-frame">frame</a>, if it exists, or to
         a new empty <a>context</a>, otherwise.</li>
@@ -2227,7 +2227,7 @@ becomes a W3C Recommendation.</p>
     <li>Added the <a>omit default flag</a>, controlled via the
       <a data-link-for="JsonLdOptions">omitDefault</a> API option and/or
       the current <a>processing mode</a>.</li>
-    <li>The API now adds an <a data-link-for="JsonLdOptions">ordered</a>
+    <li>The API now adds an {{jsonldoptions/ordered}}
       option, defaulting to <code>false</code> This is used in algorithms to
       control iteration of <a>map entry</a> keys. Previously, the
       algorithms always required such an order. The instructions for
@@ -2241,7 +2241,7 @@ becomes a W3C Recommendation.</p>
 <section class="appendix informative" id="changes-from-cg">
   <h2>Changes since JSON-LD Community Group Final Report</h2>
   <ul>
-    <li>The API now adds an <a data-link-for="JsonLdOptions">ordered</a>
+    <li>The API now adds an {{jsonldoptions/ordered}}
       option, defaulting to <code>false</code> This is used in algorithms to
       control iteration of <a>map entry</a> keys. Previously, the
       algorithms always required such an order. The instructions for
