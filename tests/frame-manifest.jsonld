@@ -1,5 +1,5 @@
 {
-  "@context": "https://w3c.github.io/json-ld-api/tests/context.jsonld",
+  "@context": ["https://w3c.github.io/json-ld-api/tests/context.jsonld", {"@base": "frame-manifest"}],
   "@id": "",
   "@type": "mf:Manifest",
   "name": "Framing",
