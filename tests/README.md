@@ -45,9 +45,16 @@ Implementations create their own infrastructure for running the test suite. In p
 If you would like to contribute a new test or a fix to an existing test,
 please follow these steps:
 
-1. Notify the JSON-LD mailing list, json-ld-wg@w3.org,
+1. Notify the JSON-LD mailing list, public-json-ld-wg@w3.org,
    that you will be creating a new test or fix and the purpose of the
    change.
 2. Clone the git repository: git://github.com/w3c/json-ld-framing.git
 3. Make your changes and submit them via github, or via a 'git format-patch'
    to the [JSON-LD Working Group mailing list](mailto:json-ld-wg@w3.org).
+
+# Distribution
+  Distributed under the [W3C Test Suite License](http://www.w3.org/Consortium/Legal/2008/04-testsuite-license). To contribute to a W3C Test Suite, see the [policies and contribution forms](http://www.w3.org/2004/10/27-testcases).
+
+# Disclaimer
+  UNDER THE EXCLUSIVE LICENSE, THIS DOCUMENT AND ALL DOCUMENTS, TESTS AND SOFTWARE THAT LINK THIS STATEMENT ARE PROVIDED "AS IS," AND COPYRIGHT HOLDERS MAKE NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, OR TITLE; THAT THE CONTENTS OF THE DOCUMENT ARE SUITABLE FOR ANY PURPOSE; NOR THAT THE IMPLEMENTATION OF SUCH CONTENTS WILL NOT INFRINGE ANY THIRD PARTY PATENTS, COPYRIGHTS, TRADEMARKS OR OTHER RIGHTS.
+  COPYRIGHT HOLDERS WILL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF ANY USE OF THE DOCUMENT OR THE PERFORMANCE OR IMPLEMENTATION OF THE CONTENTS THEREOF.
