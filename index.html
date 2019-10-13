@@ -1747,7 +1747,8 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <dt><code>[<a>value object</a>]</code> (<code><dfn>value pattern</dfn></code>)</dt>
     <dd>A <a>value object</a>, used to match a specific value. Within a <a>value object</a>,
       the values for <code>@value</code>, <code>@type</code>, and <code>@language</code>
-      may also be an array of one or more <a>string</a> values.</dd>
+      may also be an array of one or more <a>string</a> values,
+      <span class="changed">values of `@language` are compared without regard to case.</span>.</dd>
   </dl>
 
 <p>The frame matching algorithm takes the <a>framing state</a> (<var>state</var>),
@@ -1827,8 +1828,10 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     Value matches pattern using the following algorithm:</p>
 
   <ol>
-    <li>Let <var>v1</var>, <var>t1</var>, and <var>l1</var> be the values of <code>@value</code>, <code>@type</code>, and <code>@language</code> in <var>value</var>, or <strong>null</strong> if none exists.</li>
-    <li>Let <var>v2</var>, <var>t2</var>, and <var>l2</var> be the values of <code>@value</code>, <code>@type</code>, and <code>@language</code> in <var>value pattern</var>, or <strong>null</strong> if none exists.</li>
+    <li>Let <var>v1</var>, <var>t1</var>, and <var>l1</var> be the values of <code>@value</code>, <code>@type</code>, and <code>@language</code> in <var>value</var>, or <strong>null</strong> if none exists,
+      <span class="changed">where values of `@language` are normalized to lower case.</span>.</li>
+    <li>Let <var>v2</var>, <var>t2</var>, and <var>l2</var> be the values of <code>@value</code>, <code>@type</code>, and <code>@language</code> in <var>value pattern</var>, or <strong>null</strong> if none exists,
+      <span class="changed">where string values of `@language` are normalized to lower case.</span>.</li>
     <li><var>Value</var> matches <var>pattern</var> when <var>pattern</var> is <code><a>wildcard</a></code>, or:
       <ol>
         <li><var>v1</var> is in <var>v2</var>, or <var>v1</var> is not <strong>null</strong> and <var>v2</var> is <code><a>wildcard</a></code>, and</li>
