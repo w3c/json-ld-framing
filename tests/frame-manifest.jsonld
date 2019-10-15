@@ -11,6 +11,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "Library framing example",
       "purpose": "Basic example used in playgrond and spec examples.",
+      "option": {"processingMode": "json-ld-1.0"},
       "input": "frame/0001-in.jsonld",
       "frame": "frame/0001-frame.jsonld",
       "expect": "frame/0001-out.jsonld"
@@ -19,6 +20,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "reframe w/extra CURIE value.",
       "purpose": "Append extra values to output.",
+      "option": {"processingMode": "json-ld-1.0"},
       "input": "frame/0002-in.jsonld",
       "frame": "frame/0002-frame.jsonld",
       "expect": "frame/0002-out.jsonld"
@@ -27,6 +29,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "reframe (null)",
       "purpose": "Do not match without a matching @type",
+      "option": {"processingMode": "json-ld-1.0"},
       "input": "frame/0003-in.jsonld",
       "frame": "frame/0003-frame.jsonld",
       "expect": "frame/0003-out.jsonld"
@@ -35,6 +38,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "reframe (type)",
       "purpose": "Multiple matches on @type.",
+      "option": {"processingMode": "json-ld-1.0"},
       "input": "frame/0004-in.jsonld",
       "frame": "frame/0004-frame.jsonld",
       "expect": "frame/0004-out.jsonld"
@@ -43,6 +47,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "reframe (explicit)",
       "purpose": "If property is not in frame, and explicit is true, do not add any values for property to output.",
+      "option": {"processingMode": "json-ld-1.0"},
       "input": "frame/0005-in.jsonld",
       "frame": "frame/0005-frame.jsonld",
       "expect": "frame/0005-out.jsonld"
@@ -51,6 +56,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "reframe (non-explicit)",
       "purpose": "Unless the explicit is false, processors append extra values to output.",
+      "option": {"processingMode": "json-ld-1.0"},
       "input": "frame/0006-in.jsonld",
       "frame": "frame/0006-frame.jsonld",
       "expect": "frame/0006-out.jsonld"
@@ -59,6 +65,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "input has multiple types",
       "purpose": "If property is a keyword, processors add property and objects to output.",
+      "option": {"processingMode": "json-ld-1.0"},
       "input": "frame/0007-in.jsonld",
       "frame": "frame/0007-frame.jsonld",
       "expect": "frame/0007-out.jsonld"
@@ -67,6 +74,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "array framing cases",
       "purpose": "Various cases showing array output for @container: @set, and non-embedding of node values if @embed: false.",
+      "option": {"processingMode": "json-ld-1.0"},
       "input": "frame/0008-in.jsonld",
       "frame": "frame/0008-frame.jsonld",
       "expect": "frame/0008-out.jsonld"
@@ -75,6 +83,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "default value",
       "purpose": "Processors MUST skip property and property frame if property frame contains @omitDefault with a value of true. Processors MUST add property to output with a new dictionary having a property @preserve and a value that is a copy of the value of @default in frame if it exists, or the string @null otherwise.",
+      "option": {"processingMode": "json-ld-1.0"},
       "input": "frame/0009-in.jsonld",
       "frame": "frame/0009-frame.jsonld",
       "expect": "frame/0009-out.jsonld"
@@ -95,7 +104,7 @@
       "input": "frame/0011-in.jsonld",
       "frame": "frame/0011-frame.jsonld",
       "expect": "frame/0011-out.jsonld",
-      "options": {"spec-version": "json-ld-1.1", "processingMode": "json-ld-1.0"}
+      "option": {"specVersion": "json-ld-1.1"}
     }, {
       "@id": "#t0012",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
@@ -133,6 +142,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "Use @type in ducktype filter",
       "purpose": "Match if node has a @type property and frame has a @type property containing only an empty dictionary.",
+      "option": {"processingMode": "json-ld-1.0"},
       "input": "frame/0016-in.jsonld",
       "frame": "frame/0016-frame.jsonld",
       "expect": "frame/0016-out.jsonld"
@@ -141,6 +151,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "Non-flat input",
       "purpose": "Framing flattens expanded input, allowing for deeply embedded input to be re-framed.",
+      "option": {"processingMode": "json-ld-1.0"},
       "input": "frame/0017-in.jsonld",
       "frame": "frame/0017-frame.jsonld",
       "expect": "frame/0017-out.jsonld"
@@ -149,6 +160,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "no frame @context but @graph output",
       "purpose": "Set framing context to the value of @context from frame, if it exists, or to a new empty context, otherwise.",
+      "option": {"processingMode": "json-ld-1.0"},
       "input": "frame/0018-in.jsonld",
       "frame": "frame/0018-frame.jsonld",
       "expect": "frame/0018-out.jsonld"
@@ -183,6 +195,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "Match on @id",
       "purpose": "Match if node and frame both have the same @id property.",
+      "option": {"processingMode": "json-ld-1.0"},
       "input": "frame/0022-in.jsonld",
       "frame": "frame/0022-frame.jsonld",
       "expect": "frame/0022-out.jsonld"
@@ -516,7 +529,7 @@
       "input": "frame/0059-in.jsonld",
       "frame": "frame/0059-frame.jsonld",
       "expect": "frame/0059-out.jsonld",
-      "options": {"spec-version": "json-ld-1.1", "processingMode": "json-ld-1.0"}
+      "option": {"specVersion": "json-ld-1.1", "processingMode": "json-ld-1.0"}
     }, {
       "@id": "#t0060",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
@@ -525,7 +538,7 @@
       "input": "frame/0060-in.jsonld",
       "frame": "frame/0060-frame.jsonld",
       "expect": "frame/0060-out.jsonld",
-      "options": {"spec-version": "json-ld-1.1", "ordered": true}
+      "option": {"specVersion": "json-ld-1.1", "ordered": true}
     }, {
       "@id": "#t0061",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
@@ -534,7 +547,7 @@
       "input": "frame/0061-in.jsonld",
       "frame": "frame/0061-frame.jsonld",
       "expect": "frame/0061-out.jsonld",
-      "options": {"spec-version": "json-ld-1.1"}
+      "option": {"specVersion": "json-ld-1.1"}
     }, {
       "@id": "#t0062",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
@@ -543,7 +556,7 @@
       "input": "frame/0062-in.jsonld",
       "frame": "frame/0062-frame.jsonld",
       "expect": "frame/0062-out.jsonld",
-      "options": {"spec-version": "json-ld-1.1"}
+      "option": {"specVersion": "json-ld-1.1"}
     }, {
       "@id": "#t0063",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
@@ -552,7 +565,7 @@
       "input": "frame/0063-in.jsonld",
       "frame": "frame/0063-frame.jsonld",
       "expect": "frame/0063-out.jsonld",
-      "options": {"spec-version": "json-ld-1.1"}
+      "option": {"specVersion": "json-ld-1.1"}
     }, {
       "@id": "#teo01",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
