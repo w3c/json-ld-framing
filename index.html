@@ -69,10 +69,16 @@
       ],
 
       formerEditors:  [
-          { name: "Manu Sporny", url: "http://manu.sporny.org/",
-            company: "Digital Bazaar", companyURL: "https://digitalbazaar.com/" },
-          { name: "Markus Lanthaler", url: "http://www.markus-lanthaler.com/",
-            company: "Graz University of Technology", companyURL: "http://www.tugraz.at/" }
+        { name: "Manu Sporny",
+          url: "http://manu.sporny.org/",
+          company: "Digital Bazaar",
+          companyURL: "https://digitalbazaar.com/",
+          note:       "v1.0" },
+        { name: "Markus Lanthaler",
+          url: "http://www.markus-lanthaler.com/",
+          company: "Graz University of Technology",
+          companyURL: "http://www.tugraz.at/",
+          note:       "v1.0" }
       ],
 
       // authors, add as many as you like.
@@ -408,6 +414,16 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
 <section class="informative">
 <h2>Features</h2>
+
+  <p class="changed">JSON-LD 1.1 introduces new features that are
+    compatible with [[[JSON-LD10]]] [[JSON-LD10]],
+    but if processed by a JSON-LD 1.0 processor may produce different results.
+    Processors default to `json-ld-1.1`, unless the
+    <a data-cite="JSON-LD11-API#dom-jsonldoptions-processingMode">processingMode</a> API option
+    is explicitly set to `json-ld-1.0`.
+    Publishers are encouraged to use the <code>@version</code> <a>map entry</a> within a <a>context</a>
+    set to `1.1` to ensure that JSON-LD 1.0 processors will not misinterpret JSON-LD 1.1 features.</p>
+
   <section class="informative">
     <h3>Framing</h3>
     <p><dfn>Framing</dfn> is used to shape the data in a <a>JSON-LD document</a>,
@@ -518,7 +534,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       </pre>
     </aside>
 
-    <p>If <a>processing mode</a> is <code>json-ld-1.1</code>, or the <a>omit graph flag</a> is <code>true</code>,
+    <p>If <a>processing mode</a> is not <code>json-ld-1.0</code>, or the <a>omit graph flag</a> is <code>true</code>,
       the top-level <code>@graph</code> <a>entry</a> may be omitted.</p>
 
     <pre class="example result" data-transform="updateExample"
@@ -1363,6 +1379,18 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     than conversion between <a data-lt="relative IRI">relative</a> and
     <a>absolute IRIs</a>.</p>
 
+  <p class="changed">Unless specified using
+    <a data-cite="JSON-LD11-API#dom-jsonldoptions-processingMode">processingMode</a> API option,
+    the <a>processing mode</a> is set using the <code>@version</code> <a>entry</a>
+    in a local <a>context</a> and
+    affects the behavior of algorithms including <a data-cite="JSON-LD11-API#dfn-expanded">expansion</a> and <a data-cite="JSON-LD11-API#dfn-compacted">compaction</a>.
+    Once set, it is an error to attempt to change to a different processing mode,
+    and processors MUST generate,
+    a <a data-cite="JSON-LD11-API#dom-jsonlderrorcode-processing-mode-conflict">processing mode conflict</a>
+    error and abort further processing.
+    If unspecified, processors MUST set <a>processing mode</a> to `json-ld-1.1`
+    on the first attempt to use a JSON-LD 1.1 feature.</p>
+
   <p>The algorithms in this specification are generally written with more concern for clarity
     than efficiency. Thus, <a>JSON-LD Processors</a> MAY
     implement the algorithms given in this specification in any way desired,
@@ -1694,7 +1722,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
   </li>
 </ol>
 
-<p class="changed">If the <a>processing mode</a> is <code>json-ld-1.1</code>,
+<p class="changed">If the <a>processing mode</a> is not <code>json-ld-1.0</code>,
   remove the <code>@id</code> <a>entry</a> of each <a>node object</a> where the
   <a>entry</a> value is a <a>blank node identifier</a> which appears only once
   in any property value within <var>result</var>.</p>
@@ -2040,7 +2068,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       <dt class="changed"><dfn data-dfn-for="JsonLdOptions">omitGraph</dfn></dt>
       <dd class="changed">Sets the value <a>omit graph flag</a> used in the
         <a href="#framing-algorithm">Framing Algorithm</a>. If not set explicitly,
-        it is set to <code>false</code> if <a>processing mode</a> if <code>json-ld-1.0</code>, <code>true</code> otherwise.</dd>
+        it is set to <code>false</code> if <a>processing mode</a> is <code>json-ld-1.0</code>, <code>true</code> otherwise.</dd>
       <dt><dfn data-dfn-for="JsonLdOptions">requireAll</dfn></dt>
       <dd>Sets the value <a>require all flag</a> used in the
         <a href="#framing-algorithm">Framing Algorithm</a>.</dd>
@@ -2231,7 +2259,7 @@ becomes a W3C Recommendation.</p>
       object.</li>
     <li>Frames can use one or more values for <code>@id</code> to allow for matching
       specific objects in a frame.</li>
-    <li>If <a>processing mode</a> is <code>json-ld-1.1</code>,
+    <li>If <a>processing mode</a> is not <code>json-ld-1.0</code>,
       <code>@id</code> <a>entries</a> with <a>blank node identifiers</a>
       used only for that <code>@id</code> are removed.</li>
     <li>The JSON syntax has been abstracted into an <a>internal representation</a>
@@ -2267,6 +2295,10 @@ becomes a W3C Recommendation.</p>
       <code>@id</code> and <code>@type</code>.</li>
     <li>Removed <code>@first</code> and <code>@last</code> values for the
       <a>object embed flag</a> in favor of <code>@once</code>.</li>
+    <li>The <a>processing mode</a> is now implicitly `json-ld-1.1`, unless set
+      explicitly to `json-ld-1.0`. Processing mode is wired to `json-ld-1.1`
+      when the first JSON-LD 1.1 specific feature is encountered, and it is
+      not set explicilty.</li>
   </ul>
 </section>
 
