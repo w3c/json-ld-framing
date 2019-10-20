@@ -567,6 +567,15 @@
       "expect": "frame/0063-out.jsonld",
       "option": {"specVersion": "json-ld-1.1"}
     }, {
+      "@id": "#t0064",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "Using @default in @type.",
+      "purpose": "@type may have a default value.",
+      "input": "frame/0064-in.jsonld",
+      "frame": "frame/0064-frame.jsonld",
+      "expect": "frame/0064-out.jsonld",
+      "option": {"specVersion": "json-ld-1.1"}
+    }, {
       "@id": "#teo01",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "@embed true/false",

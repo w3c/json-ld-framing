@@ -580,7 +580,9 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <p>A frame may specify properties that don't exist in an input file. If the
       <a>explicit inclusion flag</a> is <code>false</code>, the framing algorithm
       will add a property and value to the result. The <code>@default</code> property
-      in a <a>node object</a> or <a>value object</a> provides a default value to use in the resulting
+      in a <a>node object</a> or <a>value object</a>,
+      <span class="changed">or as a value of `@type`</span>,
+      provides a default value to use in the resulting
       output document. If there is no <code>@default</code> value, the property will be output
       with a <code>null</code> value. (See <a href="#omit-default-flag" class="sectionRef"></a>
       for ways to avoid this).</p>
@@ -1500,6 +1502,8 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       <span class="changed">an <a>absolute IRI</a></span>,
       <a>array</a> containing only an empty <a>map</a>,
       <span class="changed">or an array of <a>absolute IRIs</a></span>.
+      <span class="changed">Values of `@type` MAY also be a <a>map</a> with
+        a `@default` entry, whose values are restricted by be <a>IRIs</a></span>.
       <a>Processors</a> MUST preserve this value when expanding.</li>
     <li>Framing either operates on the merged node definitions contained in
       the input document, or on the <a>default graph</a> depending on if the
@@ -1675,7 +1679,9 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
             </ol>
           </li>
 
-          <li>For each non-<a>keyword</a> <var>property</var> and <var>objects</var> in <var>frame</var> that is not in <var>output</var>:
+          <li>For each non-<a>keyword</a> <var>property</var> and <var>objects</var> in <var>frame</var>
+            <span class="changed">(other than `@type)</span>
+            that is not in <var>output</var>:
             <ol>
               <li>Let <var>item</var> be the first element in <var>objects</var>, which MUST be a <a>frame object</a>.</li>
               <li>Set <var>property frame</var> to the first item in <var>objects</var> or a newly created <a>frame object</a> if value is <var>objects</var>.
@@ -1811,6 +1817,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
           <li><var>property</var> matches if the <code>@type</code> property in frame includes any <a>IRI</a> in <var>values</var>.</li>
           <li>Otherwise, <var>property</var> matches if <var>values</var> is not empty and the <code>@type</code> property in <var>frame</var> is <code><a>wildcard</a></code>.</li>
           <li>Otherwise, <var>property</var> matches if <var>values</var> is empty and the <code>@type</code> property in <var>frame</var> is <code><a>match none</a></code>.</li>
+          <li>Otherwise, <var>property</var> matches if the <code>@type</code> property in frame is a <a>default object</a>.</li>
           <li>Otherwise, <var>property</var> does not match.</li>
         </ol>
       </li>
@@ -2295,6 +2302,8 @@ becomes a W3C Recommendation.</p>
       <a>object embed flag</a> in favor of <code>@once</code>.</li>
     <li>The <a>processing mode</a> is now implicitly `json-ld-1.1`, unless set
       explicitly to `json-ld-1.0`.</li>
+    <li>In a frame `@type` can have a default value, which is not used for
+      frame matching purposes.</li>
   </ul>
 </section>
 
