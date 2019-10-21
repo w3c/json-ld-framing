@@ -648,6 +648,99 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       </pre>
     </aside>
 
+    <p>Default values may also be used for `@type`, similar to other properties.
+      In this case, a matched <a>node object</a> without an `@type` will take the
+      value of the <a>default object</a> from the <a>frame</a>.
+      The <a>default object</a> has a value which is a single <a>IRI</a>.
+      If multiple <a>IRIs</a> are specified, only the first will be used as the default type.</p>
+
+    <p>The frame matches objects having specific property values,
+      and provides defaults for `@type` for matched objects.</p>
+    <pre id="sample-library-frame-with-default-type"
+         class="example frame nohighlight" data-transform="updateExample"
+         data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
+         data-frame-for="Typeless library objects"
+         title="Sample library frame with @default type">
+    <!--
+    {
+      "@context": {"@vocab": "http://example.org/"},
+      "@type": "Library",
+      "contains": {
+        ****"@type": {"@default": "Book"}****,
+        "creator": "Plato",
+        "contains": {
+          ****"@type": {"@default": "Chapter"}****,
+          "description": "An introductory chapter on The Republic."
+        }
+      }
+    }
+    -->
+    </pre>
+
+    <p>Data missing specific values for `@type`, but which matches based on
+      other property values.</p>
+    <pre id="flattened-library-objects-without-type"
+         class="example input" data-transform="updateExample"
+         title="Typeless library objects">
+    <!--
+    {
+      "@context": {
+        "@vocab": "http://example.org/",
+        "contains": {"@type": "@id"}
+      },
+      "@graph": [{
+        "@id": "http://example.org/library",
+        "@type": "Library",
+        "contains": "http://example.org/library/the-republic"
+      }, {
+        "@id": "http://example.org/library/the-republic",
+        "creator": "Plato",
+        "title": "The Republic",
+        "contains": "http://example.org/library/the-republic#introduction"
+      }, {
+        "@id": "http://example.org/library/the-republic#introduction",
+        "description": "An introductory chapter on The Republic.",
+        "title": "The Introduction"
+      }]
+    }
+    -->
+    </pre>
+
+    <aside class="example ds-selector-tabs"
+           title="Sample library output with @default type">
+      <div class="selectors">
+        <a class="playground"
+           data-result-for="#flattened-library-objects-without-type"
+           data-frame="#sample-library-frame-with-default-type"
+           target="_blank"></a>
+      </div>
+      <pre class="selected result nohighlight" data-transform="updateExample"
+           data-frame="Sample library frame with @default value"
+           data-result-for="Flattened library objects">
+      <!--
+      {
+        "@context": {"@vocab": "http://example.org/"},
+        "@graph": [{
+          "@id": "http://example.org/library",
+          "@type": "Library",
+          "contains": {
+            "@id": "http://example.org/library/the-republic",
+            ****"@type": "Book"****,
+            "contains": {
+              "@id": "http://example.org/library/the-republic#introduction",
+              ****"@type": "Chapter"****,
+              "description": "An introductory chapter on The Republic.",
+              "title": "The Introduction"
+            },
+            "creator": "Plato",
+            "description": "A great book.",
+            "title": "The Republic"
+          }
+        }]
+      }
+      -->
+      </pre>
+    </aside>
   </section>
 
   <section class="informative">
