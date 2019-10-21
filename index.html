@@ -533,6 +533,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       "@graph": [{
         "@id": "http://example.org/library",
         "@type": "Library",
+        "location": "Athens",
         "contains": "http://example.org/library/the-republic"
       }, {
         "@id": "http://example.org/library/the-republic",
@@ -561,28 +562,27 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
            data-frame="#sample-library-frame"
            target="_blank"></a>
       </div>
-      <pre class="selected result" data-transform="updateExample"
+      <pre class="selected framed result" data-transform="updateExample"
            data-frame="Sample library frame"
            data-result-for="Flattened library objects">
       <!--
       {
         "@context": {"@vocab": "http://example.org/"},
-        "@graph": [{
-          "@id": "http://example.org/library",
-          "@type": "Library",
+        "@id": "http://example.org/library",
+        "@type": "Library",
+        "location": "Athens",
+        "contains": {
+          "@id": "http://example.org/library/the-republic",
+          "@type": "Book",
+          "creator": "Plato",
+          "title": "The Republic",
           "contains": {
-            "@id": "http://example.org/library/the-republic",
-            "@type": "Book",
-            "contains": {
-              "@id": "http://example.org/library/the-republic#introduction",
-              "@type": "Chapter",
-              "description": "An introductory chapter on The Republic.",
-              "title": "The Introduction"
-            },
-            "creator": "Plato",
-            "title": "The Republic"
+            "@id": "http://example.org/library/the-republic#introduction",
+            "@type": "Chapter",
+            "description": "An introductory chapter on The Republic.",
+            "title": "The Introduction"
           }
-        }]
+        }
       }
       -->
       </pre>
@@ -601,17 +601,18 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       "@context": {"@vocab": "http://example.org/"},
       "@id": "http://example.org/library",
       "@type": "Library",
+      "location": "Athens",
       "contains": {
         "@id": "http://example.org/library/the-republic",
         "@type": "Book",
+        "creator": "Plato",
+        "title": "The Republic",
         "contains": {
           "@id": "http://example.org/library/the-republic#introduction",
           "@type": "Chapter",
           "description": "An introductory chapter on The Republic.",
           "title": "The Introduction"
-        },
-        "creator": "Plato",
-        "title": "The Republic"
+        }
       }
     }
     -->
@@ -627,6 +628,335 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       exactly one such <a>node object</a>. The value of contains also has
       a <a>node object</a>, which is then treated as a frame to match the set of <a>subjects</a>
       which are <code>contains</code> values of the <code>Library</code> object, and so forth.</p>
+
+  <section class="informative"><h4>Matching on Properties</h4>
+    <p>In addition to matching on types, a frame can match on
+      one or more properties.</p>
+
+    <p>For example, the following frame selects object based on property
+      values, rather than `@type`.</p>
+    <pre id="library-frame-with-property-selection"
+         class="example frame nohighlight" data-transform="updateExample"
+         data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
+         data-frame-for="Flattened library objects"
+         title="Library frame with property matching">
+    <!--
+    {
+      "@context": {"@vocab": "http://example.org/"},
+      ****"location": "Athens"****,
+      "contains": {
+        ****"title": "The Republic"****,
+        "contains": {
+          ****"title": "The Introduction"****
+        }
+      }
+    }
+    -->
+    </pre>
+
+    <p>This will generate the same framed results as when selecting on `@type`,
+      as the property values are unique to each node <a>object</a>.</p>
+
+    <aside class="example ds-selector-tabs"
+           title="Framed library objects with property matching">
+      <div class="selectors">
+        <a class="playground"
+           data-result-for="#flattened-library-objects"
+           data-frame="#library-frame-with-property-selection"
+           target="_blank"></a>
+      </div>
+      <pre class="selected framed result" data-transform="updateExample"
+           data-frame="Library frame with property matching"
+           data-result-for="Flattened library objects">
+      <!--
+      {
+        "@context": {"@vocab": "http://example.org/"},
+        "@id": "http://example.org/library",
+        "@type": "Library",
+        "location": "Athens",
+        "contains": {
+          "@id": "http://example.org/library/the-republic",
+          "@type": "Book",
+          "creator": "Plato",
+          "title": "The Republic",
+          "contains": {
+            "@id": "http://example.org/library/the-republic#introduction",
+            "@type": "Chapter",
+            "description": "An introductory chapter on The Republic.",
+            "title": "The Introduction"
+          }
+        }
+      }
+      -->
+      </pre>
+    </aside>
+
+    <p>See <a href="#require-all-flag" class="sectionRef"></a>
+      to see how matching can be restricted to match <a>node objects</a> containing
+      all, versus any such listed property.</p>
+  </section>
+
+  <section class="informative"><h4>Wildcard Matching</h4>
+    <p>The empty <a>map</a> (`{}`) is used as a <a>wildcard</a>, which will
+      match a property if it exists in a target <a>node object</a>, independent of any specific value.</p>
+
+    <p>For example, the following frame selects object based on property
+      wildcarding, rather than `@type`.</p>
+    <pre id="library-frame-with-wildcards"
+         class="example frame nohighlight" data-transform="updateExample"
+         data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
+         data-frame-for="Flattened library objects"
+         title="Library frame with wildcard matching">
+    <!--
+    {
+      "@context": {"@vocab": "http://example.org/"},
+      ****"location": {}****,
+      "contains": {
+        ****"creator": {}****,
+        "contains": {
+          ****"description": {}****
+        }
+      }
+    }
+    -->
+    </pre>
+
+    <p>This will generate the same framed results as when selecting on `@type`,
+      as the the matched properties are distinct to each <a>node object</a>.</p>
+
+    <aside class="example ds-selector-tabs"
+           title="Framed library objects with wildcard matching">
+      <div class="selectors">
+        <a class="playground"
+           data-result-for="#flattened-library-objects"
+           data-frame="#library-frame-with-wildcards"
+           target="_blank"></a>
+      </div>
+      <pre class="selected framed result" data-transform="updateExample"
+           data-frame="Library frame with wildcard matching"
+           data-result-for="Flattened library objects">
+      <!--
+      {
+        "@context": {"@vocab": "http://example.org/"},
+        "@id": "http://example.org/library",
+        "@type": "Library",
+        "location": "Athens",
+        "contains": {
+          "@id": "http://example.org/library/the-republic",
+          "@type": "Book",
+          "creator": "Plato",
+          "title": "The Republic",
+          "contains": {
+            "@id": "http://example.org/library/the-republic#introduction",
+            "@type": "Chapter",
+            "description": "An introductory chapter on The Republic.",
+            "title": "The Introduction"
+          }
+        }
+      }
+      -->
+      </pre>
+    </aside>
+  </section>
+
+  <section class="informative"><h4>Match on the Absence of a Property</h4>
+    <p>The empty <a>array</a> (`[]`) is used for <a>match none</a>, which will
+      match a node object only if a property does not exist in a target <a>node object</a>.</p>
+
+    <p>For example, the following frame selects object based on the absence of properties,
+      rather than `@type`.</p>
+    <pre id="library-frame-with-absent-property"
+         class="example frame nohighlight" data-transform="updateExample"
+         data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
+         data-frame-for="Flattened library objects"
+         title="Library frame with absent matching">
+    <!--
+    {
+      "@context": {"@vocab": "http://example.org/"},
+      ****"creator": []****,
+      ****"title": []****,
+      "contains": {
+        ****"location": []****,
+        ****"description": []****,
+        "contains": {
+          ****"location": []****
+        }
+      }
+    }
+    -->
+    </pre>
+
+    <p>This will generate the same framed results as when selecting on `@type`,
+      the property that is excluded uniquely identifies each <a>node object</a>.
+      Note that additional properties with the value `null` are added
+      for those properties explicitlly excluded.</p>
+
+    <aside class="example ds-selector-tabs"
+           title="Framed library objects with wildcard matching">
+      <div class="selectors">
+        <a class="playground"
+           data-result-for="#flattened-library-objects"
+           data-frame="#library-frame-with-absent-property"
+           target="_blank"></a>
+      </div>
+      <pre class="selected framed result" data-transform="updateExample"
+           data-frame="Library frame with absent matching"
+           data-result-for="Flattened library objects">
+      <!--
+      {
+        "@context": {"@vocab": "http://example.org/"},
+        "@id": "http://example.org/library",
+        "@type": "Library",
+        "location": "Athens",
+        ****"creator": null****, ####← This property is added####
+        ****"title": null****, ####← This property is added####
+        "contains": {
+          "@id": "http://example.org/library/the-republic",
+          "@type": "Book",
+          "creator": "Plato",
+          ****"description": null****, ####← This property is added####
+          ****"location": null****, ####← This property is added####
+          "title": "The Republic",
+          "contains": {
+            "@id": "http://example.org/library/the-republic#introduction",
+            "@type": "Chapter",
+            "description": "An introductory chapter on The Republic.",
+            ****"location": null****, ####← This property is added####
+            "title": "The Introduction"
+          }
+        }
+      }
+      -->
+      </pre>
+    </aside>
+  </section>
+
+  <section class="informative"><h4>Matching on Values</h4>
+    <p>Frames can be matched based on the presence of specific property values.
+      These values can themselves use <a>wildcards</a>, to match on a specific
+      or set of values, <a>language tags</a>, types, or <a>base directions</a>.</p>
+
+    <p>For an example, we'll use an multilingual version of the library example
+      with more complex value representations.</p>
+    <pre id="multilingual-library-objects"
+         class="example input" data-transform="updateExample"
+         title="Multilingual library objects">
+    <!--
+    {
+      "@context": {
+        "@vocab": "http://example.org/",
+        "contains": {"@type": "@id"}
+      },
+      "@graph": [{
+        "@id": "http://example.org/library",
+        "@type": "Library",
+        "location": [
+          {"@value": "Athens", "@language": "en"},
+          {"@value": "Αθήνα", "@language": "grc"},
+          {"@value": "Athína", "@language": "el-Latn"}
+        ],
+        "contains": "http://example.org/library/the-republic"
+      }, {
+        "@id": "http://example.org/library/the-republic",
+        "@type": "Book",
+        "creator": [
+          {"@value": "Plato", "@language": "en"},
+          {"@value": "Πλάτων", "@language": "grc"},
+          {"@value": "Plátōn", "@language": "el-Latn"}
+        ],
+        "title": [
+          {"@value": "The Republic", "@language": "en"},
+          {"@value": "Πολιτεία", "@language": "grc"},
+          {"@value": "Res Publica", "@language": "el-Latn"}
+        ],
+        "contains": "http://example.org/library/the-republic#introduction"
+      }, {
+        "@id": "http://example.org/library/the-republic#introduction",
+        "@type": "Chapter",
+        "description": "An introductory chapter on The Republic.",
+        "title": "The Introduction"
+      }]
+    }
+    -->
+    </pre>
+
+    <p>By matching on an attribute of a value, we can match frames
+      having that attribute, and limit results to property values
+      that match. In this case, we'll frame the Library and Book objects
+      on values only in latinized greek (`en-Latn`):</p>
+    <pre id="library-frame-with-language-matching"
+         class="example frame nohighlight" data-transform="updateExample"
+         data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
+         data-frame-for="Multilingual library objects"
+         title="Library frame with language matching">
+    <!--
+    {
+      "@context": {"@vocab": "http://example.org/"},
+      "location": {"@value": {}, "@language": "en-Latn"},
+      "contains": {
+        "creator": {"@value": {}, "@language": "en-Latn"},
+        "title": {"@value": {}, "@language": "en-Latn"},
+        "contains": {
+          "title": "The Introduction"
+        }
+      }
+    }
+    -->
+    </pre>
+
+    <p>This generates the following framed results:</p>
+
+    <aside class="example ds-selector-tabs"
+           title="Framed library objects with wildcard matching">
+      <div class="selectors">
+        <a class="playground"
+           data-result-for="#multilingual-library-objects"
+           data-frame="#library-frame-with-language-matching"
+           target="_blank"></a>
+      </div>
+      <pre class="selected framed result" data-transform="updateExample"
+           data-frame="Library frame with language matching"
+           data-result-for="Multilingual library objects"
+           data-ignore> <!-- ignore as this won't match the input -->
+      <!--
+      {
+        "@context": {"@vocab": "http://example.org/"},
+        "@id": "http://example.org/library",
+        "@type": "Library",
+        "location": {"@value": "Athína", "@language": "el-Latn"},
+        "contains": {
+          "@id": "http://example.org/library/the-republic",
+          "@type": "Book",
+          "creator": {"@value": "Plátōn", "@language": "el-Latn"},
+          "title": {"@value": "Res Publica", "@language": "el-Latn"},
+          "contains": {
+            "@id": "http://example.org/library/the-republic#introduction",
+            "@type": "Chapter",
+            "description": "An introductory chapter on The Republic.",
+            "title": "The Introduction"
+          }
+        }
+      }
+      -->
+      </pre>
+    </aside>
+  </section>
+
+  <section class="informative"><h4>Matching on `@id`</h4>
+    <p>Frames can be matched if they match a specific
+      identifier (`@id`).</p>
+  </section>
+
+  <section class="informative"><h4>Empty Frame</h4>
+    <p>An empty frame matches any node object, even if those
+      objects are embedded elswhere, causing them to be serialized at the top level.</p>
+  </section>
+
+  <section class="informative"><h4>Matching with default values</h4>
+    <p>Default values can be used to match node objects, where a pattern
+      exists to match some other property, and no value exists for a property
+      having a default value.</p>
+  </section>
   </section>
 
   <section class="informative">
@@ -673,30 +1003,29 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
            data-frame="#sample-library-frame-with-default-value"
            target="_blank"></a>
       </div>
-      <pre class="selected result nohighlight" data-transform="updateExample"
+      <pre class="selected framed result nohighlight" data-transform="updateExample"
            data-frame="Sample library frame with @default value"
            data-result-for="Flattened library objects">
       <!--
       {
         "@context": {"@vocab": "http://example.org/"},
-        "@graph": [{
-          "@id": "http://example.org/library",
-          "@type": "Library",
+        "@id": "http://example.org/library",
+        "@type": "Library",
+        ****"description": null****,
+        "location": "Athens",
+        "contains": {
+          "@id": "http://example.org/library/the-republic",
+          "@type": "Book",
+          "creator": "Plato",
+          ****"description": "A great book.",****
+          "title": "The Republic",
           "contains": {
-            "@id": "http://example.org/library/the-republic",
-            "@type": "Book",
-            "contains": {
-              "@id": "http://example.org/library/the-republic#introduction",
-              "@type": "Chapter",
-              "description": "An introductory chapter on The Republic.",
-              "title": "The Introduction"
-            },
-            "creator": "Plato",
-            ****"description": "A great book.",****
-            "title": "The Republic"
-          },
-          ****"description": null****
-        }]
+            "@id": "http://example.org/library/the-republic#introduction",
+            "@type": "Chapter",
+            "description": "An introductory chapter on The Republic.",
+            "title": "The Introduction"
+          }
+        }
       }
       -->
       </pre>
@@ -838,28 +1167,27 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
              data-frame="#sample-library-frame-with-implicit-embed-set-to-once"
              target="_blank"></a>
         </div>
-        <pre class="selected result nohighlight" data-transform="updateExample"
+        <pre class="selected framed result nohighlight" data-transform="updateExample"
              data-frame="Sample library frame with implicit @embed set to @once"
              data-result-for="Flattened library objects">
         <!--
         {
           "@context": {"@vocab": "http://example.org/"},
-          "@graph": [{
-            "@id": "http://example.org/library",
-            "@type": "Library",
+          "@id": "http://example.org/library",
+          "@type": "Library",
+          "location": "Athens",
+          "contains": {
+            "@id": "http://example.org/library/the-republic",
+            "@type": "Book",
+            "creator": "Plato",
+            "title": "The Republic",
             "contains": {
-              "@id": "http://example.org/library/the-republic",
-              "@type": "Book",
-              "contains": {
-                "@id": "http://example.org/library/the-republic#introduction",
-                "@type": "Chapter",
-                "description": "An introductory chapter on The Republic.",
-                "title": "The Introduction"
-              },
-              "creator": "Plato",
-              "title": "The Republic"
+              "@id": "http://example.org/library/the-republic#introduction",
+              "@type": "Chapter",
+              "description": "An introductory chapter on The Republic.",
+              "title": "The Introduction"
             }
-          }]
+          }
         }
        -->
         </pre>
@@ -900,19 +1228,18 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
              data-frame="#sample-library-frame-with-explicit-embed-set-to-never"
              target="_blank"></a>
         </div>
-        <pre class="selected result nohighlight" data-transform="updateExample"
+        <pre class="selected framed result nohighlight" data-transform="updateExample"
              data-frame="Sample library frame with explicit @embed set to @never"
              data-result-for="Flattened library objects">
         <!--
         {
           "@context": {"@vocab": "http://example.org/"},
-          "@graph": [{
-            "@id": "http://example.org/library",
-            "@type": "Library",
-            "contains": {
-              ****"@id": "http://example.org/library/the-republic"****
-            }
-          }]
+          "@id": "http://example.org/library",
+          "@type": "Library",
+          "location": "Athens",
+          "contains": {
+            ****"@id": "http://example.org/library/the-republic"****
+          }
         }
         -->
         </pre>
@@ -960,29 +1287,27 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
              data-frame="#sample-library-frame-with-implicit-embed-set-to-once"
              target="_blank"></a>
         </div>
-        <pre class="selected result nohighlight" data-transform="updateExample"
+        <pre class="selected framed result nohighlight" data-transform="updateExample"
              data-frame="Sample library frame with implicit @embed set to @once"
              data-result-for="Flattened library objects with double index">
         <!--
         {
           "@context": {"@vocab": "http://example.org/"},
-          "@graph": [{
-            "@id": "http://example.org/library",
-            "@type": "Library",
-            ****"books": {
-              "@id": "http://example.org/library/the-republic",
-              "@type": "Book",
-              "contains": {
-                "@id": "http://example.org/library/the-republic#introduction",
-                "@type": "Chapter",
-                "description": "An introductory chapter on The Republic.",
-                "title": "The Introduction"
-              },
-              "creator": "Plato",
-              "title": "The Republic"
-            },****
-            "contains": {****"@id": "http://example.org/library/the-republic"****}
-          }]
+          "@id": "http://example.org/library",
+          "@type": "Library",****
+          "contains": {****"@id": "http://example.org/library/the-republic"****},
+          ****"books": {
+            "@id": "http://example.org/library/the-republic",
+            "@type": "Book",
+            "creator": "Plato",
+            "title": "The Republic",
+            "contains": {
+              "@id": "http://example.org/library/the-republic#introduction",
+              "@type": "Chapter",
+              "description": "An introductory chapter on The Republic.",
+              "title": "The Introduction"
+            }
+          }
         }
        -->
         </pre>
@@ -1017,40 +1342,38 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
              data-frame="#sample-library-frame-with-explicit-embed-set-to-always"
              target="_blank"></a>
         </div>
-        <pre class="selected result nohighlight" data-transform="updateExample"
+        <pre class="selected framed result nohighlight" data-transform="updateExample"
              data-frame="Sample library frame with explicit @embed set to @always"
              data-result-for="Flattened library objects with double index">
         <!--
         {
           "@context": {"@vocab": "http://example.org/"},
-          "@graph": [{
-            "@id": "http://example.org/library",
-            "@type": "Library",
-            ****"books": {
-              "@id": "http://example.org/library/the-republic",
-              "@type": "Book",
-              "contains": {
-                "@id": "http://example.org/library/the-republic#introduction",
-                "@type": "Chapter",
-                "description": "An introductory chapter on The Republic.",
-                "title": "The Introduction"
-              },
-              "creator": "Plato",
-              "title": "The Republic"
-            },****
+          "@id": "http://example.org/library",
+          "@type": "Library",
+          ****"books": {
+            "@id": "http://example.org/library/the-republic",
+            "@type": "Book",
+            "creator": "Plato",
+            "title": "The Republic",
             "contains": {
-              "@id": "http://example.org/library/the-republic",
-              "@type": "Book",
-              "contains": {
-                "@id": "http://example.org/library/the-republic#introduction",
-                "@type": "Chapter",
-                "description": "An introductory chapter on The Republic.",
-                "title": "The Introduction"
-              },
-              "creator": "Plato",
-              "title": "The Republic"
+              "@id": "http://example.org/library/the-republic#introduction",
+              "@type": "Chapter",
+              "description": "An introductory chapter on The Republic.",
+              "title": "The Introduction"
             }
-          }]
+          },****
+          "contains": {
+            "@id": "http://example.org/library/the-republic",
+            "@type": "Book",
+            "creator": "Plato",
+            "title": "The Republic",
+            "contains": {
+              "@id": "http://example.org/library/the-republic#introduction",
+              "@type": "Chapter",
+              "description": "An introductory chapter on The Republic.",
+              "title": "The Introduction"
+            }
+          }
         }
        -->
         </pre>
@@ -1107,29 +1430,28 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
            target="_blank"></a>
       </div>
       <pre id="lib-example-output"
-           class="selected result nohighlight" data-transform="updateExample"
+           class="selected framed result nohighlight" data-transform="updateExample"
            data-frame="Sample library frame with @explicit set to true"
            data-result-for="Flattened library objects">
       <!--
       {
         "@context": {"@vocab": "http://example.org/"},
-        "@graph": [{
-          "@id": "http://example.org/library",
-          "@type": "Library",
+        "@id": "http://example.org/library",
+        "@type": "Library",
+        ****"description": null**** ####← This property is explicit####,
+        "location": "Athens",
+        "contains": {
+          "@id": "http://example.org/library/the-republic",
+          "@type": "Book",
+          ####"creator": "Plato", ← This property is omitted####
+          "title": "The Republic",
           "contains": {
-            "@id": "http://example.org/library/the-republic",
-            "@type": "Book",
-            "contains": {
-              "@id": "http://example.org/library/the-republic#introduction",
-              "@type": "Chapter",
-              "description": "An introductory chapter on The Republic.",
-              "title": "The Introduction"
-            },
-            ####"creator": "Plato", ← This property is omitted####
-            "title": "The Republic"
-          },
-          ****"description": null**** ####← This property is explicit####
-        }]
+            "@id": "http://example.org/library/the-republic#introduction",
+            "@type": "Chapter",
+            "description": "An introductory chapter on The Republic.",
+            "title": "The Introduction"
+          }
+        }
       }
       -->
       </pre>
@@ -1207,7 +1529,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
              data-frame="#sample-library-frame-without-omitDefault"
              target="_blank"></a>
         </div>
-        <pre class="selected result nohighlight" data-transform="updateExample"
+        <pre class="selected framed result nohighlight" data-transform="updateExample"
              data-frame="Sample parent/child relationship frame without @omitDefault"
              data-result-for="Sample parent/child relationship data">
         <!--
@@ -1219,17 +1541,17 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
           "@graph": [{
             "@id": "http://example.org#John",
             "@type": "Person",
+            "name": "John",
             "child": {
               "@id": "http://example.org#Jane",
               "@type": "Person",
               "name": "Jane"
-            },
-            "name": "John"
+            }
           }, {
             "@id": "http://example.org#Jane",
             "@type": "Person",
-            ****"child": null****,
-            "name": "Jane"
+            "name": "Jane",
+            ****"child": null****
           }]
         }
         -->
@@ -1272,7 +1594,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
              data-frame="#sample-library-frame-with-omitDefault"
              target="_blank"></a>
         </div>
-        <pre class="selected result nohighlight" data-transform="updateExample"
+        <pre class="selected framed result nohighlight" data-transform="updateExample"
              data-frame="Sample parent/child relationship frame with @omitDefault"
              data-result-for="Sample parent/child relationship data">
         <!--
@@ -1284,17 +1606,17 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
           "@graph": [{
             "@id": "http://example.org#John",
             "@type": "Person",
+            "name": "John",
             "child": {
               "@id": "http://example.org#Jane",
               "@type": "Person",
               "name": "Jane"
-            },
-            "name": "John"
+            }
           }, {
             "@id": "http://example.org#Jane",
             "@type": "Person",
             "name": "Jane"
-            ####← Does not include "child" property####
+            ####↑ Does not include "child" property####
           }]
         }
         -->
@@ -1307,11 +1629,52 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       <p>The <a>omit graph flag</a> determines if framed output containing a single
         <a>node object</a> is contained within <code>@graph</code>, or not.
         The initial value for the <a>omit graph flag</a> is set using the
-        <a data-link-for="JsonLdOptions">omitGraph</a> option, or based on
+        {{JsonLdOptions/omitGraph}} option, or based on
         the <a>processing mode</a>; if <a>processing mode</a> is <code>json-ld-1.0</code>, the output
         always includes a <code>@graph</code> <a>entry</a>, otherwise, the <code>@graph</code> <a>entry</a> is used only
         to describe multiple <a>node objects</a>, consistent with compaction.
         See <a href="#framing-algorithm" class="sectionRef"></a> for a further discussion.</p>
+
+    <p>The result is the same as the original <a href="#flattened-library-objects">Flattened library objects</a> example,
+      but a `@graph` at the top-level.
+      The top-level object can be enclosed within `@graph` by setting the <a>processing mode</a> to `json-ld-1.0`.</p>
+
+    <aside class="example ds-selector-tabs"
+           title="Framed library objects with @omitGraph">
+      <div class="selectors">
+        <a class="playground"
+           data-result-for="#flattened-library-objects"
+           data-frame="#sample-library-frame"
+           target="_blank"></a>
+      </div>
+      <pre class="selected framed result" data-transform="updateExample"
+           data-options="omitGraph=false"
+           data-frame="Sample library frame"
+           data-result-for="Flattened library objects">
+      <!--
+      {
+        "@context": {"@vocab": "http://example.org/"},
+        "@graph": [{
+          "@id": "http://example.org/library",
+          "@type": "Library",
+          "location": "Athens",
+          "contains": {
+            "@id": "http://example.org/library/the-republic",
+            "@type": "Book",
+            "creator": "Plato",
+            "title": "The Republic",
+            "contains": {
+              "@id": "http://example.org/library/the-republic#introduction",
+              "@type": "Chapter",
+              "description": "An introductory chapter on The Republic.",
+              "title": "The Introduction"
+            }
+          }
+        }]
+      }
+      -->
+      </pre>
+    </aside>
     </section>
 
     <section class="informative">
@@ -1366,7 +1729,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
            data-frame="#inverted-library-frame"
            target="_blank"></a>
       </div>
-      <pre class="selected result" data-transform="updateExample"
+      <pre class="selected framed result" data-transform="updateExample"
            data-frame="Inverted library frame"
            data-result-for="Flattened library objects"
            title="Inverted library output">
@@ -1376,24 +1739,23 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
           "@vocab": "http://example.org/",
           "within": {"@reverse": "contains"}
         },
-        "@graph": [{
-          "@id": "http://example.org/library/the-republic#introduction",
-          "@type": "Chapter",
-          "description": "An introductory chapter on The Republic.",
-          "title": "The Introduction",
+        "@id": "http://example.org/library/the-republic#introduction",
+        "@type": "Chapter",
+        "description": "An introductory chapter on The Republic.",
+        "title": "The Introduction",
+        "within": {
+          "@id": "http://example.org/library/the-republic",
+          "@type": "Book",
+          "contains": {"@id": "http://example.org/library/the-republic#introduction"},
+          "creator": "Plato",
+          "title": "The Republic",
           "within": {
-            "@id": "http://example.org/library/the-republic",
-            "@type": "Book",
-            "contains": {"@id": "http://example.org/library/the-republic#introduction"},
-            "creator": "Plato",
-            "title": "The Republic",
-            "within": {
-              "@id": "http://example.org/library",
-              "@type": "Library",
-              "contains": {"@id": "http://example.org/library/the-republic"}
-            }
+            "@id": "http://example.org/library",
+            "@type": "Library",
+            "location": "Athens",
+            "contains": {"@id": "http://example.org/library/the-republic"}
           }
-        }]
+        }
       }
       -->
       </pre>
@@ -1480,32 +1842,30 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
            data-frame="#frame-with-named-graphs"
            target="_blank"></a>
       </div>
-      <pre class="selected result nohighlight" data-transform="updateExample"
+      <pre class="selected framed result nohighlight" data-transform="updateExample"
            data-frame="Frame with named graphs"
            data-result-for="Flattened Input with named graphs">
       <!--
       {
         "@context": {"@vocab": "http://example.org/"},
-        "@graph": [{
-          "@id": "http://example.org/library",
-          "@type": "Library",
-          "name": "Library",
-          "contains": {
-            ****"@id": "http://example.org/graphs/books",
-            "@graph": {****
-              "@id": "http://example.org/library/the-republic",
-              "@type": "Book",
-              "creator": "Plato",
-              "title": "The Republic",
-              "contains": {
-                "@id": "http://example.org/library/the-republic#introduction",
-                "@type": "Chapter",
-                "description": "An introductory chapter on The Republic.",
-                "title": "The Introduction"
-              }
-            ****}****
-          }
-        }]
+        "@id": "http://example.org/library",
+        "@type": "Library",
+        "name": "Library",
+        "contains": {
+          ****"@id": "http://example.org/graphs/books",
+          "@graph": {****
+            "@id": "http://example.org/library/the-republic",
+            "@type": "Book",
+            "creator": "Plato",
+            "title": "The Republic",
+            "contains": {
+              "@id": "http://example.org/library/the-republic#introduction",
+              "@type": "Chapter",
+              "description": "An introductory chapter on The Republic.",
+              "title": "The Introduction"
+            }
+          ****}****
+        }
       }
       -->
       </pre>
