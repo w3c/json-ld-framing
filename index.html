@@ -1688,6 +1688,73 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
         default). If the flag value is <code>true</code>, then <em>all</em>
         properties in the <a>frame object</a> must be present in the <a>node
         object</a> for the node to match.</p>
+
+      <p>The following frame matches on multiple properties, including the absence of a property.
+        Using the <a href="#flattened-library-objects">Flattened library objects</a> example,
+        we can match on an object containing both the title and description or title and creator
+        properties.
+        If we were to use `@requireAll` set to `false`, then we could match on the presence
+        of any property, not all properties.</p>
+
+      <pre id="frame-with-requireAll"
+           class="example frame nohighlight" data-transform="updateExample"
+           data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
+           data-frame-for="Flattened library objects"
+           title="Frame with @requireAll">
+      <!--
+      {
+        "@context": {"@vocab": "http://example.org/"},
+        "@type": "Library",
+        "contains": {
+          "@requireAll": true,
+          "creator": {},
+          "title": {},
+          "contains": {
+            "@requireAll": true,
+            "description": {},
+            "title": {}
+          }
+        }
+      }
+      -->
+      </pre>
+
+      <p>This will, again, reproduce the desired framed output:</p>
+
+      <aside class="example ds-selector-tabs"
+             title="Framed library objects with @requireAll set to true">
+        <div class="selectors">
+          <a class="playground"
+             data-result-for="#flattened-library-objects"
+             data-frame="#frame-with-requireAll"
+             target="_blank"></a>
+        </div>
+        <pre id="lib-example-output"
+             class="selected framed result nohighlight" data-transform="updateExample"
+             data-frame="Frame with @requireAll"
+             data-result-for="Flattened library objects">
+        <!--
+        {
+          "@context": {"@vocab": "http://example.org/"},
+          "@id": "http://example.org/library",
+          "@type": "Library",
+          "location": "Athens",
+          "contains": {
+            "@id": "http://example.org/library/the-republic",
+            "@type": "Book",
+            "creator": "Plato",
+            "title": "The Republic",
+            "contains": {
+              "@id": "http://example.org/library/the-republic#introduction",
+              "@type": "Chapter",
+              "description": "An introductory chapter on The Republic.",
+              "title": "The Introduction"
+            }
+          }
+        }
+        -->
+        </pre>
+      </aside>
     </section>
   </section>
 
