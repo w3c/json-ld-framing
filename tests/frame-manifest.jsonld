@@ -467,7 +467,7 @@
       "option": {"specVersion": "json-ld-1.1"},
       "input": "frame/0052-in.jsonld",
       "frame": "frame/0052-frame.jsonld",
-      "expect": "invalid frame"
+      "expectErrorCode": "invalid frame"
     }, {
       "@id": "#t0053",
       "@type": ["jld:NegativeEvaluationTest", "jld:FrameTest"],
@@ -476,7 +476,7 @@
       "option": {"specVersion": "json-ld-1.1"},
       "input": "frame/0053-in.jsonld",
       "frame": "frame/0053-frame.jsonld",
-      "expect": "invalid frame"
+      "expectErrorCode": "invalid frame"
     }, {
       "@id": "#t0054",
       "@type": ["jld:NegativeEvaluationTest", "jld:FrameTest"],
@@ -485,7 +485,7 @@
       "option": {"specVersion": "json-ld-1.1"},
       "input": "frame/0054-in.jsonld",
       "frame": "frame/0054-frame.jsonld",
-      "expect": "invalid @embed value"
+      "expectErrorCode": "invalid @embed value"
     }, {
       "@id": "#t0055",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
