@@ -883,7 +883,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <p>By matching on an attribute of a value, we can match frames
       having that attribute, and limit results to property values
       that match. In this case, we'll frame the Library and Book objects
-      on values only in latinized greek (`en-Latn`):</p>
+      on values only in latinized greek (`el-Latn`):</p>
     <pre id="library-frame-with-language-matching"
          class="example frame nohighlight" data-transform="updateExample"
          data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
@@ -892,10 +892,10 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <!--
     {
       "@context": {"@vocab": "http://example.org/"},
-      "location": {"@value": {}, "@language": "en-Latn"},
+      "location": {"@value": {}, "@language": "el-Latn"},
       "contains": {
-        "creator": {"@value": {}, "@language": "en-Latn"},
-        "title": {"@value": {}, "@language": "en-Latn"},
+        "creator": {"@value": {}, "@language": "el-Latn"},
+        "title": {"@value": {}, "@language": "el-Latn"},
         "contains": {
           "title": "The Introduction"
         }
@@ -949,7 +949,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
   <section class="informative"><h4>Empty Frame</h4>
     <p>An empty frame matches any node object, even if those
-      objects are embedded elswhere, causing them to be serialized at the top level.</p>
+      objects are embedded elsewhere, causing them to be serialized at the top level.</p>
   </section>
 
   <section class="informative"><h4>Matching with default values</h4>
