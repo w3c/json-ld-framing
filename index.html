@@ -978,7 +978,6 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
            data-frame="#library-frame-with-id-matching"
            target="_blank"></a>
       </div>
-       <!-- ignore as this won't match the input -->
       <pre class="selected framed result" data-transform="updateExample"
            data-frame="Library frame with @id matching"
            data-result-for="Flattened library objects">
@@ -1040,15 +1039,12 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
            data-frame="#library-frame-with-array-id-matching"
            target="_blank"></a>
       </div>
-       <!-- ignore as this won't match the input -->
       <pre class="selected framed result" data-transform="updateExample"
            data-frame="Library frame with array @id matching"
            data-result-for="Flattened library objects">
       <!--
       {
-        "@context": {
-          "@vocab": "http://example.org/"
-        },
+        "@context": {"@vocab": "http://example.org/"},
         "@id": "http://example.org/library",
         "@type": "Library",
         "location": "Athens",
@@ -1073,6 +1069,72 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
   <section class="informative"><h4>Empty Frame</h4>
     <p>An empty frame matches any node object, even if those
       objects are embedded elsewhere, causing them to be serialized at the top level.</p>
+
+    <pre id="empty-frame"
+         class="example frame nohighlight" data-transform="updateExample"
+         data-content-type="application/ld+json;profile=http://www.w3.org/ns/json-ld#framed"
+         data-frame-for="Flattened library objects"
+         title="Empty frame">
+    <!--
+    {
+      "@context": {"@vocab": "http://example.org/"}
+    }
+    -->
+    </pre>
+
+    <p>This generates the following framed results:</p>
+
+    <aside class="example ds-selector-tabs"
+           title="Framed library objects with empty frame">
+      <div class="selectors">
+        <a class="playground"
+           data-result-for="#flattened-library-objects"
+           data-frame="#empty-frame"
+           target="_blank"></a>
+      </div>
+      <pre class="selected framed result" data-transform="updateExample"
+           data-frame="Empty frame"
+           data-result-for="Flattened library objects">
+      <!--
+      {
+        "@context": {"@vocab": "http://example.org/"},
+        "@graph": [{
+          "@id": "http://example.org/library",
+          "@type": "Library",
+          "location": "Athens",
+          "contains": {
+            "@id": "http://example.org/library/the-republic",
+            "@type": "Book",
+            "creator": "Plato",
+            "title": "The Republic",
+            "contains": {
+              "@id": "http://example.org/library/the-republic#introduction",
+              "@type": "Chapter",
+              "description": "An introductory chapter on The Republic.",
+              "title": "The Introduction"
+            }
+          }
+        }, {
+          "@id": "http://example.org/library/the-republic",
+          "@type": "Book",
+          "creator": "Plato",
+          "title": "The Republic",
+          "contains": {
+            "@id": "http://example.org/library/the-republic#introduction",
+            "@type": "Chapter",
+            "description": "An introductory chapter on The Republic.",
+            "title": "The Introduction"
+          }
+        }, {
+          "@id": "http://example.org/library/the-republic#introduction",
+          "@type": "Chapter",
+          "description": "An introductory chapter on The Republic.",
+          "title": "The Introduction"
+        }]
+      }
+      -->
+      </pre>
+    </aside>
   </section>
   </section>
 
@@ -1241,12 +1303,6 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
       -->
       </pre>
     </aside>
-
-  <section class="informative"><h4>Matching with default values</h4>
-    <p>Default values can be used to match node objects, where a pattern
-      exists to match some other property, and no value exists for a property
-      having a default value.</p>
-  </section>
   </section>
 
   <section class="informative">
