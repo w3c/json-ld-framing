@@ -834,7 +834,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
   <section class="informative"><h4>Matching on Values</h4>
     <p>Frames can be matched based on the presence of specific property values.
       These values can themselves use <a>wildcards</a>, to match on a specific
-      or set of values, <a>language tags</a>, types, or <a>base directions</a>.</p>
+      or set of values, <a>language tags</a>, types, or <a data-lt="base direction">base direction</a>.</p>
 
     <p>For an example, we'll use an multilingual version of the library example
       with more complex value representations.</p>
@@ -2131,8 +2131,8 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
   <p><a>JSON-LD Processors</a> MUST NOT
     attempt to correct malformed <a>IRIs</a> or language tags;
     however, they MAY issue validation warnings. IRIs are not modified other
-    than conversion between <a data-lt="relative IRI">relative</a> and
-    <a>absolute IRIs</a>.</p>
+    than conversion between
+    <a data-lt="relative IRI reference">relative</a> and absolute <a>IRIs</a>.</p>
 
   <p class="changed">Unless specified using
     <a data-cite="JSON-LD11-API#dom-jsonldoptions-processingMode">processingMode</a> API option,
@@ -2194,13 +2194,13 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <li>Values of <a>entries</a> in a <a>frame object</a> that are not <a>keyword</a> MAY also include a <a>default object</a>.
       Values of <code>@default</code> MAY include the value <code>@null</code>,
       or an <a>array</a> containing only <code>@null</code>, in addition to other values
-      allowed in the grammar for values of <a>entry</a> keys expanding to <a>absolute IRIs</a>.
+      allowed in the grammar for values of <a>entry</a> keys expanding to <a>IRIs</a>.
       <a>Processors</a> MUST preserve this value when expanding. All other <a>entries</a> of
       a <a>default object</a> MUST be ignored.</li>
     <li>The values of <code>@id</code> and <code>@type</code> may also be an empty <a>map</a>,
-      <span class="changed">an <a>absolute IRI</a></span>,
+      <span class="changed">an <a>IRI reference</a></span>,
       <a>array</a> containing only an empty <a>map</a>,
-      <span class="changed">or an array of <a>absolute IRIs</a></span>.
+      <span class="changed">or an array of <a>IRI references</a></span>.
       <span class="changed">Values of `@type` MAY also be a <a>map</a> with
         a `@default` entry, whose values are restricted by be <a>IRIs</a></span>.
       <a>Processors</a> MUST preserve this value when expanding.</li>
