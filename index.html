@@ -596,7 +596,8 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <p>The Frame Algorithm can create a new document which follows the structure
       of the frame:</p>
 
-    <aside class="example ds-selector-tabs"
+    <aside id="framed-library-objects"
+           class="example ds-selector-tabs"
            title="Framed library objects">
       <div class="selectors">
         <a class="playground"
@@ -1418,7 +1419,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
          (in addition to the <a>explicit inclusion flag</a> being <code>false</code>),
          non-listed properties are added to the output, and implicitly embedded
          using a default empty frame. As a result, the same output used in the
-         <a href="#lib-example-output">Framed library objects</a> above is generated,
+         <a href="#framed-library-objects">Framed library objects</a> above is generated,
          assuming that the {{JsonLdOptions/ordered}} flag is <code>true</code>.</p>
 
       <p>However, if the <code>@embed</code> property is added explicitly with a
@@ -1650,8 +1651,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
            data-frame="#sample-library-frame-with-explicit-set-to-true"
            target="_blank"></a>
       </div>
-      <pre id="lib-example-output"
-           class="selected framed result nohighlight" data-transform="updateExample"
+      <pre class="selected framed result nohighlight" data-transform="updateExample"
            data-frame="Sample library frame with @explicit set to true"
            data-result-for="Flattened library objects">
       <!--
@@ -1950,8 +1950,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
              data-frame="#frame-with-requireAll"
              target="_blank"></a>
         </div>
-        <pre id="lib-example-output"
-             class="selected framed result nohighlight" data-transform="updateExample"
+        <pre class="selected framed result nohighlight" data-transform="updateExample"
              data-frame="Frame with @requireAll"
              data-result-for="Flattened library objects">
         <!--
