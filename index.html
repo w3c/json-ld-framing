@@ -526,7 +526,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     compatible with [[[JSON-LD10]]] [[JSON-LD10]],
     but if processed by a JSON-LD 1.0 processor may produce different results.
     Processors default to `json-ld-1.1`, unless the
-    <a data-cite="JSON-LD11-API#dom-jsonldoptions-processingMode">processingMode</a> API option
+    <a data-cite="JSON-LD11-API#dom-jsonldoptions-processingmode">processingMode</a> API option
     is explicitly set to `json-ld-1.0`.
     Publishers are encouraged to use the <code>@version</code> <a>map entry</a> within a <a>context</a>
     set to `1.1` to ensure that JSON-LD 1.0 processors will not misinterpret JSON-LD 1.1 features.</p>
@@ -2187,10 +2187,10 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <a data-lt="relative IRI reference">relative</a> and absolute <a>IRIs</a>.</p>
 
   <p class="changed">Unless specified using
-    <a data-cite="JSON-LD11-API#dom-jsonldoptions-processingMode">processingMode</a> API option,
+    <a data-cite="JSON-LD11-API#dom-jsonldoptions-processingmode">processingMode</a> API option,
     the <a>processing mode</a> is set using the <code>@version</code> <a>entry</a>
     in a local <a>context</a> and
-    affects the behavior of algorithms including <a data-cite="JSON-LD11-API#dfn-expanded">expansion</a> and <a data-cite="JSON-LD11-API#dfn-compacted">compaction</a>.
+    affects the behavior of algorithms including <a data-cite="JSON-LD11-API#dfn-expanded">expansion</a> and <a data-cite="JSON-LD11-API#dfn-compact">compaction</a>.
     Once set, it is an error to attempt to change to a different processing mode,
     and processors MUST generate,
     a <a data-cite="JSON-LD11-API#dom-jsonlderrorcode-processing-mode-conflict">processing mode conflict</a>
@@ -2273,7 +2273,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
   which  MUST be a <a>JSON-LD frame</a> in
   <a data-cite="JSON-LD11-API#dfn-expanded-form">expanded form</a>,
   a <a>context</a> (<var>context</var>),
-  and a number of <a data-lt="JsonLdProcessor-frame-options">options</a> and produces <a>JSON-LD output</a>.</p>
+  and a number of <a data-lt="JsonLdProcessor-frame-options">options</a> and produces <a>JSON-LD document</a>.</p>
 
 <p>If an error is detected in the <var>expanded frame</var>, a <a data-link-for="JsonLdFramingErrorCode">invalid frame</a>
   error has been detected and processing is aborted.
@@ -2640,7 +2640,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
   <section class="algorithm">
     <h3>JsonLdProcessor</h3>
 
-    <p>The <a data-cite="JSON-LD11-API#dfn-json-ld-processors">JSON-LD Processor</a> interface is the high-level programming structure that developers
+    <p>The <a data-cite="JSON-LD11-API#dfn-json-ld-processor">JSON-LD Processor</a> interface is the high-level programming structure that developers
       use to access the JSON-LD transformation methods. The definition below is an experimental
       extension of the interface defined in the JSON-LD 1.1 API [[JSON-LD11-API]].</p>
 

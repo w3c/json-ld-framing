@@ -2029,8 +2029,7 @@ familiar with the basic RDF concepts [<cite><a class="bibref" href="#bib-rdf11-c
     The initial <a href="#dfn-frame" class="internalDFN" data-link-type="dfn">Frame</a> provided to the framing algorithm.</dd>
   <dt><dfn id="dfn-json-ld-input" data-dfn-type="dfn" data-no-export=""><a href="https://www.w3.org/TR/json-ld11-api/#dfn-json-ld-input">JSON-LD input</a></dfn></dt><dd>
     The JSON-LD data structure that is provided as input to the algorithm.</dd>
-  <dt><dfn id="dfn-json-ld-output" data-dfn-type="dfn" data-no-export=""><a href="https://www.w3.org/TR/json-ld11-api/#dfn-json-ld-output">JSON-LD output</a></dfn></dt><dd>
-    The JSON-LD data structure that is produced as output by the algorithm.</dd>
+  
   <dt><dfn id="dfn-map-of-flattened-subjects" data-dfn-type="dfn">map of flattened subjects</dfn></dt><dd>
     A map of subjects that is the result of the
     <a href="https://www.w3.org/TR/json-ld11-api/#node-map-generation">Node Map Generation algorithm</a>.</dd>
@@ -2116,7 +2115,7 @@ familiar with the basic RDF concepts [<cite><a class="bibref" href="#bib-rdf11-c
     compatible with <cite><a href="https://www.w3.org/TR/2014/REC-json-ld-20140116/">JSON-LD 1.0</a></cite> [<cite><a class="bibref" href="#bib-json-ld10" title="JSON-LD 1.0" data-link-type="biblio">JSON-LD10</a></cite>],
     but if processed by a JSON-LD 1.0 processor may produce different results.
     Processors default to <code>json-ld-1.1</code>, unless the
-    <a href="https://www.w3.org/TR/json-ld11-api/#dom-jsonldoptions-processingMode">processingMode</a> API option
+    <a href="https://www.w3.org/TR/json-ld11-api/#dom-jsonldoptions-processingmode">processingMode</a> API option
     is explicitly set to <code>json-ld-1.0</code>.
     Publishers are encouraged to use the <code>@version</code> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry">map entry</a> within a <a data-link-type="dfn" href="https://www.w3.org/TR/json-ld11/#dfn-context">context</a>
     set to <code>1.1</code> to ensure that JSON-LD 1.0 processors will not misinterpret JSON-LD 1.1 features.</p>
@@ -3524,10 +3523,10 @@ familiar with the basic RDF concepts [<cite><a class="bibref" href="#bib-rdf11-c
     <a data-lt="relative IRI reference" data-link-type="dfn" href="https://tools.ietf.org/html/rfc3987#section-6.5">relative</a> and absolute <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc3987#section-2">IRIs</a>.</p>
 
   <p class="changed">Unless specified using
-    <a href="https://www.w3.org/TR/json-ld11-api/#dom-jsonldoptions-processingMode">processingMode</a> API option,
+    <a href="https://www.w3.org/TR/json-ld11-api/#dom-jsonldoptions-processingmode">processingMode</a> API option,
     the <a data-link-type="dfn" href="https://www.w3.org/TR/json-ld11/#dfn-processing-mode">processing mode</a> is set using the <code>@version</code> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry">entry</a>
     in a local <a data-link-type="dfn" href="https://www.w3.org/TR/json-ld11/#dfn-context">context</a> and
-    affects the behavior of algorithms including <a href="https://www.w3.org/TR/json-ld11-api/#dfn-expanded">expansion</a> and <a href="https://www.w3.org/TR/json-ld11-api/#dfn-compacted">compaction</a>.
+    affects the behavior of algorithms including <a href="https://www.w3.org/TR/json-ld11-api/#dfn-expanded">expansion</a> and <a href="https://www.w3.org/TR/json-ld11-api/#dfn-compact">compaction</a>.
     Once set, it is an error to attempt to change to a different processing mode,
     and processors <em class="rfc2119" title="MUST">MUST</em> generate,
     a <a href="https://www.w3.org/TR/json-ld11-api/#dom-jsonlderrorcode-processing-mode-conflict">processing mode conflict</a>
@@ -3610,7 +3609,7 @@ familiar with the basic RDF concepts [<cite><a class="bibref" href="#bib-rdf11-c
   which  <em class="rfc2119" title="MUST">MUST</em> be a <a href="#dfn-frame" class="internalDFN" data-link-type="dfn">JSON-LD frame</a> in
   <a href="https://www.w3.org/TR/json-ld11-api/#dfn-expanded-form">expanded form</a>,
   a <a data-link-type="dfn" href="https://www.w3.org/TR/json-ld11/#dfn-context">context</a> (<var>context</var>),
-  and a number of <a data-lt="JsonLdProcessor-frame-options" href="#dfn-jsonldprocessor-frame-options" class="internalDFN" data-link-type="dfn">options</a> and produces <a data-link-type="dfn" href="https://www.w3.org/TR/json-ld11-api/#dfn-json-ld-output">JSON-LD output</a>.</p>
+  and a number of <a data-lt="JsonLdProcessor-frame-options" href="#dfn-jsonldprocessor-frame-options" class="internalDFN" data-link-type="dfn">options</a> and produces <a data-link-type="dfn" href="https://www.w3.org/TR/json-ld11/#dfn-json-ld-document">JSON-LD document</a>.</p>
 
 <p>If an error is detected in the <var>expanded frame</var>, a <a data-link-for="JsonLdFramingErrorCode" href="#dom-jsonldframingerrorcode-invalid-frame" class="internalDFN" data-link-type="idl"><code>invalid frame</code></a>
   error has been detected and processing is aborted.
@@ -3975,7 +3974,7 @@ familiar with the basic RDF concepts [<cite><a class="bibref" href="#bib-rdf11-c
   <section class="algorithm" id="jsonldprocessor">
     <h3 id="x5-1-jsonldprocessor"><bdi class="secno">5.1 </bdi>JsonLdProcessor<a class="self-link" aria-label="§" href="#jsonldprocessor"></a></h3>
 
-    <p>The <a href="https://www.w3.org/TR/json-ld11-api/#dfn-json-ld-processors">JSON-LD Processor</a> interface is the high-level programming structure that developers
+    <p>The <a href="https://www.w3.org/TR/json-ld11-api/#dfn-json-ld-processor">JSON-LD Processor</a> interface is the high-level programming structure that developers
       use to access the JSON-LD transformation methods. The definition below is an experimental
       extension of the interface defined in the JSON-LD 1.1 API [<cite><a class="bibref" href="#bib-json-ld11-api" title="JSON-LD 1.1 Processing Algorithms and API" data-link-type="biblio">JSON-LD11-API</a></cite>].</p>
 
