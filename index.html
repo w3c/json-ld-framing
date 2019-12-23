@@ -648,8 +648,7 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
     <pre class="example result" data-transform="updateExample"
          data-frame="Sample library frame"
          data-result-for="Flattened library objects"
-         data-options="omitGraph=true"
-         title="Framed library objects with omitGraph set to false">
+         title="Framed library objects">
     <!--
     {
       "@context": {"@vocab": "http://example.org/"},
@@ -1869,10 +1868,14 @@ familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
     <p>The result is the same as the original <a href="#flattened-library-objects">Flattened library objects</a> example,
       but a `@graph` at the top-level.
-      The top-level object can be enclosed within `@graph` by setting the <a>processing mode</a> to `json-ld-1.0`.</p>
+      <a href="#example-5-framed-library-objects">Example 5</a> shows the results
+      with the <a>omit graph flag</a> set to `true`, which is the default value when
+      the <a>processing mode</a> is set to the default `json-ld-1.1`.
+      The top-level object can be enclosed within `@graph` by setting the <a>processing mode</a> to `json-ld-1.0`,
+      or by setting the <a>omit graph flag</a> to `false`.</p>
 
     <aside class="example ds-selector-tabs"
-           title="Framed library objects with @omitGraph">
+           title="Framed library objects with @omitGraph set to false">
       <div class="selectors">
         <a class="playground"
            data-result-for="#flattened-library-objects"
