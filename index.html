@@ -369,52 +369,35 @@
   their application expects.</p>
 
 <section class="informative">
-<h2>How to Read this Document</h2>
-
-<p>
-This document is a detailed specification for a serialization of Linked
-Data in JSON. The document is primarily intended for the following audiences:
-</p>
-
-<ul>
-  <li>Authors who want to query JSON-LD documents to create representations
-    more appropriate for a given use case.</li>
-  <li>Software developers that want to implement <a>processors</a> and APIs for
-  JSON-LD.</li>
-</ul>
-
-<p>
-To understand the basics in this specification you must first be familiar with
-<a data-cite="RFC8259" data-no-xref="">JSON</a>, which is detailed in [[RFC8259]]. You must also understand the
-JSON-LD 1.1 Syntax specification [[JSON-LD11]], which is the base syntax used by all of the
-algorithms in this document,
-and the JSON-LD 1.1 API [[JSON-LD11-API]]. To understand the API and how it is
-intended to operate  in a programming environment, it is useful to have working
-knowledge of the JavaScript programming language [[ECMASCRIPT]] and
-WebIDL [[WEBIDL]]. To understand how JSON-LD maps to RDF, it is helpful to be
-familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
-
-</section>
-
-<section class="informative">
   <h2>How to Read this Document</h2>
 
   <p>This document is a detailed specification for a serialization of Linked
     Data in JSON. The document is primarily intended for the following audiences:</p>
 
   <ul>
-    <li>Software developers who want to implement processors and APIs for
-      JSON-LD</li>
+    <li>Authors who want to query JSON-LD documents to create representations
+      more appropriate for a given use case.</li>
+    <li>Software developers that want to implement <a>processors</a> and APIs for JSON-LD.</li>
   </ul>
 
   <p>A companion document, the JSON-LD 1.1 specification
     [[JSON-LD11]], specifies the grammar of JSON-LD documents.</p>
 
   <p>To understand the basics in this specification you must first be familiar with
-    <a data-cite="RFC8259" data-no-xref="">JSON</a>, which is detailed in [[RFC8259]].</p>
+    <a data-cite="RFC8259" data-no-xref="">JSON</a>, which is detailed in [[RFC8259]].
+    You must also understand the JSON-LD 1.1 Syntax specification [[JSON-LD11]],
+    which is the base syntax used by all of the algorithms in this document,
+    and the JSON-LD 1.1 API [[JSON-LD11-API]].
+    To understand the API and how it is intended to operate in a programming environment,
+    it is useful to have working knowledge of
+    the JavaScript programming language [[ECMASCRIPT]]
+    and WebIDL [[WEBIDL]].
+    To understand how JSON-LD maps to RDF, it is helpful to be
+    familiar with the basic RDF concepts [[RDF11-CONCEPTS]].</p>
 
   <p>This document can highlight changes since the [[[JSON-LD10]]] version.
     Select to <button class="show-changes"></button> changes.</p>
+
 </section>
 
 <section class="informative">
@@ -3062,6 +3045,8 @@ becomes a W3C Recommendation.</p>
 <section class="appendix informative" id="changes-from-cr">
   <h2>Changes since Candidate Release of 12 December 2019</h2>
   <ul>
+    <li>Removed duplicate <a href="#how-to-read-this-document" class="sectionRef"></a>.
+      This is in response to <a href="https://github.com/w3c/json-ld-framing/issues/92">Issue 92</a>.</li>
   </ul>
 </section>
 
