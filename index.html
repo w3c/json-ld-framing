@@ -1357,7 +1357,7 @@
         <a>node object</a> is embedded as a property value of a referencing
         object, or kept as a <a>node reference</a>.
         The initial value for the <a>object embed flag</a> is set using the
-        <a data-link-for="JsonLdOptions">embed</a> option.
+        {{JsonLdOptions/embed}} option.
         Consider the following frame
         based on the default <code>@once</code> value of the <a>object embed flag</a>:</p>
 
@@ -1606,7 +1606,7 @@
         If <code>true</code>, only properties present in
         the input frame will be placed into the output.
         The initial value for the <a>explicit inclusion flag</a> is set using the
-        <a data-link-for="JsonLdOptions">explicit</a> option.</p>
+        {{JsonLdOptions/explicit}} option.</p>
 
       <p>For example, take an expanded version of the library frame which include
         some properties from the input, but omit others.</p>
@@ -1682,7 +1682,7 @@
       <p>The <a>omit default flag</a> changes the way framing generates output when a property
         described in the frame is not present in the input document.
         The initial value for the <a>omit default flag</a> is set using the
-        <a data-link-for="JsonLdOptions">omitDefault</a> option.
+        {{JsonLdOptions/omitDefault}} option.
         See <a href="#default-content" class="sectionRef"></a> for a further discussion.</p>
 
       <p>Consider the following input document:</p>
@@ -2252,63 +2252,23 @@
 </section>
 
 <section><h3>Algorithm</h3>
-<p>The framing algorithm takes an <a>JSON-LD input</a> (<var>expanded input</var>),
-  which  MUST be a <a>JSON-LD document</a> in
-  <a data-cite="JSON-LD11-API#dfn-expanded-form">expanded form</a>,
-  an <a>input frame</a> (<var>expanded frame</var>),
-  which  MUST be a <a>JSON-LD frame</a> in
-  <a data-cite="JSON-LD11-API#dfn-expanded-form">expanded form</a>,
-  a <a>context</a> (<var>context</var>),
-  and a number of <a data-lt="JsonLdProcessor-frame-options">options</a> and produces <a>JSON-LD document</a>.</p>
+<p>The framing algorithm takes an
+  five required input variables and one optional input variable.
+  The require inputs are a <a>framing state</a> <var>state</var>,
+  a list of <var>subjects</var> to frame,
+  an <a>input frame</a> <var>expanded frame</var>,
+  a <var>parent</var> used to collect partial frame results,
+  and an <var>active property</var>.
+  The optional input variable is the {{JsonLdOptions/ordered}} flag.</p>
 
-<p>If an error is detected in the <var>expanded frame</var>, a <a data-link-for="JsonLdFramingErrorCode">invalid frame</a>
-  error has been detected and processing is aborted.
-  <span class="ednote">Need more specifics as to what constitutes a valid frame.</span></p>
-
-<p class="changed">Set <var>graph map</var> to the result of performing the
-  <a data-cite="JSON-LD11-API#node-map-generation">Node Map Generation</a> algorithm on
-  <var>expanded input</var>.</p>
-
-<p class="changed">If the <a data-link-for="JsonLdOptions">frameDefault</a> option
-  is present with the value <code>true</code>, set <var>graph name</var> to <code>@default</code>.
-  Otherwise, create <var>merged node map</var> using the <a data-cite="JSON-LD11-API#merge-node-maps">Merge Node Maps</a> algorithm
-  with <var>graph map</var> and add <var>merged node map</var> as the value of <code>@merged</code>
-  in <var>graph map</var> and set <var>graph name</var> to <code>@merged</code>.</p>
-
-<p>The recursive algorithm operates with a <a>framing state</a> (<var>state</var>),
-  created initially using
-  the <a>object embed flag</a> set to <code>@once</code>,
-  <span class="changed">the <dfn>embedded flag</dfn>, set to `false`,</span>
-  the <a>explicit inclusion flag</a> set to <code>false</code>,
-  the <a>require all flag</a> set to <code>true</code>,
-  the <a>omit default flag</a> set to <code>false</code>,
-  <var>graph map</var>, <var>graph name</var>,
-  along with <a>map of flattened subjects</a>
-  set to the property associated with <var>graph name</var> in <var>graph map</var>, and
-  <var>graph stack</var> set to an empty <a>array</a>. The initial values of the
-  <a>object embed flag</a>, <a>require all flag</a>, and <a>omit default flag</a>
-  MUST be overridden by values set in <a data-lt="JsonLdProcessor-frame-options">options</a>.
-  Also initialize <var>results</var> as an empty <a>array</a>.</p>
-
-<p><a>Processors</a> MAY use other runtime options to set different <a>framing state</a> defaults
-  for values of <var>state</var>.</p>
-
-<p>Invoke the recursive algorithm using <a>framing state</a> (<var>state</var>),
-  the keys from the <a>map of flattened subjects</a> as <var>subjects</var>,
-  <var>expanded frame</var> (<var>frame</var>), <var>result</var> as <var>parent</var>, and
-  <code>null</code> as <var>active property</var>.</p>
-
-<p>The recursive algorithm adds elements to <var>parent</var> either by appending
+<p>The algorithm adds elements to <var>parent</var> either by appending
   the element to <var>parent</var>, if it is an <a>array</a>, or by appending it
   to an array associated with <var>active property</var> in <var>parent</var>, if it is a <a>map</a>.
   Note that if <var>parent</var> is an <a>array</a>, <var>active property</var> MUST be <code>null</code>,
   and if it is a <a>map</a>, it MUST NOT be <code>null</code>.</p>
 
-<p>The following series of steps is the recursive
-  portion of the framing algorithm:</p>
-
 <ol>
-  <li>If <var>frame</var> is an <a>array</a>, set <var>frame</var> to the first item in the <a>array</a>, which MUST be a valid <a>frame</a>.</li>
+  <li>If <var>frame</var> is an <a>array</a>, set <var>frame</var> to the first value in the <a>array</a>, which MUST be a valid <a>frame</a>.</li>
   <li>Initialize flags <var>embed</var>, <var>explicit</var>, and <var>requireAll</var> from
     <a>object embed flag</a>, <a>explicit inclusion flag</a>, and
     <a>require all flag</a> in <var>state</var> overriding from any property values
@@ -2352,7 +2312,7 @@
               in <var>state</var>.</li>
               <li>Set the value of <var>graph name</var> in <var>state</var> to <var>id</var>.</li>
               <li>Set the value of <a>embedded flag</a> in <var>state</var> to `false`.</li>
-              <li>Invoke the recursive algorithm
+              <li>Invoke the algorithm
                 using a copy of <var>state</var>
                 with the value of <var>graph name</var> set to <var>id</var>
                 and the value of <a>embedded flag</a> set to `false`,
@@ -2366,7 +2326,7 @@
       </li>
       <li class="changed">
         If <var>frame</var> has an `@included` <a>entry</a>,
-        invoke the recursive algorithm
+        invoke the algorithm
         using a copy of <var>state</var> with the value of <a>embedded flag</a> set to `false`,
         <var>subjects</var>, <var>frame</var>,
         <var>output</var> as <var>parent</var>, and `@included` as <var>active property</var>.
@@ -2386,7 +2346,7 @@
                 in output:
                 <ol>
                   <li>If <var>listitem</var> is a <a>node reference</a>,
-                    invoke the recursive algorithm
+                    invoke the algorithm
                     <span class="changed">using a copy of <var>state</var> with the value of <a>embedded flag</a> set to `true`</span>,
                     the value of <code>@id</code> from <var>listitem</var>
                     as the sole item in a new <var>subjects</var> <a>array</a>,
@@ -2395,7 +2355,7 @@
                     If <var>frame</var> does not exist, create a new <var>frame</var> using a new <a>map</a>
                     with properties for <code>@embed</code>, <code>@explicit</code> and <code>@requireAll</code>
                     taken from <var>embed</var>, <var>explicit</var> and <var>requireAll</var>.
-                    <span class="ednote">Could this use the <var>list</var> <a>array</a>, and <code>null</code> for <var>active property</var>?</span></li>
+                    <!--span class="ednote">Could this use the <var>list</var> <a>array</a>, and <code>null</code> for <var>active property</var>?</span--></li>
                   <li>Otherwise, append a copy of <var>listitem</var> to <code>@list</code> in <var>list</var>.</li>
                 </ol>
               </li>
@@ -2418,13 +2378,13 @@
             <span class="changed">(other than `@type)</span>
             that is not in <var>output</var>:
             <ol>
-              <li>Let <var>item</var> be the first element in <var>objects</var>, which MUST be a <a>frame object</a>.</li>
-              <li>Set <var>property frame</var> to the first item in <var>objects</var> or a newly created <a>frame object</a> if value is <var>objects</var>.
+              <li>Let <var>item</var> be the first value in <var>objects</var>, which MUST be a <a>frame object</a>.</li>
+              <li>Set <var>property frame</var> to the first value in <var>objects</var> or a newly created <a>frame object</a> if value is <var>objects</var>.
                 <var>property frame</var> MUST be a dictionary.</li>
               <li>Skip <var>property</var> and <var>property frame</var> if <var>property frame</var> contains
                 <code>@omitDefault</code> with a value of <code>true</code>,
                 or does not contain <code>@omitDefault</code> and the value of
-                the <a>omit default flag</a> is <code>true</code>.</li>
+                the <a>omit default flag</a> in <var>state</var> is <code>true</code>.</li>
               <li>Add <var>property</var> to <var>output</var> with a
                 new <a>map</a> having a property <code>@preserve</code> and
                 a value that is a copy of the value of <code>@default</code> in
@@ -2460,30 +2420,6 @@
     </ol>
   </li>
 </ol>
-
-<p class="changed">If the <a>processing mode</a> is not <code>json-ld-1.0</code>,
-  remove the <code>@id</code> <a>entry</a> of each <a>node object</a> where the
-  <a>entry</a> value is a <a>blank node identifier</a> which appears only once
-  in any property value within <var>result</var>.</p>
-<p>Recursively, replace all <a>entries</a> in <var>results</var>
-  where the key is `@preserve` with the first value of that <a>entry</a>.
-  <span class="note">The value of the entry will be an array with a single value;
-    this will effectively replace the map containing `@preserve` with that value.</span></p>
-<p>Set <var>compacted results</var> to the result of using the
-  <code class="idlMemberName"><a data-cite="JSON-LD11-API#dom-jsonldprocessor-compact">compact</a></code>
-  method using <var>results</var>, <a>context</a>, and
-  <a data-lt="JsonLdProcessor-frame-options">options</a>.</p>
-<p>Recursively, replace all `@null` values in <var>compacted results</var> with `null`.
-  If, after replacement, an <a>array</a> contains only the value `null` remove that value, leaving
-  an empty array.</p>
-<p>If <span class="changed">the <a>omit graph flag</a> is <code>false</code> and</span>
-  <var>compacted results</var> does not have a top-level <code>@graph</code> <a>entry</a>, or its value is
-  not an <a>array</a>, modify <var>compacted results</var> to place the non <code>@context</code> <a>properties</a>
-  of <var>compacted results</var> into a <a>map</a> contained within the array value of
-  <code>@graph</code>. If the <a>omit graph flag</a> is <code>true</code>, a
-  top-level <code>@graph</code> <a>entry</a> is used only to contain multiple <a>node objects</a>.</p>
-<p>Return <var>compacted results</var>.</p>
-
 </section>
 </section>
 
@@ -2573,7 +2509,8 @@
         <ol>
           <li>Let <var>value subjects</var> be the list of subjects from the <a>map of flattened subjects</a> matching the <a>node object</a> values from <var>values</var>.</li>
           <li>Let <var>matched subjects</var> be the result of calling this algorithm recursively using
-            <var>state</var>, <var>value subjects</var> for <var>subjects</var>, <var>node pattern</var> for <var>frame</var>, and the <var>requireAll</var> flag.</li>
+            <var>state</var>, <var>value subjects</var> for <var>subjects</var>,
+            <var>node pattern</var> for <var>frame</var>, and the <var>requireAll</var> flag.</li>
           <li><var>property</var> matches if <var>matched subjects</var> is not empty.</li>
         </ol>
       </li>
@@ -2651,7 +2588,7 @@
       <li>Set <var>expanded input</var> to the result of using the
         <a data-cite="JSON-LD11-API#dom-jsonldprocessor-expand">expand</a>
         method using <a data-lt="JsonLdProcessor-frame-input">input</a> and <a data-lt="JsonLdProcessor-frame-options">options</a>
-        <span class="changed">with {{JsonLdOptions/ordered}} set to <code>false</code></span>.
+        <span class="changed">with {{JsonLdOptions/ordered}} set to <code>false</code></span>.</li>
       <li>Set <var>expanded frame</var> to the result of using the
         <code class="idlMemberName"><a data-cite="JSON-LD11-API#dom-jsonldprocessor-expand">expand</a></code>
         method using
@@ -2660,6 +2597,14 @@
         <code class="idlMemberName"><a data-cite="JSON-LD11-API#dom-jsonldoptions-expandcontext">expandContext</a></code> set to <code>null</code>,
         the <a data-cite="JSON-LD11-API#dom-jsonldoptions-frameexpansion">frameExpansion</a> option set to <code>true</code>,
         <span class="changed">and the {{JsonLdOptions/ordered}} option set to <code>false</code></span>.
+        <ol>
+          <li>If an error is detected in the <var>expanded frame</var>,
+            an <a data-link-for="JsonLdFramingErrorCode">invalid frame</a>
+            error has been detected and processing is aborted.
+            <!--div class="ednote">Need more specifics as to what constitutes a valid frame.</div-->
+          </li>
+        </ol>
+      </li>
       <li>Set <var>context</var> to the value of <code>@context</code>
         from <a data-lt="JsonLdProcessor-frame-frame">frame</a>, if it exists, or to
         a new empty <a>context</a>, otherwise.</li>
@@ -2672,13 +2617,76 @@
         <strong>true</strong>, to the IRI of the currently being processed
         document, if available; otherwise to <code>null</code>.</li>
       <li>If <a data-lt="JsonLdProcessor-frame-frame">frame</a> has a top-level
-        property which expands to <code>@graph</code> set the <a data-link-for="JsonLdOptions">frameDefault</a>
+        property which expands to <code>@graph</code> set the {{JsonLdOptions/frameDefault}}
         option to <a data-lt="JsonLdProcessor-frame-options">options</a> with the
         value <code>true</code>.</li>
-      <li>Set <var>framed</var> to the result of using the
+      <li>Initialize a new <a>framing state</a> (<var>state</var>) to an empty <a>map</a>.
+        <ol>
+          <li>Set <a>object embed flag</a> in <var>state</var> to
+            {{JsonLdOptions/embed}}
+            with the default value `@once`.</li>
+          <li>Set the <dfn>embedded flag</dfn> in <var>state</var> to `false`</li>
+          <li>Set <a>explicit inclusion flag</a> in <var>state</var> to
+            {{JsonLdOptions/explicit}}
+            with the default value `false`.</li>
+          <li>Set <a>require all flag</a> in <var>state</var> to
+            {{JsonLdOptions/requireAll}}
+            with the default value `false`.</li>
+          <li>Set <a>omit default flag</a> in <var>state</var> to
+            {{JsonLdOptions/omitDefault}}
+            with the default value `false`.</li>
+          <li>Set the <var>graph name</var> in <var>state</var> to
+            either `@default` if {{JsonLdOptions/frameDefault}} is `true`,
+            otherwise to `false`.</li>
+          <li>Set the <var>graph map</var> in <var>state</var> to the result of performing the
+            <a data-cite="JSON-LD11-API#node-map-generation">Node Map Generation</a> algorithm on
+            <var>expanded input</var>.
+            <ol>
+              <li>If <var>graph name</var> in <var>state</var> is `@merged`,
+                add en entry for `@merged` in <var>graph map</var> set
+                to the result of the <a data-cite="JSON-LD11-API#merge-node-maps">Merge Node Maps</a> algorithm
+                pasing <var>graph map</var>.
+              </li>
+            </ol>
+          </li>
+          <li>Set the <var>graph stack</var> in <var>state</var> to an empty <a>array</a>.</li>
+          <li>Set <var>subject map</var> in <var>state</var>
+            to the <a>map of flattened subjects</a> which is the value of <var>graph name</var>
+            in <var>graph map</var>.</li>
+          <li></li>
+        </ol>
+      </li>
+      <li>Initialize <var>results</var> as an empty <a>array</a>.</li>
+      <li>Invoke the
         <a href="#framing-algorithm">Framing algorithm</a>, passing
-        <var>expanded input</var>, <var>expanded frame</var>, <a>active context</a>, and <var>options</var>.</li>
-      <li>Fulfill the <var>promise</var> passing <var>framed</var>.</li>
+        <var>state</var>,
+        the keys from <var>subject map</var> in <var>state</var> for <var>subjects</var>,
+        <var>expanded frame</var>,
+        <var>results</var> for <var>parent</var>,
+        and `null` as <var>active property</var>.</li>
+      <li class="changed">If the <a>processing mode</a> is not <code>json-ld-1.0</code>,
+        remove the <code>@id</code> <a>entry</a> of each <a>node object</a> in <var>results</var>
+        where the <a>entry</a> value is a <a>blank node identifier</a> which appears only once
+        in any property value within <var>results</var>.</li>
+      <li>Recursively, replace all <a>entries</a> in <var>results</var>
+        where the key is `@preserve` with the first value of that <a>entry</a>.
+        <div class="note">The value of the entry will be an array with a single value;
+          this will effectively replace the map containing `@preserve` with that value.</div></li>
+      <li>Set <var>compacted results</var> to the result of using the
+        <code class="idlMemberName"><a data-cite="JSON-LD11-API#dom-jsonldprocessor-compact">compact</a></code>
+        method using <var>results</var>, <a>context</a>, and
+        <a data-lt="JsonLdProcessor-frame-options">options</a>.</li>
+      <li>Recursively, replace all `@null` values in <var>compacted results</var> with `null`.
+        If, after replacement, an <a>array</a> contains only the value `null` remove that value, leaving
+        an empty array.</li>
+      <li>If <span class="changed">{{JsonLdOptions/omitGraph}} is <code>false</code> and</span>
+        <var>compacted results</var> does not have a top-level <code>@graph</code> <a>entry</a>, or its value is
+        not an <a>array</a>, modify <var>compacted results</var> to place the non <code>@context</code> <a>entry</a>
+        of <var>compacted results</var> into a <a>map</a> contained within the <a>array</a> value of
+        <code>@graph</code>. If {{JsonLdOptions/omitGraph}} is <code>true</code>, a
+        top-level <code>@graph</code> <a>entry</a> is used only to contain multiple <a>node objects</a>.</p>
+      <li>Resolve the <var>promise</var> with <var>compacted results</var>.
+         transforming <var>compacted results</var> from the <a>internal representation</a> to a JSON serialization.</li>
     </ol>
 
     <dl class="parameters">
@@ -2821,7 +2829,7 @@
         is not considered in processing.</dd>
     </dl>
 
-    <p><dfn>JsonLdEmbed</dfn> enumerates the values of the <a data-link-for="JsonLdOptions">embed</a> option:</p>
+    <p><dfn>JsonLdEmbed</dfn> enumerates the values of the {{JsonLdOptions/embed}} option:</p>
     <dl data-sort>
       <dt><dfn data-dfn-for="JsonLdEmbed">@always</dfn></dt><dd>
         Always embed <a>node objects</a> as property values, unless this would
@@ -3009,7 +3017,7 @@ becomes a W3C Recommendation.</p>
     <li>Preserved values are compacted using the properties of the referencing term.</li>
     <li>Removed support for <code>@link</code> and in-memory object linking.</li>
     <li>Added the <a>omit default flag</a>, controlled via the
-      <a data-link-for="JsonLdOptions">omitDefault</a> API option and/or
+      {{JsonLdOptions/omitDefault}} API option and/or
       the current <a>processing mode</a>.</li>
     <li>The API now adds an {{JsonLdOptions/ordered}}
       option, defaulting to <code>false</code> This is used in algorithms to
