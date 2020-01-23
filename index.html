@@ -2252,11 +2252,12 @@
 </section>
 
 <section><h3>Algorithm</h3>
-<p>The framing algorithm takes an
+<p>The framing algorithm takes
   five required input variables and one optional input variable.
-  The require inputs are a <a>framing state</a> <var>state</var>,
+  The required inputs are
+  a <a>framing state</a> (<var>state</var>),
   a list of <var>subjects</var> to frame,
-  an <a>input frame</a> <var>expanded frame</var>,
+  an <a>input frame</a> (<var>expanded frame</var>),
   a <var>parent</var> used to collect partial frame results,
   and an <var>active property</var>.
   The optional input variable is the {{JsonLdOptions/ordered}} flag.</p>
@@ -2268,7 +2269,24 @@
   and if it is a <a>map</a>, it MUST NOT be <code>null</code>.</p>
 
 <ol>
-  <li>If <var>frame</var> is an <a>array</a>, set <var>frame</var> to the first value in the <a>array</a>, which MUST be a valid <a>frame</a>.</li>
+  <li>If <var>frame</var> is an <a>array</a>, set <var>frame</var> to the value of the <a>array</a>, which MUST be a valid <a>frame</a>.
+    If <var>frame</var> is determined to be invalid,
+    an <a data-link-for="JsonLdFramingErrorCode">invalid frame</a>
+    error has been detected and processing is aborted.
+    <!--div class="ednote">Need more specifics as to what constitutes a valid frame.</div-->
+    <ol>
+      <li><var>Frame</var> MUST be a <a>map</a>.</li>
+      <li>If <var>frame</var> has an `@id` <a>entry</a>, its value MUST be
+        either an <a>array</a> containing a single empty <a>map</a> as a value,
+        a valid <a>IRI</a>
+        or an <a>array</a> where all values are valid <a>IRIs</a>.</li>
+      <li>If <var>frame</var> has a `@type` <a>entry</a>, its value MUST be
+        either an <a>array</a> containing a single empty <a>map</a> as a value,
+        an <a>array</a> containing a <a>map</a> with a <a>entry</a> whose key is `@default`,
+        a valid <a>IRI</a>
+        or an <a>array</a> where all values are valid <a>IRIs</a>.</li>
+    </ol>
+  </li>
   <li>Initialize flags <var>embed</var>, <var>explicit</var>, and <var>requireAll</var> from
     <a>object embed flag</a>, <a>explicit inclusion flag</a>, and
     <a>require all flag</a> in <var>state</var> overriding from any property values
@@ -2360,7 +2378,7 @@
                 </ol>
               </li>
               <li>If <var>item</var> is a <a>node reference</a>,
-                invoke the recursive algorithm
+                invoke the algorithm
                 <span class="changed">using a copy of <var>state</var> with the value of <a>embedded flag</a> set to `true`</span>,
                 the value of <code>@id</code> from <var>item</var>
                 as the sole item in a new <var>subjects</var> <a>array</a>,
@@ -2401,7 +2419,7 @@
                 <var>reverse property</var> containing a <a>node reference</a> with an <code>@id</code> of <var>id</var>:
                 <ol>
                   <li>Add <var>reverse property</var> to <var>reverse dict</var> with a new empty <a>array</a> as its value.</li>
-                  <li>Invoke the recursive algorithm
+                  <li>Invoke the algorithm
                     <span class="changed">using a copy of <var>state</var> with the value of <a>embedded flag</a> set to `true`</span>,
                     the <var>reverse id</var>
                     as the sole item in a new <var>subjects</var> <a>array</a>,
@@ -2560,6 +2578,17 @@
   environment, the entirety of the following API MUST be implemented.
   </p>
 
+  <p>The JSON-LD API uses <a data-cite="ECMASCRIPT#sec-promise-objects">Promises</a> to represent
+    the result of the various deferred operations.
+    <a data-cite="ECMASCRIPT#sec-promise-objects">Promises</a> are defined in [[ECMASCRIPT]].
+    General use within specifications can be found in [[promises-guide]].
+    <span class="changed">Implementations MAY chose to implement in an appropriate way for their native environments
+      as long as they generally use the same methods, arguments, and options
+      and return the same results.</span></p>
+
+  <p class="note">Interfaces are marked `[Exposed=(Window,Worker)]`,
+    but the API is also intended for use outside of a browser context.</p>
+
   <section class="algorithm">
     <h3>JsonLdProcessor</h3>
 
@@ -2567,8 +2596,13 @@
       use to access the JSON-LD transformation methods. The definition below is an experimental
       extension of the interface defined in the JSON-LD 1.1 API [[JSON-LD11-API]].</p>
 
+    <p>It is important to highlight that implementations do not modify the input parameters.
+      If an error is detected, the {{Promise}} is
+      rejected <a>JsonLdFramingError</a> with the corresponding {{JsonLdFramingError/code}}
+      and processing is stopped.</p>
+
     <pre class="idl">
-      [Exposed=Window]
+      [Exposed=(Window,Worker)]
       interface JsonLdProcessor {
           static Promise&lt;JsonLdDictionary> frame(
             JsonLdInput input,
@@ -2597,13 +2631,6 @@
         <code class="idlMemberName"><a data-cite="JSON-LD11-API#dom-jsonldoptions-expandcontext">expandContext</a></code> set to <code>null</code>,
         the <a data-cite="JSON-LD11-API#dom-jsonldoptions-frameexpansion">frameExpansion</a> option set to <code>true</code>,
         <span class="changed">and the {{JsonLdOptions/ordered}} option set to <code>false</code></span>.
-        <ol>
-          <li>If an error is detected in the <var>expanded frame</var>,
-            an <a data-link-for="JsonLdFramingErrorCode">invalid frame</a>
-            error has been detected and processing is aborted.
-            <!--div class="ednote">Need more specifics as to what constitutes a valid frame.</div-->
-          </li>
-        </ol>
       </li>
       <li>Set <var>context</var> to the value of <code>@context</code>
         from <a data-lt="JsonLdProcessor-frame-frame">frame</a>, if it exists, or to
@@ -2684,7 +2711,7 @@
         not an <a>array</a>, modify <var>compacted results</var> to place the non <code>@context</code> <a>entry</a>
         of <var>compacted results</var> into a <a>map</a> contained within the <a>array</a> value of
         <code>@graph</code>. If {{JsonLdOptions/omitGraph}} is <code>true</code>, a
-        top-level <code>@graph</code> <a>entry</a> is used only to contain multiple <a>node objects</a>.</p>
+        top-level <code>@graph</code> <a>entry</a> is used only to contain multiple <a>node objects</a>.</li>
       <li>Resolve the <var>promise</var> with <var>compacted results</var>.
          transforming <var>compacted results</var> from the <a>internal representation</a> to a JSON serialization.</li>
     </ol>
