@@ -2273,7 +2273,6 @@
     If <var>frame</var> is determined to be invalid,
     an <a data-link-for="JsonLdFramingErrorCode">invalid frame</a>
     error has been detected and processing is aborted.
-    <!--div class="ednote">Need more specifics as to what constitutes a valid frame.</div-->
     <ol>
       <li><var>Frame</var> MUST be a <a>map</a>.</li>
       <li>If <var>frame</var> has an `@id` <a>entry</a>, its value MUST be
@@ -2598,7 +2597,7 @@
 
     <p>It is important to highlight that implementations do not modify the input parameters.
       If an error is detected, the {{Promise}} is
-      rejected <a>JsonLdFramingError</a> with the corresponding {{JsonLdFramingError/code}}
+      rejected with a <a>JsonLdFramingError</a> having an appropriate {{JsonLdFramingError/code}}
       and processing is stopped.</p>
 
     <pre class="idl">
