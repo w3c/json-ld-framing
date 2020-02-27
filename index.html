@@ -2397,7 +2397,7 @@
             <ol>
               <li>Let <var>item</var> be the first value in <var>objects</var>, which MUST be a <a>frame object</a>.</li>
               <li>Set <var>property frame</var> to the first value in <var>objects</var> or a newly created <a>frame object</a> if value is <var>objects</var>.
-                <var>property frame</var> MUST be a dictionary.</li>
+                <var>property frame</var> MUST be a <a>map</a>.</li>
               <li>Skip <var>property</var> and <var>property frame</var> if <var>property frame</var> contains
                 <code>@omitDefault</code> with a value of <code>true</code>,
                 or does not contain <code>@omitDefault</code> and the value of
@@ -2603,10 +2603,11 @@
     <pre class="idl">
       [Exposed=(Window,Worker)]
       interface JsonLdProcessor {
-          static Promise&lt;JsonLdDictionary> frame(
-            JsonLdInput input,
-            (JsonLdDictionary or USVString) frame,
-            optional JsonLdOptions options = {});
+        constructor();
+        static Promise&lt;JsonLdRecord> frame(
+          JsonLdInput input,
+          JsonLdInput frame,
+          optional JsonLdOptions options = {});
       };
     </pre>
     <p>The <dfn>JsonLdProcessor</dfn> interface
@@ -2618,22 +2619,52 @@
     <ol>
       <li>Create a new {{Promise}} <var>promise</var> and return it. The
         following steps are then executed asynchronously.</li>
+      <li class="changed">If the provided <a data-lt="jsonldprocessor-frame-input">input</a>
+        is a <a data-cite="JSON-LD11-API#dom-remotedocument">RemoteDocument</a>,
+        initialize <var>remote document</var> to <a data-lt="jsonldprocessor-frame-input">input</a>.</li>
+      <li>Otherwise, if the provided <a data-lt="jsonldprocessor-frame-input">input</a>
+        is a <a>string</a> representing the <a>IRI</a> of a remote document, await and dereference it as <var>remote document</var>
+        using <a data-cite="JSON-LD11-API#dom-loaddocumentcallback">LoadDocumentCallback</a>, passing <a data-lt="jsonldprocessor-frame-input">input</a>
+        for <var>url</var>,
+        and the <a data-cite="JSON-LD11-API#dom-loaddocumentoptions-extractallscripts">extractAllScripts</a> option from <a data-lt="jsonldprocessor-frame-options">options</a>
+        for <var>extractAllScripts</var>.</li>
       <li>Set <var>expanded input</var> to the result of using the
         <a data-cite="JSON-LD11-API#dom-jsonldprocessor-expand">expand</a>
-        method using <a data-lt="JsonLdProcessor-frame-input">input</a> and <a data-lt="JsonLdProcessor-frame-options">options</a>
+        method either <var>remote document</var>
+        or <a data-lt="jsonldprocessor-frame-input">input</a>
+        if there is no <var>remote document</var>
+        for <a data-cite="JSON-LD11-API#dom-jjsonldprocessor-expand-input">input</a>
+        and <a data-lt="JsonLdProcessor-frame-options">options</a>
         <span class="changed">with {{JsonLdOptions/ordered}} set to <code>false</code></span>.</li>
+      <li class="changed">If the provided <a data-lt="jsonldprocessor-frame-frame">frame</a>
+        is a <a data-cite="JSON-LD11-API#dom-remotedocument">RemoteDocument</a>,
+        initialize <var>remote frame</var> to <a data-lt="jsonldprocessor-frame-frame">frame</a>.</li>
+      <li>Otherwise, if the provided <a data-lt="jsonldprocessor-frame-frame">frame</a>
+        is a <a>string</a> representing the <a>IRI</a> of a remote document, await and dereference it as <var>remote frame</var>
+        using <a data-cite="JSON-LD11-API#dom-loaddocumentcallback">LoadDocumentCallback</a>, passing <a data-lt="jsonldprocessor-frame-frame">frame</a>
+        for <var>url</var>,
+        and the <a data-cite="JSON-LD11-API#dom-loaddocumentoptions-extractallscripts">extractAllScripts</a> option from <a data-lt="jsonldprocessor-frame-options">options</a>
+        for <var>extractAllScripts</var>.</li>
       <li>Set <var>expanded frame</var> to the result of using the
-        <code class="idlMemberName"><a data-cite="JSON-LD11-API#dom-jsonldprocessor-expand">expand</a></code>
-        method using
-        <a data-lt="JsonLdProcessor-frame-frame">frame</a> and
-        <a data-lt="JsonLdProcessor-frame-options">options</a> with
-        <code class="idlMemberName"><a data-cite="JSON-LD11-API#dom-jsonldoptions-expandcontext">expandContext</a></code> set to <code>null</code>,
+        <a data-cite="JSON-LD11-API#dom-jsonldprocessor-expand">expand</a>
+        method either <var>remote frame</var>
+        or <a data-lt="jsonldprocessor-frame-frame">frame</a>
+        if there is no <var>remote frame</var>
+        for <a data-cite="JSON-LD11-API#dom-jjsonldprocessor-expand-input">input</a>
+        <a data-lt="JsonLdProcessor-frame-options">options</a>
         the <a data-cite="JSON-LD11-API#dom-jsonldoptions-frameexpansion">frameExpansion</a> option set to <code>true</code>,
-        <span class="changed">and the {{JsonLdOptions/ordered}} option set to <code>false</code></span>.
-      </li>
+        <span class="changed">and the{{JsonLdOptions/ordered}} set to <code>false</code></span>.</li>
       <li>Set <var>context</var> to the value of <code>@context</code>
-        from <a data-lt="JsonLdProcessor-frame-frame">frame</a>, if it exists, or to
+        from <var>remote frame</var> or <a data-lt="JsonLdProcessor-frame-frame">frame</a>, if it exists, or to
         a new empty <a>context</a>, otherwise.</li>
+      <li class="changed">Set <var>context base</var> to the {{RemoteDocument/documentUrl}}
+        from <var>remote frame</var>, if available, otherwise to the {{JsonLdOptions/base}} option
+        from <a data-lt="jsonldprocessor-frame-options">options</a>.</li>
+      <li class="changed">Initialize <var>active context</var>
+        to the result of the <a data-cite="JSON-LD11-API#context-processing-algorithm">Context Processing algorithm</a>
+        passing a new empty <a>context</a> as <var>active context</var>
+        <var>context</var> as <var>local context</var>,
+        and <var>context base</var> as <var>base URL</var>.</li>
       <li class="changed">Initialize an <a>active context</a> using <var>context</var>;
         the <a>base IRI</a> is set to
         the <a data-cite="JSON-LD11-API#dom-jsonldoptions-base">base</a> option from
@@ -2642,6 +2673,8 @@
         <a data-cite="JSON-LD11-API#dom-jsonldoptions-compacttorelative">compactToRelative</a> option is
         <strong>true</strong>, to the IRI of the currently being processed
         document, if available; otherwise to <code>null</code>.</li>
+      <li>Initialize <var>inverse context</var> to the result of performing the
+        <a data-cite="JSON-LD11-API#inverse-context-creation">Inverse Context Creation algorithm</a>.</li>
       <li>If <a data-lt="JsonLdProcessor-frame-frame">frame</a> has a top-level
         property which expands to <code>@graph</code> set the {{JsonLdOptions/frameDefault}}
         option to <a data-lt="JsonLdProcessor-frame-options">options</a> with the
@@ -2700,8 +2733,26 @@
           this will effectively replace the map containing `@preserve` with that value.</div></li>
       <li>Set <var>compacted results</var> to the result of using the
         <code class="idlMemberName"><a data-cite="JSON-LD11-API#dom-jsonldprocessor-compact">compact</a></code>
-        method using <var>results</var>, <a>context</a>, and
-        <a data-lt="JsonLdProcessor-frame-options">options</a>.</li>
+        method using
+        <var>active context</var>,
+        <var>inverse context</var>,
+        <code>null</code> for <var>active property</var>,
+        <var>results</var> as <var>element</var>,,
+        and the {{JsonLdOptions/compactArrays}}
+        <span class="changed">and {{JsonLdOptions/ordered}}</span>
+        flags from <a data-lt="jsonldprocessor-frame-options">options</a>.
+        <ol class="changed">
+          <li>If <var>compacted results</var> is an empty <a>array</a>,
+            replace it with a new <a>map</a>.</li>
+          <li>Otherwise, if <var>compacted results</var> is an <a>array</a>,
+            replace it with a new <a>map</a> with a single <a>entry</a>
+            whose key is the result of
+            <span class="changed"><a>IRI compacting</a> `@graph`</span>
+            and value is <var>compacted results</var>.</li>
+          <li>Add an <code>@context</code> <a>entry</a> to <var>compacted results</var> and set its value
+            to the provided <var>context</var>.</li>
+        </ol>
+      </li>
       <li>Recursively, replace all `@null` values in <var>compacted results</var> with `null`.
         If, after replacement, an <a>array</a> contains only the value `null` remove that value, leaving
         an empty array.</li>
@@ -2724,26 +2775,34 @@
         in the form of an <a>map</a> or as <a>IRI</a>.</dd>
       <dt><dfn data-lt="JsonLdProcessor-frame-options" data-lt-noDefault>options</dfn></dt>
       <dd>A set of options that MAY affect the framing algorithm such as, e.g., the
-        input document's base <a>IRI</a>.</dd>
+        input document's base <a>IRI</a>.
+        <span class="changed">The {{JsonLdOptions}} type defines default option values.</span></dd>
     </dl>
 
     <pre class="idl changed">
-      dictionary JsonLdDictionary {};
+      typedef record&lt;USVString, any> JsonLdRecord;
     </pre>
-    <p class="changed">The <dfn>JsonLdDictionary</dfn> is the definition of a <a>map</a>
+    <p class="changed">The <dfn>JsonLdRecord</dfn> is the definition of a <a>map</a>
       used to contain arbitrary <a>map entries</a>
       which are the result of parsing a <a>JSON Object</a>.
 
     <pre class="idl changed">
-      typedef (JsonLdDictionary or sequence&lt;JsonLdDictionary> or USVString) JsonLdInput;
+      typedef (JsonLdRecord or sequence&lt;JsonLdRecord> or USVString or RemoteDocument) JsonLdInput;
     </pre>
 
-    <p class="changed">The <dfn>JsonLdInput</dfn> type is used to refer to an input value
-      that that may be a <a>map</a>,
-      an array of <a>maps </a>,
-      or a <a>string</a> representing an <a>IRI</a>
-      which can be dereferenced to retrieve a valid JSON document.</p>
+    <p class="changed">The <dfn>JsonLdInput</dfn> interface is used to refer to an input value
+      that that may be a <a>JsonLdRecord</a>,
+      a `sequence` of <a>JsonLdRecords</a>,
+      a <a>string</a> representing an <a>IRI</a>,
+      which can be dereferenced to retrieve a valid JSON document,
+      <span class="changed">or an already dereferenced <a data-cite="JSON-LD11-API#dom-remotedocument">RemoteDocument</a></span>.</p>
 
+    <p class="changed">When the value is a <a>JsonLdRecord</a> or sequence of <a>JsonLdRecords</a>,
+      the values are taken as their equivalent internal representation values,
+      where a <a>JsonLdRecord</a> is equivalent to a <a>map</a>,
+      and a sequence of <a>JsonLdRecords</a> is equivalent to an <a>array</a>
+      of <a>maps</a>. The <a>map entries</a> are converted to their equivalents
+      in [[INFRA]].</p>
   </section>
 
   <section>
