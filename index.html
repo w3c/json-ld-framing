@@ -2325,8 +2325,6 @@
             is <code>@merged</code> or <code>@default</code>.</li>
           <li>If <var>recurse</var> is <code>true</code>:
             <ol>
-              <li>Push <var>graph name</var> from <var>state</var> onto <var>graph stack</var>
-              in <var>state</var>.</li>
               <li>Set the value of <var>graph name</var> in <var>state</var> to <var>id</var>.</li>
               <li>Set the value of <a>embedded flag</a> in <var>state</var> to `false`.</li>
               <li>Invoke the algorithm
@@ -2336,7 +2334,6 @@
                 the keys from the <var>graph map</var> in <var>state</var> associated with id as <var>subjects</var>,
                 <var>subframe</var> as <var>frame</var>,
                 <var>output</var> as <var>parent</var>, and <code>@graph</code> as <var>active property</var>.
-              <li>Pop the value from <var>graph stack</var> in <var>state</var>.</li>
             </ol>
           </li>
         </ol>
@@ -2708,7 +2705,6 @@
               </li>
             </ol>
           </li>
-          <li>Set the <var>graph stack</var> in <var>state</var> to an empty <a>array</a>.</li>
           <li>Set <var>subject map</var> in <var>state</var>
             to the <a>map of flattened subjects</a> which is the value of <var>graph name</var>
             in <var>graph map</var>.</li>
@@ -3145,6 +3141,8 @@ becomes a W3C Recommendation.</p>
     </li>
     <li>Moved non-recursive portions algorithms
       into the {{JsonLdProcessor}} processing steps.</li>
+    <li>Remove the <var>graph stack</var> from <a>framing state</a>
+      as being unnecessary.</li>
   </ul>
 </section>
 
