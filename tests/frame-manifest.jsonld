@@ -576,6 +576,33 @@
       "expect": "frame/0064-out.jsonld",
       "option": {"specVersion": "json-ld-1.1"}
     }, {
+      "@id": "#t0065",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "Match on value",
+      "purpose": "Value matching.",
+      "input": "frame/0065-in.jsonld",
+      "frame": "frame/0065-frame.jsonld",
+      "expect": "frame/0065-out.jsonld",
+      "option": {"specVersion": "json-ld-1.1"}
+    }, {
+      "@id": "#t0066",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "Match on value reference",
+      "purpose": "Value reference matching.",
+      "input": "frame/0066-in.jsonld",
+      "frame": "frame/0066-frame.jsonld",
+      "expect": "frame/0066-out.jsonld",
+      "option": {"specVersion": "json-ld-1.1"}
+    }, {
+      "@id": "#t0067",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "Match on list value",
+      "purpose": "List value matching.",
+      "input": "frame/0067-in.jsonld",
+      "frame": "frame/0067-frame.jsonld",
+      "expect": "frame/0067-out.jsonld",
+      "option": {"specVersion": "json-ld-1.1"}
+    }, {
       "@id": "#teo01",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "@embed true/false",
