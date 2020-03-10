@@ -603,6 +603,15 @@
       "expect": "frame/0067-out.jsonld",
       "option": {"specVersion": "json-ld-1.1"}
     }, {
+      "@id": "#t0068",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "Merge @type from different graphs",
+      "purpose": "When merging nodes, ensure that @type values from each node are retained.",
+      "input": "frame/0068-in.jsonld",
+      "frame": "frame/0068-frame.jsonld",
+      "expect": "frame/0068-out.jsonld",
+      "option": {"specVersion": "json-ld-1.1"}
+    }, {
       "@id": "#teo01",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "@embed true/false",
