@@ -3,7 +3,7 @@
   "@id": "",
   "@type": "mf:Manifest",
   "name": "Framing",
-  "description": "JSON-LD Framing tests.",
+  "description": "These tests implement the requirements for the JSON-LD [Framing Algorithm](https://www.w3.org/TR/json-ld11-framing/#framing-algorithm).",
   "baseIri": "https://w3c.github.io/json-ld-framing/tests/",
   "sequence": [
     {
