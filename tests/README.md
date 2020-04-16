@@ -13,7 +13,7 @@ Tests driven from a top-level [manifest](manifest.jsonld) and are defined for [f
 
 * [frame](frame-manifest.jsonld) tests have _input_, _frame_ and _expected_ documents. The _expected_ results can be compared using [JSON-LD object comparison](#json-ld-object-comparison) with the processor output. Additionally, if the `ordered` option is not set, result should be expanded and compared with the expanded _expected_ document also using [JSON-LD object comparison](#json-ld-object-comparison).
 
-  For *NegativeEvaluationTests*, the result is a string associated with the expected error code.
+  For **NegativeEvaluationTests**, the result is a string associated with the expected error code.
 
 Unless `processingMode` is set explicitly in a test entry, `processingMode` is compatible with both `json-ld-1.0` and `json-ld-1.1`.
 
