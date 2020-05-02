@@ -1089,7 +1089,7 @@ to show the results of transforming an example into other representations.</pre>
 
     <div data-oninclude="restrictReferences"><section><h4 id="terms-imported-from-other-specifications">Terms imported from Other Specifications<a class="self-link" aria-label="§" href="#terms-imported-from-other-specifications"></a></h4>
 <p>Terms imported from <cite><a href="https://tc39.es/ecma262/">ECMAScript Language Specification</a></cite> [<cite><a class="bibref" data-link-type="biblio" href="#bib-ecmascript" title="ECMAScript Language Specification">ECMASCRIPT</a></cite>], <cite><a href="https://tools.ietf.org/html/rfc8259">The JavaScript Object Notation (JSON) Data Interchange Format</a></cite> [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8259" title="The JavaScript Object Notation (JSON) Data Interchange Format">RFC8259</a></cite>], <cite><a href="https://infra.spec.whatwg.org/">Infra Standard</a></cite> [<cite><a class="bibref" data-link-type="biblio" href="#bib-infra" title="Infra Standard">INFRA</a></cite>], and <cite><a href="https://heycam.github.io/webidl/">Web IDL</a></cite> [<cite><a class="bibref" data-link-type="biblio" href="#bib-webidl" title="Web IDL">WEBIDL</a></cite>]</p>
-<dl class="termlist" data-sort="" id="terms"><dt><dfn class="preserve" data-dfn-type="dfn" data-plurals="arrays" id="dfn-array" data-no-export=""><a href="https://infra.spec.whatwg.org/#list">array</a></dfn></dt><dd>
+<dl class="termlist" data-sort="" id="terms-0"><dt><dfn class="preserve" data-dfn-type="dfn" data-plurals="arrays" id="dfn-array" data-no-export=""><a href="https://infra.spec.whatwg.org/#list">array</a></dfn></dt><dd>
     In the JSON serialization,
     an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">array</a> structure is represented as square brackets surrounding zero or more values.
     Values are separated by commas.
@@ -1367,7 +1367,7 @@ to show the results of transforming an example into other representations.</pre>
 
     <p>The Following terms are used within specific algorithms.</p>
 
-    <div data-oninclude="restrictReferences"><dl class="termlist" data-sort="" id="terms-0"><dt><dfn id="dfn-active-property" data-dfn-type="dfn" data-no-export=""><a href="https://www.w3.org/TR/json-ld11-api/#dfn-active-property">active property</a></dfn></dt><dd>
+    <div data-oninclude="restrictReferences"><dl class="termlist" data-sort="" id="terms"><dt><dfn id="dfn-active-property" data-dfn-type="dfn" data-no-export=""><a href="https://www.w3.org/TR/json-ld11-api/#dfn-active-property">active property</a></dfn></dt><dd>
     The currently active <a data-link-type="dfn" href="https://www.w3.org/TR/rdf11-concepts/#dfn-property">property</a> or <a data-link-type="dfn" href="https://www.w3.org/TR/json-ld11/#dfn-keyword">keyword</a> that the processor should use when processing.
     The <a data-link-type="dfn" href="https://www.w3.org/TR/json-ld11-api/#dfn-active-property">active property</a> is represented in the original lexical form,
     which is used for finding coercion mappings in the <a data-link-type="dfn" href="https://www.w3.org/TR/json-ld11/#dfn-active-context">active context</a>.</dd>
@@ -1387,8 +1387,6 @@ to show the results of transforming an example into other representations.</pre>
     and the <a href="#dfn-omit-default-flag" class="internalDFN" data-link-type="dfn">omit default flag</a>.</dd>
   <dt><dfn id="dfn-input-frame" data-dfn-type="dfn">input frame</dfn></dt><dd>
     The initial <a href="#dfn-frame" class="internalDFN" data-link-type="dfn">Frame</a> provided to the framing algorithm.</dd>
-  
-  
   <dt class="changed"><dfn id="dfn-iri-compacting" data-dfn-type="dfn" data-no-export=""><a href="https://www.w3.org/TR/json-ld11-api/#dfn-iri-compacting"><abbr title="Internationalized Resource Identifier">IRI</abbr> compacting</a></dfn></dt>
   <dd class="algorithm changed">
     Used as a macro within various algorithms as to reduce the language used to describe
@@ -1408,6 +1406,9 @@ to show the results of transforming an example into other representations.</pre>
     </ol>
   </dd>
   
+  
+  <dt><dfn class="preserve" data-dfn-type="dfn" id="dfn-json-ld-input" data-no-export=""><a href="https://www.w3.org/TR/json-ld11-api/#dfn-json-ld-input">JSON-LD input</a></dfn></dt><dd>
+    The JSON-LD data structure that is provided as input to the algorithm.</dd>
   
   <dt><dfn id="dfn-map-of-flattened-subjects" data-dfn-type="dfn">map of flattened subjects</dfn></dt><dd>
     A map of subjects that is the result of the
@@ -3355,7 +3356,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-jso
         method either <var>remote document</var>
         or <a data-lt="jsonldprocessor-frame-input" href="#dfn-jsonldprocessor-frame-input" class="internalDFN" data-link-type="dfn">input</a>
         if there is no <var>remote document</var>
-        for <a href="https://www.w3.org/TR/json-ld11-api/#dom-jjsonldprocessor-expand-input">input</a>
+        for <a href="https://www.w3.org/TR/json-ld11-api/#dfn-jsonldprocessor-expand-input">input</a>
         and <a data-lt="JsonLdProcessor-frame-options" href="#dfn-jsonldprocessor-frame-options" class="internalDFN" data-link-type="dfn">options</a>
         <span class="changed">with <a href="#dom-jsonldoptions-ordered" class="internalDFN" data-link-type="idl"><code><code>ordered</code></code></a> set to <code>false</code></span>.</li>
       <li class="changed">If the provided <a data-lt="jsonldprocessor-frame-frame" href="#dfn-jsonldprocessor-frame-frame" class="internalDFN" data-link-type="dfn">frame</a>
@@ -3901,7 +3902,7 @@ enum <a class="internalDFN idlID" data-link-type="enum" href="#dom-jsonldembed">
     </p>
 
     <ul class="ack">
-        <li>Timothy Cole (University of Illinois at Urbana-Champaign)</li>
+                <li>Timothy Cole (University of Illinois at Urbana-Champaign)</li>
         <li>Gregory Todd Williams (J. Paul Getty Trust)</li>
         <li>Ivan Herman (<abbr title="World Wide Web Consortium">W3C</abbr> Staff)</li>
         <li>Jeff Mixter (OCLC (Online Computer Library Center, Inc.))</li>
@@ -3918,7 +3919,7 @@ enum <a class="internalDFN idlID" data-link-type="enum" href="#dom-jsonldembed">
     <p>Additionally, the following people were members of the Working Group at the time of publication:</p>
 
     <ul class="ack">
-        <li>Steve Blackmon (Apache Software Foundation)</li>
+                <li>Steve Blackmon (Apache Software Foundation)</li>
         <li>Dan Brickley (Google, Inc.)</li>
         <li>Newton Calegari (NIC.br - Brazilian Network Information Center)</li>
         <li>Victor Charpenay (Siemens AG)</li>
