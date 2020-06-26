@@ -2582,9 +2582,8 @@
       as long as they generally use the same methods, arguments, and options
       and return the same results.</span></p>
 
-  <p class="note">Interfaces are not marked with the `[Exposed]`
-    <a data-cite="WEBIDL#dfn-extended-attribute">extended attribute</a>,
-    as this is currently quite browser specific.
+  <p class="note">Interfaces are marked `[Exposed=JsonLd]`,
+    which creates a global interface.
     The use of WebIDL in JSON-LD, while appropriate for use within browsers,
     is not limited to such use.</p>
 
@@ -2601,6 +2600,13 @@
       and processing is stopped.</p>
 
     <pre class="idl">
+      /*
+       * The JsonLd interface is created to expose the JsonLdProcessor interface.
+       */
+      [Global=JsonLd, Exposed=JsonLd]
+      interface JsonLd {};
+
+      [Exposed=JsonLd]
       interface JsonLdProcessor {
         constructor();
         static Promise&lt;JsonLdRecord> frame(
@@ -3145,9 +3151,9 @@ becomes a W3C Recommendation.</p>
       into the {{JsonLdProcessor}} processing steps.</li>
     <li>Remove the <var>graph stack</var> from <a>framing state</a>
       as being unnecessary.</li>
-    <li>Removed the `[Exposed=(Window,Worker)]`
-      <a data-cite="WEBIDL#dfn-extended-attribute">extended attribute</a>
-      from <a href="#the-application-programming-interface" class="sectionRef"></a> to address review suggestions.</li>
+    <li>Changed `[Exposed=(Window,Worker)]` to `[Exposed=JsonLd]`,
+      which is declared as a global interface in order to expose the {{JsonLdProcessor}} interface
+      for non-browser usage to address review suggestions.</li>
   </ul>
 </section>
 
