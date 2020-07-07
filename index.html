@@ -24,8 +24,9 @@
       // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
       // and its maturity status
       prevVersion:          "https://www.w3.org/TR/2020/PR-json-ld11-framing-20200507/",
-      previousPublishDate:  "2020-05-17",
+      previousPublishDate:  "2020-05-07",
       previousMaturity:     "PR",
+      errata:               "https://w3c.github.io/json-ld-framing/errata/",
 
       // if there a publicly available Editor's Draft, this is the link
       edDraftURI:           "https://w3c.github.io/json-ld-framing/",
@@ -3151,6 +3152,11 @@ becomes a W3C Recommendation.</p>
       into the {{JsonLdProcessor}} processing steps.</li>
     <li>Remove the <var>graph stack</var> from <a>framing state</a>
       as being unnecessary.</li>
+  </ul>
+</section>
+<section class="appendix informative" id="changes-from-pr">
+  <h2>Changes since Proposed Recommendation Release of 7 May 2020</h2>
+  <ul>
     <li>Changed `[Exposed=(Window,Worker)]` to `[Exposed=JsonLd]`,
       which is declared as a global interface in order to expose the {{JsonLdProcessor}} interface
       for non-browser usage to address review suggestions.</li>
