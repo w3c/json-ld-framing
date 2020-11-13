@@ -3,7 +3,7 @@
 <head>
 <title>JSON-LD 1.1 Framing</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-<script src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove" defer></script>
+<script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
 <script src="common/common.js" class="remove" defer></script>
 <script src="common/jsonld.js" class="remove"></script>
 <script class="remove">
@@ -116,22 +116,9 @@
           note:       "v1.0" }
       ],
 
-      // name of the WG
-      wg:           "JSON-LD Working Group",
+      group: "wg/json-ld",
+      wgPublicList:           "public-json-ld-wg",
 
-      // URI of the public WG page
-      wgURI:        "https://www.w3.org/2018/json-ld-wg/",
-
-      // name (with the @w3c.org) of the public mailing to which comments are due
-      wgPublicList: "public-json-ld-wg",
-
-      // URI of the patent status for this WG, for Rec-track documents
-      // !!!! IMPORTANT !!!!
-      // This is important for Rec-track documents, do not copy a patent URI from a random
-      // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
-      // Team Contact.
-      wgPatentURI:  "https://www.w3.org/2004/01/pp-impl/107714/status",
-      processVersion: 2018,
       maxTocLevel: 4,
       alternateFormats: [ {uri: "json-ld11-framing.epub", label: "EPUB"} ]
   };
@@ -432,18 +419,14 @@
     <p>This document uses the following terms as defined in external specifications
       and defines terms specific to JSON-LD.</p>
 
-    <div data-include="common/terms.html"
-         data-oninclude="restrictReferences">
-    </div>
+    <div data-include="common/terms.html"></div>
 
   <section>
     <h4>Algorithm Terms</h4>
 
     <p>The Following terms are used within specific algorithms.</p>
 
-    <div data-include="common/algorithm-terms.html"
-         data-oninclude="restrictReferences">
-    </div>
+    <div data-include="common/algorithm-terms.html"></div>
   </section>
 </section>
 <section id="framing-keywords">
@@ -599,7 +582,8 @@
         <a class="playground"
            data-result-for="#flattened-library-objects"
            data-frame="#sample-library-frame"
-           target="_blank"></a>
+           target="_blank"
+           href="#">PG</a>
       </div>
       <pre class="selected framed result" data-transform="updateExample"
            data-frame="Sample library frame"
@@ -701,7 +685,8 @@
         <a class="playground"
            data-result-for="#flattened-library-objects"
            data-frame="#library-frame-with-property-selection"
-           target="_blank"></a>
+           target="_blank"
+           href="#">PG</a>
       </div>
       <pre class="selected framed result" data-transform="updateExample"
            data-frame="Library frame with property matching"
@@ -768,7 +753,8 @@
         <a class="playground"
            data-result-for="#flattened-library-objects"
            data-frame="#library-frame-with-wildcards"
-           target="_blank"></a>
+           target="_blank"
+           href="#">PG</a>
       </div>
       <pre class="selected framed result" data-transform="updateExample"
            data-frame="Library frame with wildcard matching"
@@ -835,7 +821,8 @@
         <a class="playground"
            data-result-for="#flattened-library-objects"
            data-frame="#library-frame-with-absent-property"
-           target="_blank"></a>
+           target="_blank"
+           href="#">PG</a>
       </div>
       <pre class="selected framed result" data-transform="updateExample"
            data-frame="Library frame with absent matching"
@@ -950,7 +937,8 @@
         <a class="playground"
            data-result-for="#multilingual-library-objects"
            data-frame="#library-frame-with-language-matching"
-           target="_blank"></a>
+           target="_blank"
+           href="#">PG</a>
       </div>
        <!-- ignore as this won't match the input -->
       <pre class="selected framed result" data-transform="updateExample"
@@ -1014,7 +1002,8 @@
         <a class="playground"
            data-result-for="#flattened-library-objects"
            data-frame="#library-frame-with-id-matching"
-           target="_blank"></a>
+           target="_blank"
+           href="#">PG</a>
       </div>
       <pre class="selected framed result" data-transform="updateExample"
            data-frame="Library frame with @id matching"
@@ -1075,7 +1064,8 @@
         <a class="playground"
            data-result-for="#flattened-library-objects"
            data-frame="#library-frame-with-array-id-matching"
-           target="_blank"></a>
+           target="_blank"
+           href="#">PG</a>
       </div>
       <pre class="selected framed result" data-transform="updateExample"
            data-frame="Library frame with array @id matching"
@@ -1128,7 +1118,8 @@
         <a class="playground"
            data-result-for="#flattened-library-objects"
            data-frame="#empty-frame"
-           target="_blank"></a>
+           target="_blank"
+           href="#">PG</a>
       </div>
       <pre class="selected framed result" data-transform="updateExample"
            data-frame="Empty frame"
@@ -1218,7 +1209,8 @@
         <a class="playground"
            data-result-for="#flattened-library-objects"
            data-frame="#sample-library-frame-with-default-value"
-           target="_blank"></a>
+           target="_blank"
+           href="#">PG</a>
       </div>
       <pre class="selected framed result nohighlight" data-transform="updateExample"
            data-frame="Sample library frame with @default value"
@@ -1312,7 +1304,8 @@
         <a class="playground"
            data-result-for="#flattened-library-objects-without-type"
            data-frame="#sample-library-frame-with-default-type"
-           target="_blank"></a>
+           target="_blank"
+           href="#">PG</a>
       </div>
       <pre class="selected result nohighlight" data-transform="updateExample"
            data-frame="Sample library frame with @default value"
@@ -1382,7 +1375,8 @@
           <a class="playground"
              data-result-for="#flattened-library-objects"
              data-frame="#sample-library-frame-with-implicit-embed-set-to-once"
-             target="_blank"></a>
+             target="_blank"
+             href="#">PG</a>
         </div>
         <pre class="selected framed result nohighlight" data-transform="updateExample"
              data-frame="Sample library frame with implicit @embed set to @once"
@@ -1443,7 +1437,8 @@
           <a class="playground"
              data-result-for="#flattened-library-objects"
              data-frame="#sample-library-frame-with-explicit-embed-set-to-never"
-             target="_blank"></a>
+             target="_blank"
+             href="#">PG</a>
         </div>
         <pre class="selected framed result nohighlight" data-transform="updateExample"
              data-frame="Sample library frame with explicit @embed set to @never"
@@ -1502,7 +1497,8 @@
           <a class="playground"
              data-result-for="#flattened-library-objects-with-double-index"
              data-frame="#sample-library-frame-with-implicit-embed-set-to-once"
-             target="_blank"></a>
+             target="_blank"
+             href="#">PG</a>
         </div>
         <pre class="selected framed result nohighlight" data-transform="updateExample"
              data-frame="Sample library frame with implicit @embed set to @once"
@@ -1557,7 +1553,8 @@
           <a class="playground"
              data-result-for="#flattened-library-objects-with-double-index"
              data-frame="#sample-library-frame-with-explicit-embed-set-to-always"
-             target="_blank"></a>
+             target="_blank"
+             href="#">PG</a>
         </div>
         <pre class="selected framed result nohighlight" data-transform="updateExample"
              data-frame="Sample library frame with explicit @embed set to @always"
@@ -1644,7 +1641,8 @@
         <a class="playground"
            data-result-for="#flattened-library-objects"
            data-frame="#sample-library-frame-with-explicit-set-to-true"
-           target="_blank"></a>
+           target="_blank"
+           href="#">PG</a>
       </div>
       <pre class="selected framed result nohighlight" data-transform="updateExample"
            data-frame="Sample library frame with @explicit set to true"
@@ -1743,7 +1741,8 @@
           <a class="playground"
              data-result-for="#sample-input-for-omitDefault"
              data-frame="#sample-library-frame-without-omitDefault"
-             target="_blank"></a>
+             target="_blank"
+             href="#">PG</a>
         </div>
         <pre class="selected framed result nohighlight" data-transform="updateExample"
              data-frame="Sample parent/child relationship frame without @omitDefault"
@@ -1808,7 +1807,8 @@
           <a class="playground"
              data-result-for="#sample-input-for-omitDefault"
              data-frame="#sample-library-frame-with-omitDefault"
-             target="_blank"></a>
+             target="_blank"
+             href="#">PG</a>
         </div>
         <pre class="selected framed result nohighlight" data-transform="updateExample"
              data-frame="Sample parent/child relationship frame with @omitDefault"
@@ -1865,7 +1865,8 @@
         <a class="playground"
            data-result-for="#flattened-library-objects"
            data-frame="#sample-library-frame"
-           target="_blank"></a>
+           target="_blank"
+           href="#">PG</a>
       </div>
       <pre class="selected framed result" data-transform="updateExample"
            data-options="omitGraph=false"
@@ -1947,7 +1948,8 @@
           <a class="playground"
              data-result-for="#flattened-library-objects"
              data-frame="#frame-with-requireAll"
-             target="_blank"></a>
+             target="_blank"
+             href="#">PG</a>
         </div>
         <pre class="selected framed result nohighlight" data-transform="updateExample"
              data-frame="Frame with @requireAll"
@@ -2013,7 +2015,8 @@
         <a class="playground"
            data-result-for="#flattened-library-objects"
            data-frame="#inverted-library-frame"
-           target="_blank"></a>
+           target="_blank"
+           href="#">PG</a>
       </div>
       <pre class="selected framed result" data-transform="updateExample"
            data-frame="Inverted library frame"
@@ -2126,7 +2129,8 @@
         <a class="playground"
            data-result-for="#flattened-input-with-named-graphs"
            data-frame="#frame-with-named-graphs"
-           target="_blank"></a>
+           target="_blank"
+           href="#">PG</a>
       </div>
       <pre class="selected framed result nohighlight" data-transform="updateExample"
            data-frame="Frame with named graphs"
@@ -3160,6 +3164,12 @@ becomes a W3C Recommendation.</p>
     <li>Changed `[Exposed=(Window,Worker)]` to `[Exposed=JsonLd]`,
       which is declared as a global interface in order to expose the {{JsonLdProcessor}} interface
       for non-browser usage to address review suggestions.</li>
+  </ul>
+</section>
+<section class="appendix informative" id="changes-from-rec1">
+  <h2>Changes since Recommendation of 16 July 2020</h2>
+  <ul>
+    <li>Regenerated definition list, which does not attempt to filter out unused definitions.</li>
   </ul>
 </section>
 
