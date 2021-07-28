@@ -2712,7 +2712,7 @@
             <var>expanded input</var>.
             <ol>
               <li>If <var>graph name</var> in <var>state</var> is `@merged`,
-                add en entry for `@merged` in <var>graph map</var> set
+                add an entry for `@merged` in <var>graph map</var> set
                 to the result of the <a data-cite="JSON-LD11-API#merge-node-maps">Merge Node Maps</a> algorithm
                 passing <var>graph map</var>.
               </li>
@@ -2721,7 +2721,6 @@
           <li>Set <var>subject map</var> in <var>state</var>
             to the <a>map of flattened subjects</a> which is the value of <var>graph name</var>
             in <var>graph map</var>.</li>
-          <li></li>
         </ol>
       </li>
       <li>Initialize <var>results</var> as an empty <a>array</a>.</li>
@@ -2829,7 +2828,7 @@
       };
     </pre>
     <p>JSON-LD Framing extends the error interface and codes defined in
-      <a data-cite="JSON-LD11-API#error-handling"></a> the JSON-LD 1.1 API [[JSON-LD11-API]].
+      <a data-cite="JSON-LD11-API#error-handling"></a> [[JSON-LD11-API]].
 
     <dl>
       <dt><dfn data-dfn-for="JsonLdFramingError">code</dfn></dt>
@@ -3114,7 +3113,7 @@ becomes a W3C Recommendation.</p>
       {{JsonLdOptions/omitDefault}} API option and/or
       the current <a>processing mode</a>.</li>
     <li>The API now adds an {{JsonLdOptions/ordered}}
-      option, defaulting to <code>false</code> This is used in algorithms to
+      option, defaulting to <code>false</code>. This is used in algorithms to
       control iteration of <a>map entry</a> keys. Previously, the
       algorithms always required such an order. The instructions for
       evaluating test results have been updated accordingly.</li>
@@ -3128,7 +3127,7 @@ becomes a W3C Recommendation.</p>
   <h2>Changes since JSON-LD Community Group Final Report</h2>
   <ul>
     <li>The API now adds an {{JsonLdOptions/ordered}}
-      option, defaulting to <code>false</code> This is used in algorithms to
+      option, defaulting to <code>false</code>. This is used in algorithms to
       control iteration of <a>map entry</a> keys. Previously, the
       algorithms always required such an order. The instructions for
       evaluating test results have been updated accordingly.</li>
