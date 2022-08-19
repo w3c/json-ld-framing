@@ -2974,9 +2974,6 @@ becomes a W3C Recommendation.</p>
   <dt>Subtype name:</dt>
   <dd class="changed">ld+json</dd>
   <dt class="changed">Required parameters:</dt>
-    <dd>None</dd>
-  <dt class="changed">Optional parameters:</dt>
-  <dd class="changed">
     <dl>
       <dt><code>profile</code></dt>
       <dd>
@@ -2986,13 +2983,17 @@ becomes a W3C Recommendation.</p>
           and without knowledge of a profiled resource can safely use the same
           representation.</p>
         <dl>
-          <dt><code>http://www.w3.org/ns/json-ld#framed</code></dt>
-          <dd>To specify a JSON-LD <a>Frame</a>.</dd>
+          <dt><code>http://www.w3.org/ns/json-ld#frame</code></dt>
+          <dd>To request or specify a <a data-lt="frame">JSON-LD Frame document</a>.</dd>
         </dl>
-        <p>The <code>http://www.w3.org/ns/json-ld#framed</code> SHOULD
-          be used when serving and requesting a JSON-LD frame document.</p>
+        <p>The <code>http://www.w3.org/ns/json-ld#frame</code> `profile` parameter SHOULD
+          be used when serving and requesting a
+          <a data-lt="frame">JSON-LD Frame document</a>.</p>
       </dd>
     </dl>
+  <dt class="changed">Optional parameters:</dt>
+  <dd class="changed">
+    <dd>None</dd>
   </dd>
   <dt>Encoding considerations:</dt>
   <dd>See <a data-cite="RFC8259#section-11">RFC&nbsp;8259, section 11</a>.</dd>
@@ -3169,6 +3170,14 @@ becomes a W3C Recommendation.</p>
   <h2>Changes since Recommendation of 16 July 2020</h2>
   <ul>
     <li>Regenerated definition list, which does not attempt to filter out unused definitions.</li>
+    <li>Updated <a href="#iana-considerations" class="sectionRef"></a>
+      to describe the `http://www.w3.org/ns/json-ld#frame`
+      `profile` parameter as a required parameter,
+      instead of `http://www.w3.org/ns/json-ld#framed`
+      as an optional parameter to be consistent with the textual
+      description and the description of the same parameter
+      in [[JSON-LD11]] <a data-cite="JSON-LD11#iana-considerations">IANA Considerations</a>.
+    This is in response to <a href="https://github.com/w3c/json-ld-framing/issues/132">Issue 132</a>.</li>
   </ul>
 </section>
 
