@@ -52,7 +52,7 @@
       pluralize:            true,
 
       // Cross-reference definitions
-      xref: ["json-ld11", "json-ld11-api", "json-ld11-framing"],
+      xref: ["json-ld11", "json-ld11-api"],
 
       // editors, add as many as you like
       // only "name" is required
@@ -494,7 +494,7 @@
     compatible with [[[JSON-LD10]]] [[JSON-LD10]],
     but if processed by a JSON-LD 1.0 processor may produce different results.
     Processors default to `json-ld-1.1`, unless the
-    <a data-cite="JSON-LD11-API#dom-jsonldoptions-processingmode">processingMode</a> API option
+    {{JsonLdOptions/processingMode}} API option
     is explicitly set to `json-ld-1.0`.
     Publishers are encouraged to use the <code>@version</code> <a>map entry</a> within a <a>context</a>
     set to `1.1` to ensure that JSON-LD 1.0 processors will not misinterpret JSON-LD 1.1 features.</p>
@@ -1338,7 +1338,8 @@
 
   <section class="informative">
     <h3>Framing Flags</h3>
-    <p>Framing can be controlled using <a data-lt="JsonLdOptions">API options</a>,
+    <p>Framing can be controlled using
+      <a href="#jsonldoptions" class="sectionRef">API options</a>,
       or by adding framing <a>keywords</a> within the <a>frame</a> as
       described in <a href="#framing-keywords" class="sectionRef"></a>.</p>
 
@@ -2179,13 +2180,13 @@
     <a data-lt="relative IRI reference">relative</a> and absolute <a>IRIs</a>.</p>
 
   <p class="changed">Unless specified using
-    <a data-cite="JSON-LD11-API#dom-jsonldoptions-processingmode">processingMode</a> API option,
+    {{JsonLdOptions/processingMode}} API option,
     the <a>processing mode</a> is set using the <code>@version</code> <a>entry</a>
     in a local <a>context</a> and
     affects the behavior of algorithms including <a data-cite="JSON-LD11-API#dfn-expanded">expansion</a> and <a data-cite="JSON-LD11-API#dfn-compact">compaction</a>.
     Once set, it is an error to attempt to change to a different processing mode,
     and processors MUST generate,
-    a <a data-cite="JSON-LD11-API#dom-jsonlderrorcode-processing-mode-conflict">processing mode conflict</a>
+    a {{JsonLdErrorCode/"processing mode conflict"}}
     error and abort further processing.</p>
 
   <p>The algorithms in this specification are generally written with more concern for clarity
@@ -2605,22 +2606,15 @@
       and processing is stopped.</p>
 
     <pre class="idl">
-      /*
-       * The JsonLd interface is created to expose the JsonLdProcessor interface.
-       */
-      [Global=JsonLd, Exposed=JsonLd]
-      interface JsonLd {};
-
       [Exposed=JsonLd]
-      interface JsonLdProcessor {
-        constructor();
+      partial interface JsonLdProcessor {
         static Promise&lt;JsonLdRecord> frame(
           JsonLdInput input,
           JsonLdInput frame,
           optional JsonLdOptions options = {});
       };
     </pre>
-    <p>The <dfn>JsonLdProcessor</dfn> interface
+    <p>The {{JsonLdProcessor}} interface
       <dfn data-dfn-for="JsonLdProcessor">frame()</dfn> method
       <a href="#framing">Frames</a>
       the given <code>input</code> using <a data-lt="JsonLdProcessor-frame-frame">frame</a>
@@ -2630,16 +2624,16 @@
       <li>Create a new {{Promise}} <var>promise</var> and return it. The
         following steps are then executed asynchronously.</li>
       <li class="changed">If the provided <a data-lt="jsonldprocessor-frame-input">input</a>
-        is a <a data-cite="JSON-LD11-API#dom-remotedocument">RemoteDocument</a>,
+        is a {{RemoteDocument}},
         initialize <var>remote document</var> to <a data-lt="jsonldprocessor-frame-input">input</a>.</li>
       <li>Otherwise, if the provided <a data-lt="jsonldprocessor-frame-input">input</a>
         is a <a>string</a> representing the <a>IRI</a> of a remote document, await and dereference it as <var>remote document</var>
-        using <a data-cite="JSON-LD11-API#dom-loaddocumentcallback">LoadDocumentCallback</a>, passing <a data-lt="jsonldprocessor-frame-input">input</a>
+        using {{LoadDocumentCallback}}, passing <a data-lt="jsonldprocessor-frame-input">input</a>
         for <var>url</var>,
-        and the <a data-cite="JSON-LD11-API#dom-loaddocumentoptions-extractallscripts">extractAllScripts</a> option from <a data-lt="jsonldprocessor-frame-options">options</a>
+        and the {{LoadDocumentOptions/extractAllScripts}} option from <a data-lt="jsonldprocessor-frame-options">options</a>
         for <var>extractAllScripts</var>.</li>
       <li>Set <var>expanded input</var> to the result of using the
-        <a data-cite="JSON-LD11-API#dom-jsonldprocessor-expand">expand</a>
+        {{JsonLdProcessor/expand()}}
         method either <var>remote document</var>
         or <a data-lt="jsonldprocessor-frame-input">input</a>
         if there is no <var>remote document</var>
@@ -2647,22 +2641,22 @@
         and <a data-lt="JsonLdProcessor-frame-options">options</a>
         <span class="changed">with {{JsonLdOptions/ordered}} set to <code>false</code></span>.</li>
       <li class="changed">If the provided <a data-lt="jsonldprocessor-frame-frame">frame</a>
-        is a <a data-cite="JSON-LD11-API#dom-remotedocument">RemoteDocument</a>,
+        is a {{RemoteDocument}},
         initialize <var>remote frame</var> to <a data-lt="jsonldprocessor-frame-frame">frame</a>.</li>
       <li>Otherwise, if the provided <a data-lt="jsonldprocessor-frame-frame">frame</a>
         is a <a>string</a> representing the <a>IRI</a> of a remote document, await and dereference it as <var>remote frame</var>
-        using <a data-cite="JSON-LD11-API#dom-loaddocumentcallback">LoadDocumentCallback</a>, passing <a data-lt="jsonldprocessor-frame-frame">frame</a>
+        using {{LoadDocumentCallback}}, passing <a data-lt="jsonldprocessor-frame-frame">frame</a>
         for <var>url</var>,
-        and the <a data-cite="JSON-LD11-API#dom-loaddocumentoptions-extractallscripts">extractAllScripts</a> option from <a data-lt="jsonldprocessor-frame-options">options</a>
+        and the {{LoadDocumentOptions/extractAllScripts}} option from <a data-lt="jsonldprocessor-frame-options">options</a>
         for <var>extractAllScripts</var>.</li>
       <li>Set <var>expanded frame</var> to the result of using the
-        <a data-cite="JSON-LD11-API#dom-jsonldprocessor-expand">expand</a>
+        {{JsonLdProcessor/expand()}}
         method either <var>remote frame</var>
         or <a data-lt="jsonldprocessor-frame-frame">frame</a>
         if there is no <var>remote frame</var>
         for <a data-cite="JSON-LD11-API#dfn-jsonldprocessor-expand-input">input</a>
         <a data-lt="JsonLdProcessor-frame-options">options</a>
-        the <a data-cite="JSON-LD11-API#dom-jsonldoptions-frameexpansion">frameExpansion</a> option set to <code>true</code>,
+        the {{JsonLdOptions/frameExpansion}} option set to <code>true</code>,
         <span class="changed">and the{{JsonLdOptions/ordered}} set to <code>false</code></span>.</li>
       <li>Set <var>context</var> to the value of <code>@context</code>
         from <var>remote frame</var> or <a data-lt="JsonLdProcessor-frame-frame">frame</a>, if it exists, or to
@@ -2677,10 +2671,10 @@
         and <var>context base</var> as <var>base URL</var>.</li>
       <li class="changed">Initialize an <a>active context</a> using <var>context</var>;
         the <a>base IRI</a> is set to
-        the <a data-cite="JSON-LD11-API#dom-jsonldoptions-base">base</a> option from
+        the {{JsonLdOptions/base}} option from
         <a data-lt="jsonldprocessor-frame-options">options</a>, if set;
         otherwise, if the
-        <a data-cite="JSON-LD11-API#dom-jsonldoptions-compacttorelative">compactToRelative</a> option is
+        {{JsonLdOptions/compactToRelative}} option is
         <strong>true</strong>, to the IRI of the currently being processed
         document, if available; otherwise to <code>null</code>.</li>
       <li>Initialize <var>inverse context</var> to the result of performing the
@@ -2740,8 +2734,7 @@
         <div class="note">The value of the entry will be an array with a single value;
           this will effectively replace the map containing `@preserve` with that value.</div></li>
       <li>Set <var>compacted results</var> to the result of using the
-        <code class="idlMemberName"><a data-cite="JSON-LD11-API#dom-jsonldprocessor-compact">compact</a></code>
-        method using
+        {{JsonLdProcessor/compact()}} method using
         <var>active context</var>,
         <var>inverse context</var>,
         <code>null</code> for <var>active property</var>,
@@ -2786,31 +2779,6 @@
         input document's base <a>IRI</a>.
         <span class="changed">The {{JsonLdOptions}} type defines default option values.</span></dd>
     </dl>
-
-    <pre class="idl changed">
-      typedef record&lt;USVString, any> JsonLdRecord;
-    </pre>
-    <p class="changed">The <dfn>JsonLdRecord</dfn> is the definition of a <a>map</a>
-      used to contain arbitrary <a>map entries</a>
-      which are the result of parsing a <a>JSON Object</a>.
-
-    <pre class="idl changed">
-      typedef (JsonLdRecord or sequence&lt;JsonLdRecord> or USVString or RemoteDocument) JsonLdInput;
-    </pre>
-
-    <p class="changed">The <dfn>JsonLdInput</dfn> interface is used to refer to an input value
-      that that may be a <a>JsonLdRecord</a>,
-      a `sequence` of <a>JsonLdRecords</a>,
-      a <a>string</a> representing an <a>IRI</a>,
-      which can be dereferenced to retrieve a valid JSON document,
-      <span class="changed">or an already dereferenced <a data-cite="JSON-LD11-API#dom-remotedocument">RemoteDocument</a></span>.</p>
-
-    <p class="changed">When the value is a <a>JsonLdRecord</a> or sequence of <a>JsonLdRecords</a>,
-      the values are taken as their equivalent internal representation values,
-      where a <a>JsonLdRecord</a> is equivalent to a <a>map</a>,
-      and a sequence of <a>JsonLdRecords</a> is equivalent to an <a>array</a>
-      of <a>maps</a>. The <a>map entries</a> are converted to their equivalents
-      in [[INFRA]].</p>
   </section>
 
   <section>
@@ -2858,28 +2826,27 @@
 
     <section>
     <h3>JsonLdContext</h3>
-    <p>The <a data-cite="JSON-LD11-API#dom-jsonldcontext">JsonLdContext</a> type is used to refer to a value that
+    <p>The {{JsonLdContext}} type is used to refer to a value that
         that may be a <a>map</a>, a <a>string</a> representing an
         <a>IRI</a>, or an array of <a class="changed">maps</a>
         and <a>strings</a>.</p>
 
-    <p>See <a data-cite="JSON-LD11-API#dom-jsonldcontext">JsonLdContext</a> definition in the JSON-LD 1.1 API [[JSON-LD11-API]].</p>
+    <p>See {{JsonLdContext}} definition in the JSON-LD 1.1 API [[JSON-LD11-API]].</p>
     </section>
 
     <section>
     <h3>JsonLdOptions</h3>
-    <p>The <dfn>JsonLdOptions</dfn> type is used to pass various options to the
-      <a>JsonLdProcessor</a> methods.</p>
+    <p>The {{JsonLdOptions}} type is used to pass various options to the
+      {{JsonLdProcessor}} methods.</p>
 
     <pre class="idl">
-      dictionary JsonLdOptions {
+      partial dictionary JsonLdOptions {
         (JsonLdEmbed or boolean)  embed         = "@once";
         boolean                   explicit      = false;
         boolean                   omitDefault   = false;
         boolean                   omitGraph;
         boolean                   requireAll    = false;
         boolean                   frameDefault  = false;
-        boolean                   ordered       = false;
       };
 
       enum JsonLdEmbed {
@@ -2915,11 +2882,6 @@
         <a href="#framing-algorithm">Framing Algorithm</a>.</dd>
       <dt><dfn data-dfn-for="JsonLdOptions">frameDefault</dfn></dt>
       <dd>Instead of framing a <var>merged graph</var>, frame only the <a>default graph</a>.</dd>
-      <dt class="changed"><dfn data-dfn-for="JsonLdOptions">ordered</dfn></dt>
-      <dd class="changed">If set to <code>true</code>, certain algorithm
-        processing steps where indicated are ordered lexicographically.
-        If <code>false</code>, order
-        is not considered in processing.</dd>
     </dl>
 
     <p><dfn>JsonLdEmbed</dfn> enumerates the values of the {{JsonLdOptions/embed}} option:</p>
@@ -2936,7 +2898,7 @@
         Always use a <a>node reference</a> when serializing matching values.</dd>
     </dl>
 
-    <p>See <a data-cite="JSON-LD11-API#dom-jsonldoptions">JsonLdOptions</a> definition in the JSON-LD 1.1 API [[JSON-LD11-API]].</p>
+    <p>See {{JsonLdOptions}} definition in the JSON-LD 1.1 API [[JSON-LD11-API]].</p>
   </section>
   </section>
 
