@@ -1,0 +1,15 @@
+{
+  "@context": {
+    "ex": "http://example.org/vocab#"
+  },
+  "@graph": [
+    {
+      "@id": "http://example.org/test/#library",
+      "@type": "ex:Library",
+      "ex:info": {
+        "author": "JOHN",
+        "pages": 200
+      }
+    }
+  ]
+}
