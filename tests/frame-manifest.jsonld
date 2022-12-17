@@ -612,6 +612,15 @@
       "expect": "frame/0068-out.jsonld",
       "option": {"specVersion": "json-ld-1.1"}
     }, {
+      "@id": "#t0069",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "Tests @json in framing",
+      "purpose": "Test collection to better define what is expected when framing over a `@json` field..",
+      "input": "frame/0069-in.jsonld",
+      "frame": "frame/0069-frame.jsonld",
+      "expect": "frame/0069-out.jsonld",
+      "option": {"specVersion": "json-ld-1.1"}
+    }, {
       "@id": "#teo01",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "@embed true/false",
