@@ -1,6 +1,10 @@
 {
   "@context": {
-    "ex": "http://example.org/vocab#"
+    "ex": "http://example.org/vocab#",
+    "ex:info": {"@type": "@json"}
   },
-  "ex:info": {}
+  "http://example.org/vocab#info": {
+    "@value": {},
+    "@type": "@json"
+  }
 }
