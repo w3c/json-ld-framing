@@ -1,15 +1,12 @@
 {
   "@context": {
-    "ex": "http://example.org/vocab#"
+    "ex": "http://example.org/vocab#",
+    "ex:info": {"@type": "@json"}
   },
-  "@graph": [
-    {
-      "@id": "http://example.org/test/#library",
-      "@type": "ex:Library",
-      "ex:info": {
-        "author": "JOHN",
-        "pages": 200
-      }
-    }
-  ]
+  "@id": "http://example.org/test/#library",
+  "@type": "ex:Library",
+  "ex:info": {
+    "author": "JOHN",
+    "pages": 200
+  }
 }
