@@ -92,7 +92,7 @@ GEM
       stringio
     public_suffix (5.0.0)
     racc (1.6.1)
-    rack (2.2.4)
+    rack (2.2.6.2)
     rake (13.0.6)
     rdf (3.2.9)
       link_header (~> 0.0, >= 0.0.8)
