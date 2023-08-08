@@ -2301,7 +2301,7 @@
     using the <a href="#frame-matching">Frame Matching algorithm</a>
     with <var>state</var>, <var>subjects</var>, <var>frame</var>, and <var>requireAll</var>.</li>
   <li>For each <var>id</var> and associated <a>node object</a> <var>node</var>
-    from the set of matched subjects, ordered lexicographically by <var>id</var>
+    from the set of matched subjects, in <a>code point order</a> by <var>id</var>
     <span class="changed">if the optional {{JsonLdOptions/ordered}} flag is <code>true</code></span>:
     <ol>
       <li>Initialize <var>output</var> to a new <a>map</a> with <code>@id</code> and <var>id</var>.</li>
@@ -2352,7 +2352,8 @@
         <var>subjects</var>, <var>frame</var>,
         <var>output</var> as <var>parent</var>, and `@included` as <var>active property</var>.
       </li>
-      <li>For each <var>property</var> and <var>objects</var> in <var>node</var>, ordered lexicographically by <var>property</var>
+      <li>For each <var>property</var> and <var>objects</var> in <var>node</var>,
+        in <a>code point order</a> by <var>property</var>
         <span class="changed">if the optional {{JsonLdOptions/ordered}} flag is <code>true</code></span>:
         <ol>
           <li>If <var>property</var> is a <a>keyword</a>, add <var>property</var> and <var>objects</var>
@@ -3171,6 +3172,7 @@ becomes a W3C Recommendation.</p>
       to use `omitGraph` instead of `@omitGraph`,
       as {{JsonLdOptions/omitGraph}} is an API option, not a <a>framing keyword</a>.
     </li>
+    <li>Use <a>code point order</a> as a better definition for the more vague "lexicographical order".</li>
   </ul>
 </section>
 
