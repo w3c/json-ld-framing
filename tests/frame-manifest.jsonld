@@ -621,6 +621,15 @@
       "expect": "frame/0069-out.jsonld",
       "option": {"specVersion": "json-ld-1.1"}
     }, {
+      "@id": "#t0070",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "Empty frame with empty context with protected terms.",
+      "purpose": "Empty frame matches all nodes using empty context and protected terms.",
+      "input": "frame/0070-in.jsonld",
+      "frame": "frame/0070-frame.jsonld",
+      "expect": "frame/0070-out.jsonld",
+      "option": {"specVersion": "json-ld-1.1"}
+    }, {
       "@id": "#teo01",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "@embed true/false",
