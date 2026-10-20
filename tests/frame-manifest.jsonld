@@ -630,6 +630,15 @@
       "expect": "frame/0070-out.jsonld",
       "option": {"specVersion": "json-ld-1.1"}
     }, {
+      "@id": "#t0071",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "@json values are not changed by null cleanup",
+      "purpose": "Values within a JSON literal, including null, false, 0, \"\" and the string \"@null\", are kept as is.",
+      "input": "frame/0071-in.jsonld",
+      "frame": "frame/0071-frame.jsonld",
+      "expect": "frame/0071-out.jsonld",
+      "option": {"specVersion": "json-ld-1.1"}
+    }, {
       "@id": "#teo01",
       "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
       "name": "@embed true/false",

@@ -1,0 +1,7 @@
+{
+  "@context": {
+    "ex": "http://example.org/vocab#",
+    "ex:info": {"@type": "@json"}
+  },
+  "@type": "ex:Library"
+}

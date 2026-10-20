@@ -2755,9 +2755,20 @@
             to the provided <var>context</var>.</li>
         </ol>
       </li>
+
       <li>Recursively, replace all `@null` values in <var>compacted results</var> with `null`.
         If, after replacement, an <a>array</a> contains only the value `null` remove that value, leaving
-        an empty array.</li>
+        an empty array.
+        Do not replace or remove anything within a
+        <a data-cite="JSON-LD11#json-literals">JSON literal</a>: the value of an <a>entry</a> whose
+        term has a type mapping of `@json` in the frame's context, or the `@value` entry of a
+        <a>value object</a> whose `@type` is `@json`.</li>
+      <!-- The above could also be as follows, but it would be a slightly bigger change.
+      <li>Replace each value that this algorithm inserted for a `@null` default with `null`.
+        If, after replacement, an <a>array</a> contains only the value `null` remove that value,
+        leaving an empty array.</li> 
+      -->
+
       <li>If <span class="changed">{{JsonLdOptions/omitGraph}} is <code>false</code> and</span>
         <var>compacted results</var> does not have a top-level <code>@graph</code> <a>entry</a>, or its value is
         not an <a>array</a>, modify <var>compacted results</var> to place the non <code>@context</code> <a>entry</a>

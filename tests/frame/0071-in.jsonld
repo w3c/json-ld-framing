@@ -1,0 +1,9 @@
+{
+  "@context": {
+    "ex": "http://example.org/vocab#",
+    "ex:info": {"@type": "@json"}
+  },
+  "@id": "http://example.org/test/#library",
+  "@type": "ex:Library",
+  "ex:info": [0, false, "", null, "@null", 1]
+}
